@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface ContainerProps {
-  width?: number
+  width?: number;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -9,7 +9,7 @@ export const Container = styled.div<ContainerProps>`
   flex-direction: column;
   justify-content: space-between;
   height: 3.8rem;
-  width: ${({width}) => width}%;
+  width: ${({ width }) => width}%;
 `;
 
 export const InputContainer = styled.div`
