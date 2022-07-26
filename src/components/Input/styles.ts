@@ -5,20 +5,25 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 3.8rem;
-  width: 100%
+  width: 100%;
 `;
 
 export const InputContainer = styled.div`
   width: 100%;
-  border: 1px solid ${({ theme }) => theme.colors.grey6};
+  border: 1px solid ${({ theme }) => theme.colors.grey8};
   border-radius: 0.3rem;
   transition: 0.5s;
 
+  :hover {
+    background-color: ${({ theme }) => theme.colors.grey8};
+  }
+
   :focus-within {
-    border: 1px solid ${({ theme }) => theme.colors.grey4};
+    border: 1px solid ${({ theme }) => theme.colors.brand2};
   }
 
   > input {
+    width: 98%;
     padding: 0.6rem;
     border: none;
     background-color: transparent;
@@ -35,7 +40,6 @@ export const InputContainer = styled.div`
     }
   }
 `;
-
 
 export const Label = styled.label`
   font-size: 1.06rem;
