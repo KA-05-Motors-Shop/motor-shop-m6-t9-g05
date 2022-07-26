@@ -9,19 +9,20 @@ import InputMask from "react-input-mask";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
+  width?: number;
   mask?: string;
   error?: any;
 }
 
 const InputDefault: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-  { label, error, mask, ...rest },
+  { label, error, mask, width = 95, ...rest },
   ref
 ) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   if (!mask) {
     return (
-      <Container>
+      <Container width={width}>
         <Label>
           {label} {!!error && <span> - {error}</span>}{" "}
         </Label>
