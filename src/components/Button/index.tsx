@@ -1,8 +1,8 @@
-import { ReactNode } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 import theme from "../../styles/theme";
 import { ButtonContainer } from "./styles";
 
-interface ButtonProps {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   big?: boolean;
   bgcolor?: string;
