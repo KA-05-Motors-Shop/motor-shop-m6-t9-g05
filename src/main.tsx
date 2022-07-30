@@ -1,4 +1,5 @@
 import { createRoot } from "react-dom/client";
+import AppProvider from "./providers";
 import { ThemeProvider } from "styled-components";
 import App from "./App";
 import GlobalStyled from "./styles/global";
@@ -9,7 +10,9 @@ const root = createRoot(container);
 
 root.render(
   <ThemeProvider theme={theme}>
-    <App />
+    <AppProvider>
+      <App />
+    </AppProvider>
 
     <GlobalStyled />
   </ThemeProvider>

@@ -1,10 +1,22 @@
-import { createContext, ReactNode, useContext, useState } from "react";
-
-const ModalContext = createContext([]);
+import {
+  createContext,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
 
 interface ModalProps {
   children: ReactNode;
 }
+
+interface ModalContextData {
+  stateModalCarImage: boolean;
+  setStateModalCarImage: React.Dispatch<SetStateAction<boolean>>;
+  Switch: (modal: string) => void;
+}
+
+const ModalContext = createContext<ModalContextData>({} as ModalContextData);
 
 export const ModalProvider = ({ children }: ModalProps) => {
   const [stateModalCarImage, setStateModalCarImage] = useState(true);
@@ -27,6 +39,7 @@ export const ModalProvider = ({ children }: ModalProps) => {
       value={{
         Switch,
         stateModalCarImage,
+        setStateModalCarImage,
       }}
     >
       {children}
