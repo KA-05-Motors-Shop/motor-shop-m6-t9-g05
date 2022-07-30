@@ -15,7 +15,6 @@ export const ButtonContainer = styled.button<ContainerProps>`
   color: ${({ color }) => color};
   border: 1.5px solid ${({ bgcolor }) => bgcolor};
   border-radius: 4px;
-  /* padding: 12px 28px; */
   ${({ big }) =>
     big
       ? css`
@@ -24,7 +23,6 @@ export const ButtonContainer = styled.button<ContainerProps>`
       : css`
           padding: 12px 20px;
         `}
-  /* font-size: 16px; */
   ${({ big }) =>
     big
       ? css`

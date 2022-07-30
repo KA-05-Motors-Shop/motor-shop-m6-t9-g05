@@ -8,6 +8,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   bgcolor?: string;
   color?: string;
 }
+
 export const Button = ({
   children,
   big = false,
