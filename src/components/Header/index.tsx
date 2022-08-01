@@ -4,6 +4,7 @@ import {
   Container,
   ContainerLeft,
   ContainerRight,
+  DivLink,
   Header as ContainerHeader,
 } from "./styles";
 import LogoHeader from "../../assets/logo-header.svg";
@@ -44,11 +45,11 @@ export const Header = () => {
               </li>
             </ul>
           </nav>
-          <div className="links">
+          <DivLink>
             <a href="">Carros</a>
             <a href="">Motos</a>
             <a href="">Leilão</a>
-          </div>
+          </DivLink>
         </ContainerLeft>
         <ContainerRight>
           <a href="">Login</a>
