@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface HeaderProps {
+  isActive?: boolean
+}
+
 export const Header = styled.header`
   width: 100%;
   height: 80px;
@@ -18,7 +22,7 @@ export const Container = styled.div`
   }
 `;
 
-export const ContainerLeft = styled.div`
+export const ContainerLeft = styled.div<HeaderProps>`
   display: flex;
   height: 100%;
   padding: 0 1rem;
@@ -98,22 +102,6 @@ export const ContainerLeft = styled.div`
       display: none;
     }
   }
-
-  .links {
-    display: none;
-
-    @media (min-width: 768px) {
-      display: flex;
-      a {
-        font-family: "Inter", sans-serif;
-        font-size: 1rem;
-        font-weight: ${({ theme }) => theme.fonts.fontWeight600};
-        margin: 0 1.375rem;
-        text-decoration: none;
-        color: ${({ theme }) => theme.colors.grey2};
-      }
-    }
-  }
 `;
 
 export const ContainerRight = styled.div`
@@ -149,6 +137,22 @@ export const ContainerRight = styled.div`
 
     :hover {
       background-color: ${({ theme }) => theme.colors.grey8};
+    }
+  }
+`;
+
+export const DivLink = styled.div`
+  display: none;
+
+  @media (min-width: 768px) {
+    display: flex;
+    a {
+      font-family: "Inter", sans-serif;
+      font-size: 1rem;
+      font-weight: ${({ theme }) => theme.fonts.fontWeight600};
+      margin: 0 1.375rem;
+      text-decoration: none;
+      color: ${({ theme }) => theme.colors.grey2};
     }
   }
 `;
