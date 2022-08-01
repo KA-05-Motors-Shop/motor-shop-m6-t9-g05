@@ -1,11 +1,8 @@
-import React from "react";
 import { useModal } from "../../providers/Modal";
 import Button from "../Button";
 import { ModalContainer } from "./style";
 
-interface ModalCarImageProps {}
-
-const ModalCarImage: React.FC<ModalCarImageProps> = ({}) => {
+const ModalCarImage = ({}) => {
   const { Switch, stateModalCarImage } = useModal();
 
   return (
