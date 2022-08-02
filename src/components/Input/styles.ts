@@ -17,6 +17,9 @@ export const InputContainer = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.grey8};
   border-radius: 0.3rem;
   transition: 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   :hover {
     background-color: ${({ theme }) => theme.colors.grey8};
@@ -27,7 +30,7 @@ export const InputContainer = styled.div`
   }
 
   > input {
-    width: 98%;
+    width: 100%;
     padding: 0.6rem;
     border: none;
     background-color: transparent;
@@ -42,11 +45,21 @@ export const InputContainer = styled.div`
       font-family: "Inter", sans-serif;
       font-size: 0.9rem;
     }
+
+    ::-webkit-outer-spin-button,
+    ::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
   }
 `;
 
 export const Label = styled.label`
-  font-size: 1.06rem;
+  font-size: 0.875rem;
   font-weight: ${({ theme }) => theme.fonts.fontWeight500};
   font-family: "Inter", sans-serif;
+  margin-bottom: 0.7rem;
 `;

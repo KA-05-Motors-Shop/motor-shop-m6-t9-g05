@@ -2,7 +2,7 @@ const theme = {
   colors: {
     brand1: "#4529E6",
     brand2: "#5126EA",
-    brand3: "##B0A6F0",
+    brand3: "#B0A6F0",
     brand4: "#EDEAFD",
     grey0: "#0B0D0D",
     grey1: "#212529",
