@@ -1,19 +1,24 @@
 import styled, { css } from "styled-components";
 
 interface ContainerProps {
+  width?: number;
+  heigth?: number;
   big?: boolean;
   bgcolor?: string;
   color?: string;
+  borderColor?: string;
 }
 
 export const ButtonContainer = styled.button<ContainerProps>`
+  width: ${({ width }) => width}%;
+  max-width: 332px;
+  height: ${({ heigth }) => heigth}px;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   background-color: ${({ bgcolor }) => bgcolor};
   color: ${({ color }) => color};
-  border: 1.5px solid ${({ bgcolor }) => bgcolor};
+  border: 1.5px solid ${({ borderColor }) => borderColor};
   border-radius: 4px;
   ${({ big }) =>
     big
@@ -32,7 +37,6 @@ export const ButtonContainer = styled.button<ContainerProps>`
           font-size: 14px;
         `}
   font-weight: ${({ theme }) => theme.fonts.fontWeight600};
-  line-height: 0px;
   gap: 10px;
   :hover {
     cursor: pointer;

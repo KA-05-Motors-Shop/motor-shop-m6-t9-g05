@@ -1,8 +1,12 @@
+import CreateAd from "./components/Modals/ModalCreateAd";
+import car from './assets/car1.png'
+
 const App = () => {
   return (
-    <div>
-      <h1>Hello world!</h1>
-    </div>
+    <>
+    <img src={car} alt="" />
+    <CreateAd />
+    </>
   );
 };
 

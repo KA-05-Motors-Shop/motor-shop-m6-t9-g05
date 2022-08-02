@@ -1,5 +1,5 @@
-import { useModal } from "../../providers/Modal";
-import Button from "../Button";
+import { useModal } from "../../../providers/Modal";
+import Button from "../../Button";
 import { ModalContainer } from "./style";
 
 const ModalCarImage = ({}) => {
