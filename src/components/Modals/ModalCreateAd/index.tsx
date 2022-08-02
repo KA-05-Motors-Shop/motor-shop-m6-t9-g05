@@ -1,4 +1,5 @@
 import { X } from "phosphor-react";
+import { useModal } from "../../../providers/Modal";
 import theme from "../../../styles/theme";
 import Button from "../../Button";
 import { Input } from "../../Input";
@@ -14,17 +15,19 @@ import {
   DivInfos,
   Details,
   DivFooter,
-  DivButton
+  DivButton,
 } from "./styles";
 
 const CreateAd = () => {
+  const { Switch } = useModal();
+
   return (
     <Container>
       <ContainerForm>
         <Form>
           <DivTitle>
             <span>Criar anuncio</span>
-            <button>
+            <button onClick={() => Switch("ModalCreateAd")} type="button">
               <X size={20} weight="bold" />
             </button>
           </DivTitle>
@@ -105,7 +108,7 @@ const CreateAd = () => {
                 color={theme.colors.brand1}
                 height={40}
                 width={100}
-                type='button'
+                type="button"
               >
                 Adicionar campo para imagem da galeria
               </Button>
@@ -118,11 +121,16 @@ const CreateAd = () => {
                   height={45}
                   bgcolor={theme.colors.grey6}
                   color={theme.colors.grey0}
-                  type='button'
+                  type="button"
                 >
                   Cancelar
                 </Button>
-                <Button width={95} height={45} bgcolor={theme.colors.brand3} type='submit'>
+                <Button
+                  width={95}
+                  height={45}
+                  bgcolor={theme.colors.brand3}
+                  type="submit"
+                >
                   Criar anuncio
                 </Button>
               </div>

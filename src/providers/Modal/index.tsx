@@ -12,6 +12,7 @@ interface ModalProps {
 
 interface ModalContextData {
   stateModalCarImage: boolean;
+  openCreateAdModal: boolean;
   setStateModalCarImage: React.Dispatch<SetStateAction<boolean>>;
   Switch: (modal: string) => void;
 }
@@ -19,12 +20,17 @@ interface ModalContextData {
 const ModalContext = createContext<ModalContextData>({} as ModalContextData);
 
 export const ModalProvider = ({ children }: ModalProps) => {
-  const [stateModalCarImage, setStateModalCarImage] = useState(true);
+  const [stateModalCarImage, setStateModalCarImage] = useState<boolean>(true);
+  const [openCreateAdModal, setOpenCreateAdModal] = useState<boolean>(false);
 
   const Switch = (modal: string) => {
     switch (modal) {
       case "ModalCarImage": {
         setStateModalCarImage(!stateModalCarImage);
+        break;
+      }
+      case "ModalCreateAd": {
+        setOpenCreateAdModal(!openCreateAdModal);
         break;
       }
 
@@ -39,6 +45,7 @@ export const ModalProvider = ({ children }: ModalProps) => {
       value={{
         Switch,
         stateModalCarImage,
+        openCreateAdModal,
         setStateModalCarImage,
       }}
     >
