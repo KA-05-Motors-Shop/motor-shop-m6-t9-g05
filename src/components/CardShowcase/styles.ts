@@ -73,38 +73,38 @@ export const Footer = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 0 0 0;
+`;
 
-  .tags {
-    display: flex;
+export const DivTags = styled.div`
+  display: flex;
 
-    div + div {
-      margin: 0 0.375rem;
-    }
-
-    div {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 51px;
-      height: 32px;
-      background-color: ${({ theme }) => theme.colors.brand4};
-      border-radius: 4px;
-
-      span {
-        font-size: 0.875rem;
-        font-family: "Inter", sans-serif;
-        font-weight: ${({ theme }) => theme.fonts.fontWeight500};
-        color: ${({ theme }) => theme.colors.brand1};
-      }
-    }
+  div + div {
+    margin: 0 0.375rem;
   }
 
-  .price {
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 51px;
+    height: 32px;
+    background-color: ${({ theme }) => theme.colors.brand4};
+    border-radius: 4px;
+
     span {
-      font-size: 1rem;
-      font-family: "Lexend", sans-serif;
+      font-size: 0.875rem;
+      font-family: "Inter", sans-serif;
       font-weight: ${({ theme }) => theme.fonts.fontWeight500};
-      color: ${({ theme }) => theme.colors.grey1};
+      color: ${({ theme }) => theme.colors.brand1};
     }
+  }
+`;
+
+export const DivPrice = styled.div`
+  span {
+    font-size: 1rem;
+    font-family: "Lexend", sans-serif;
+    font-weight: ${({ theme }) => theme.fonts.fontWeight500};
+    color: ${({ theme }) => theme.colors.grey1};
   }
 `;

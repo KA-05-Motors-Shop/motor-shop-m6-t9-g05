@@ -1,4 +1,4 @@
-import { Container, ContainerImage, Footer, UserInfo } from "./styles";
+import { Container, ContainerImage, Footer, UserInfo, DivTags, DivPrice } from "./styles";
 import Car from "../../assets/car1.png";
 
 export const CardShowcase = () => {
@@ -21,17 +21,17 @@ export const CardShowcase = () => {
         <span>Samuel Leão</span>
       </UserInfo>
       <Footer>
-        <div className="tags">
+        <DivTags>
           <div>
             <span>0 KM</span>
           </div>
           <div>
             <span>2019</span>
           </div>
-        </div>
-        <div className="price">
+        </DivTags>
+        <DivPrice>
           <span>R$ 00.000,00</span>
-        </div>
+        </DivPrice>
       </Footer>
     </Container>
   );
