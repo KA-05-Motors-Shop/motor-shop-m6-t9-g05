@@ -1,7 +1,9 @@
+import CreateAd from "./components/Modals/ModalCreateAd";
+
 const App = () => {
   return (
     <div>
-      <h1>Hello world!</h1>
+      <CreateAd />
     </div>
   );
 };
