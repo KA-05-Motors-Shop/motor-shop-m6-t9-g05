@@ -210,3 +210,16 @@ export const TextArea = styled.textarea`
 export const DivButton = styled.div`
   margin-top: 1rem;
 `;
+
+
+export const DivExtraInputs = styled.div`
+
+  div:first-child {
+    margin-top: 1rem;
+  }
+
+  div + div {
+      margin-top: 1rem;
+  }
+
+`
