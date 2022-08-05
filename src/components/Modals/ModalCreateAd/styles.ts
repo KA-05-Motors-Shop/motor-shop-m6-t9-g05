@@ -2,23 +2,23 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  height: 100vh;
   top: 0;
   position: absolute;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   z-index: 1;
   backdrop-filter: saturate(180%);
   -webkit-backdrop-filter: saturate(180%);
   background-color: rgba(17, 25, 40, 0.3);
+
 `;
 
 export const ContainerForm = styled.div`
   width: 95%;
   max-width: 500px;
-  height: 100%;
+  margin-bottom: 1rem;
+
 `;
 
 export const Form = styled.form`
@@ -146,6 +146,7 @@ export const DivFooter = styled.div`
     margin-top: 1rem;
     display: flex;
     justify-content: center;
+    margin-bottom: 1rem;
 
     > button {
       width: 50%;
@@ -211,15 +212,12 @@ export const DivButton = styled.div`
   margin-top: 1rem;
 `;
 
-
 export const DivExtraInputs = styled.div`
-
   div:first-child {
     margin-top: 1rem;
   }
 
   div + div {
-      margin-top: 1rem;
+    margin-top: 1rem;
   }
-
-`
+`;
