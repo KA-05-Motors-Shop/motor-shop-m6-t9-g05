@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
+  min-height: fit-content;
   top: 0;
   position: absolute;
   display: flex;
@@ -46,7 +47,7 @@ export const DivTitle = styled.div`
   > button {
     background-color: transparent;
     border: none;
-    cursor: pointer;
+    cursor: pointer; 
 
     svg {
       color: ${({ theme }) => theme.colors.grey4};

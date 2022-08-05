@@ -1,0 +1,170 @@
+import styled from "styled-components";
+
+export const Container = styled.main`
+  background-color: ${({ theme }) => theme.colors.grey8};
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const SectionUser = styled.section`
+  background: ${({ theme }) => theme.colors.brand1};
+  background: linear-gradient(
+    180deg,
+    ${({ theme }) => theme.colors.brand1} 50%,
+    ${({ theme }) => theme.colors.grey8} 50%
+  );
+  width: 100%;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const DivUser = styled.div`
+  background-color: ${({ theme }) => theme.colors.gray10};
+  width: 75%;
+  height: 270px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+`;
+
+export const SpanName = styled.span`
+  font-family: "Lexend", sans-serif;
+  font-weight: ${({ theme }) => theme.fonts.fontWeight600};
+  font-size: 1.2rem;
+
+  > span {
+    background-color: ${({ theme }) => theme.colors.brand4};
+    color: ${({ theme }) => theme.colors.brand1};
+    font-size: 0.8rem;
+    font-weight: ${({ theme }) => theme.fonts.fontWeight500};
+    border-radius: 5px;
+    padding: 8px;
+  }
+`;
+
+export const Content = styled.div`
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  > div {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    > span {
+      font-family: "Inter", sans-serif;
+      color: ${({ theme }) => theme.colors.whiteFixed};
+      font-weight: ${({ theme }) => theme.fonts.fontWeight500};
+      font-size: 1.9rem;
+    }
+  }
+
+  > p {
+    font-family: "Inter", sans-serif;
+    color: ${({ theme }) => theme.colors.grey2};
+    font-weight: ${({ theme }) => theme.fonts.fontWeight400};
+    font-size: 1rem;
+  }
+`;
+
+export const SectionLeilao = styled.section`
+  width: 95%;
+
+  > ul {
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+
+    li {
+      min-width: 300px;
+      height: 350px;
+      width: 300px;
+      background-color: blue;
+      margin-right: 1rem;
+      scroll-snap-align: center;
+      border-radius: 5px;
+
+      @media screen and (min-width: 1024px) {
+        min-width: 550px;
+        height: 300px;
+      }
+    }
+  }
+`;
+
+export const SectionVehicles = styled.section`
+  width: 95%;
+
+  > ul {
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+
+    li {
+      min-width: 300px;
+      height: 280px;
+      width: 300px;
+      background-color: blue;
+      margin-right: 1rem;
+      scroll-snap-align: center;
+      border-radius: 5px;
+    }
+  }
+`;
+
+export const H2 = styled.h2`
+  font-family: "Lexend", sans-serif;
+  font-size: 1.3rem;
+  font-weight: ${({ theme }) => theme.fonts.fontWeight600};
+  color: #000;
+  margin: 1.5rem 0 1.5rem 0;
+`;
+
+export const Footer = styled.footer`
+  margin-top: 1.5rem;
+  background-color: #000;
+  height: 250px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  > span {
+    color: #fff;
+    font-size: 0.8rem;
+    font-family: "Inter", sans-serif;
+    font-weight: ${({ theme }) => theme.fonts.fontWeight400};
+  }
+
+  > button {
+    background-color: ${({ theme }) => theme.colors.grey1};
+    border-radius: 5px;
+    border: none;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    svg {
+      color: #fff;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    height: 200px;
+    flex-direction: row;
+  }
+`;

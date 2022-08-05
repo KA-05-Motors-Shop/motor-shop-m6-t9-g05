@@ -1,8 +1,8 @@
+import ProfileViewAdmin from "./pages/ProfileViewAdmin";
+
 const App = () => {
   return (
-    <div>
-      
-    </div>
+    <ProfileViewAdmin />
   );
 };
 
