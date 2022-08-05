@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 interface HeaderProps {
   isActive?: boolean;
   isOpen?: boolean;
+  bgColor?: string
 }
 
 export const Header = styled.header`
@@ -117,15 +118,14 @@ export const ContainerRight = styled.div`
     font-family: "Inter", sans-serif;
     font-weight: ${({ theme }) => theme.fonts.fontWeight400};
     color: ${({ theme }) => theme.colors.grey2};
-    cursor: pointer;
   }
 `;
 
-export const DivName = styled.div`
+export const DivName = styled.div<HeaderProps>`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: red;
+  background-color: ${({bgColor}) => bgColor};
   display: flex;
   justify-content: center;
   align-items: center;
