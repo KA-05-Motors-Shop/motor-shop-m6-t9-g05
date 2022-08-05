@@ -21,7 +21,7 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { createAdSchema } from "../../../schemas/createAd.schema";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface CreateAdProps {
   title: string;
@@ -69,7 +69,7 @@ const CreateAd = () => {
     data.type_of_vehicle = typeVehicle;
     console.log(data);
   };
-
+  
   return (
     <Container>
       <ContainerForm>
@@ -196,8 +196,8 @@ const CreateAd = () => {
                   label={`${num}° Imagem da galeria`}
                   width={100}
                   placeholder="Inserir URL da imagem"
-                  {...register(`gallery_image${num}` as "gallery_image")}
-                  error={errors.gallery_image?.message}
+                  {...register(`gallery_image${num}` as "gallery_image2")}
+                  error={errors.gallery_image2?.message}
                 />
               ))}
             </DivExtraInputs>
