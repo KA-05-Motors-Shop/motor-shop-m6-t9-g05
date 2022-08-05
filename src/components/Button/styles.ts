@@ -10,7 +10,7 @@ interface ContainerProps {
 }
 
 export const ButtonContainer = styled.button<ContainerProps>`
-  width: ${({ width }) => width}%;
+  width: ${({ width }) => width}px;
   max-width: 332px;
   height: ${({ heigth }) => heigth}px;
   display: flex;

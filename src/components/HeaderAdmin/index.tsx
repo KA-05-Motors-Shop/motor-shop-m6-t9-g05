@@ -6,12 +6,15 @@ import {
   ContainerRight,
   DivLink,
   Header as ContainerHeader,
+  DropMenu,
+  DivName,
 } from "./styles";
 import LogoHeader from "../../assets/logo-header.svg";
 import { List, X } from "phosphor-react";
 
-const Header = () => {
+const HeaderAdmin = () => {
   const [isActive, setIsActive] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleNavLinks = () => setIsActive(!isActive);
 
@@ -38,10 +41,16 @@ const Header = () => {
                 <a href="">Leilão</a>
               </li>
               <li>
-                <a href="">Fazer Login</a>
+                <button>Editar endereço</button>
               </li>
               <li>
-                <button>Cadastrar</button>
+                <button>Editar perfil</button>
+              </li>
+              <li>
+                <button>Minhas compras</button>
+              </li>
+              <li>
+                <button>Sair</button>
               </li>
             </ul>
           </nav>
@@ -51,13 +60,22 @@ const Header = () => {
             <a href="">Leilão</a>
           </DivLink>
         </ContainerLeft>
-        <ContainerRight>
-          <a href="">Login</a>
-          <button>Cadastrar</button>
+        <ContainerRight
+          onMouseEnter={() => setIsOpen(true)}
+          onMouseLeave={() => setIsOpen(false)}
+        >
+          <DivName>SL</DivName>
+          <span>Samuel Leão</span>
+          <DropMenu isOpen={isOpen}>
+            <a href="#">Editar perfil</a>
+            <a href="#">Editar endereço</a>
+            <a href="#">Minhas compras</a>
+            <a href="#">Sair</a>
+          </DropMenu>
         </ContainerRight>
       </Container>
     </ContainerHeader>
   );
 };
 
-export default Header
+export default HeaderAdmin;

@@ -1,7 +1,8 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 interface HeaderProps {
   isActive?: boolean;
+  isOpen?: boolean;
 }
 
 export const Header = styled.header`
@@ -39,7 +40,8 @@ export const ContainerLeft = styled.div<HeaderProps>`
     width: 100%;
     position: absolute;
     border-top: 1px solid ${({ theme }) => theme.colors.grey6};
-    margin: 440px 0 0 -1rem;
+    top: 80px;
+    left: 0;
     -webkit-box-shadow: 0px 13px 31px -7px rgba(0, 0, 0, 0.19);
     box-shadow: 0px 13px 31px -7px rgba(0, 0, 0, 0.19);
 
@@ -70,20 +72,12 @@ export const ContainerLeft = styled.div<HeaderProps>`
     }
 
     li button {
-      width: 100%;
-      padding: 0.75rem 1.75rem;
-      font-family: "Inter", sans-serif;
       font-size: 1rem;
+      font-family: "Inter", sans-serif;
       font-weight: ${({ theme }) => theme.fonts.fontWeight600};
-      background: ${({ theme }) => theme.colors.whiteFixed};
-      border: 1px solid ${({ theme }) => theme.colors.grey4};
-      border-radius: 4px;
-      cursor: pointer;
-      transition: 0.2s;
-
-      :hover {
-        background-color: ${({ theme }) => theme.colors.grey8};
-      }
+      color: ${({ theme }) => theme.colors.grey2};
+      background-color: transparent;
+      border: none;
     }
   }
 
@@ -92,7 +86,7 @@ export const ContainerLeft = styled.div<HeaderProps>`
   }
 
   @media (min-width: 768px) {
-    flex: 1; //max de espaço
+    flex: 1;
     padding: 0 1rem 0 3rem;
 
     svg {
@@ -110,36 +104,34 @@ export const ContainerRight = styled.div`
 
   @media (min-width: 768px) {
     display: flex;
+    justify-content: space-between;
+    width: 170px;
     height: 100%;
     padding: 0 3rem 0 1.375rem;
     align-items: center;
     border-left: 2px solid ${({ theme }) => theme.colors.grey6};
   }
 
-  a {
-    font-family: "Inter", sans-serif;
+  > span {
     font-size: 1rem;
-    font-weight: ${({ theme }) => theme.fonts.fontWeight600};
-    margin: 0 1.375rem 0 1rem;
-    text-decoration: none;
+    font-family: "Inter", sans-serif;
+    font-weight: ${({ theme }) => theme.fonts.fontWeight400};
     color: ${({ theme }) => theme.colors.grey2};
-  }
-
-  button {
-    padding: 0.75rem 1.75rem;
-    font-family: "Inter", sans-serif;
-    font-size: 1rem;
-    font-weight: ${({ theme }) => theme.fonts.fontWeight600};
-    background: ${({ theme }) => theme.colors.whiteFixed};
-    border: 1px solid ${({ theme }) => theme.colors.grey4};
-    border-radius: 4px;
     cursor: pointer;
-    transition: 0.2s;
-
-    :hover {
-      background-color: ${({ theme }) => theme.colors.grey8};
-    }
   }
+`;
+
+export const DivName = styled.div`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+  font-weight: ${({ theme }) => theme.fonts.fontWeight700};
+  color: ${({ theme }) => theme.colors.whiteFixed};
 `;
 
 export const DivLink = styled.div`
@@ -156,4 +148,33 @@ export const DivLink = styled.div`
       color: ${({ theme }) => theme.colors.grey2};
     }
   }
+`;
+
+export const DropMenu = styled.div<HeaderProps>`
+  display: none;
+
+  ${({ isOpen }) =>
+    isOpen &&
+    css`
+      display: block;
+      width: 150px;
+      position: absolute;
+      top: 70px;
+      z-index: 1;
+      background-color: ${({ theme }) => theme.colors.grey9};
+      height: 130px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      padding: 1rem;
+      border-radius: 8px;
+
+      a {
+        font-size: 1rem;
+        font-family: "Inter", sans-serif;
+        text-decoration: none;
+        color: ${({ theme }) => theme.colors.grey2};
+        font-weight: ${({ theme }) => theme.fonts.fontWeight400};
+      }
+    `}
 `;

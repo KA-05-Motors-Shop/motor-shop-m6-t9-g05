@@ -84,7 +84,7 @@ const CreateAd = () => {
             <label>Tipo de anuncio</label>
             <div>
               <Button
-                width={95}
+                width={235}
                 height={45}
                 type="button"
                 onClick={() => setTypeAd("Venda")}
@@ -92,7 +92,7 @@ const CreateAd = () => {
                 Venda
               </Button>
               <Button
-                width={95}
+                width={235}
                 height={45}
                 bgcolor={theme.colors.whiteFixed}
                 color={theme.colors.grey0}
@@ -155,7 +155,7 @@ const CreateAd = () => {
               <label>Tipo de Veiculo</label>
               <div>
                 <Button
-                  width={95}
+                  width={235}
                   height={45}
                   type="button"
                   onClick={() => setTypeVehicle("Carro")}
@@ -163,7 +163,7 @@ const CreateAd = () => {
                   Carro
                 </Button>
                 <Button
-                  width={95}
+                  width={235}
                   height={45}
                   bgcolor={theme.colors.whiteFixed}
                   color={theme.colors.grey0}
@@ -206,7 +206,7 @@ const CreateAd = () => {
                 bgcolor={theme.colors.brand4}
                 color={theme.colors.brand1}
                 height={40}
-                width={100}
+                width={320}
                 type="button"
                 onClick={renderInputs}
               >
