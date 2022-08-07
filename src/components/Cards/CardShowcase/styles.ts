@@ -34,6 +34,7 @@ export const ContainerImage = styled.div`
   img {
     width: 262px;
     filter: drop-shadow(5px 5px 3px #00000073);
+    object-fit: cover;
   }
 `;
 
@@ -71,18 +72,19 @@ export const UserInfo = styled.div`
 export const Footer = styled.div`
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: space-between;
   padding: 0.5rem 0 0 0;
 `;
 
 export const DivTags = styled.div`
   display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
 
-  div + div {
-    margin: 0 0.375rem;
-  }
-
-  div {
+  div:not(:nth-child(3)) {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -101,10 +103,19 @@ export const DivTags = styled.div`
 `;
 
 export const DivPrice = styled.div`
+  margin-left: auto;
+
   span {
     font-size: 1rem;
     font-family: "Lexend", sans-serif;
     font-weight: ${({ theme }) => theme.fonts.fontWeight500};
     color: ${({ theme }) => theme.colors.grey1};
   }
+`;
+
+export const DivButtons = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+
 `;

@@ -16,15 +16,15 @@ import {
 import { useModal } from "../../providers/Modal";
 import CreateAd from "../../components/Modals/ModalCreateAd";
 import HeaderAdmin from "../../components/HeaderAdmin";
-
+import CardShowcase from "../../components/Cards/CardShowcase";
+import CardAuction from "../../components/Cards/CardAuction";
 
 const ProfileViewAdmin = () => {
-    const {Switch, openCreateAdModal} = useModal()
-
+  const { Switch, openCreateAdModal } = useModal();
 
   return (
     <Container>
-        <HeaderAdmin />
+      <HeaderAdmin />
       <SectionUser>
         <DivUser>
           <Content>
@@ -44,7 +44,7 @@ const ProfileViewAdmin = () => {
               borderColor={theme.colors.brand1}
               width={160}
               height={40}
-              onClick={() => Switch('ModalCreateAd')}
+              onClick={() => Switch("ModalCreateAd")}
             >
               Criar anuncio
             </Button>
@@ -55,16 +55,11 @@ const ProfileViewAdmin = () => {
       <SectionLeilao>
         <H2>Leilão</H2>
         <ul>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
+        {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+            <li>
+              <CardAuction />
+            </li>
+          ))}
         </ul>
       </SectionLeilao>
 
@@ -72,16 +67,11 @@ const ProfileViewAdmin = () => {
         <H2>Carros</H2>
 
         <ul>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+            <li>
+              <CardShowcase isUser={false}/>
+            </li>
+          ))}
         </ul>
       </SectionVehicles>
 
@@ -89,16 +79,11 @@ const ProfileViewAdmin = () => {
         <H2>Motos</H2>
 
         <ul>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+            <li>
+              <CardShowcase isUser={false}/>
+            </li>
+          ))}
         </ul>
       </SectionVehicles>
 
