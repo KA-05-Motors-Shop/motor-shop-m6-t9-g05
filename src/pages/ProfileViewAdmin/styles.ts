@@ -24,11 +24,16 @@ export const SectionUser = styled.section`
 
 export const DivUser = styled.div`
   background-color: ${({ theme }) => theme.colors.gray10};
-  width: 75%;
-  height: 270px;
+  width: 90%;
+  height: 320px;
   border-radius: 8px;
   display: flex;
   justify-content: center;
+
+  @media screen and (min-width: 1024px) {
+    width: 70%;
+    height: 270px;
+  }
 `;
 
 export const SpanName = styled.span`
@@ -84,20 +89,12 @@ export const SectionLeilao = styled.section`
     display: flex;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
 
     li {
-      min-width: 300px;
-      height: 350px;
-      width: 300px;
-      background-color: blue;
-      margin-right: 1rem;
       scroll-snap-align: center;
       border-radius: 5px;
-
-      @media screen and (min-width: 1024px) {
-        min-width: 550px;
-        height: 300px;
-      }
     }
   }
 `;
@@ -109,12 +106,11 @@ export const SectionVehicles = styled.section`
     display: flex;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
+    gap: 1.5rem;
 
     li {
       min-width: 300px;
-      height: 280px;
       width: 300px;
-      background-color: blue;
       margin-right: 1rem;
       scroll-snap-align: center;
       border-radius: 5px;

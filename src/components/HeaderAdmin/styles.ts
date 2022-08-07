@@ -169,12 +169,16 @@ export const DropMenu = styled.div<HeaderProps>`
       padding: 1rem;
       border-radius: 8px;
 
-      a {
+      button {
+        background-color: transparent;
+        border: none;
         font-size: 1rem;
         font-family: "Inter", sans-serif;
         text-decoration: none;
         color: ${({ theme }) => theme.colors.grey2};
         font-weight: ${({ theme }) => theme.fonts.fontWeight400};
+        text-align: start;
+        cursor: pointer;
       }
     `}
 `;

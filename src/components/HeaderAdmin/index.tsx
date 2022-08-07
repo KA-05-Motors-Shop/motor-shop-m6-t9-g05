@@ -11,27 +11,13 @@ import {
 } from "./styles";
 import LogoHeader from "../../assets/logo-header.svg";
 import { List, X } from "phosphor-react";
-import theme from "../../styles/theme";
-
-const colors = [
-  theme.colors.random1,
-  theme.colors.random1,
-  theme.colors.random3,
-  theme.colors.random4,
-  theme.colors.random5,
-  theme.colors.random6,
-  theme.colors.random7,
-  theme.colors.random8,
-  theme.colors.random9,
-  theme.colors.random10,
-  theme.colors.random11,
-];
+import { randomColors } from "../../utils/randomColors";
 
 const HeaderAdmin = () => {
   const [isActive, setIsActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  const bgColor = colors[Math.floor(Math.random() * colors.length)];
+  const bgColor = randomColors()
 
   const handleNavLinks = () => setIsActive(!isActive);
 
@@ -84,10 +70,10 @@ const HeaderAdmin = () => {
           <DivName bgColor={bgColor}>SL</DivName>
           <span>Samuel Leão</span>
           <DropMenu isOpen={isOpen}>
-            <a href="#">Editar perfil</a>
-            <a href="#">Editar endereço</a>
-            <a href="#">Minhas compras</a>
-            <a href="#">Sair</a>
+            <button>Editar perfil</button>
+            <button>Editar endereço</button>
+            <button>Minhas compras</button>
+            <button>Sair</button>
           </DropMenu>
         </ContainerRight>
       </Container>
