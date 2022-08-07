@@ -40,8 +40,9 @@ interface CreateAdProps {
   gallery_image6?: string;
 }
 
+
 const CreateAd = () => {
-  const { Switch } = useModal();
+  const { Switch, openCreateAdModal } = useModal();
   const [typeAd, setTypeAd] = useState<string>("");
   const [typeVehicle, setTypeVehicle] = useState<string>("");
   const [count, setCount] = useState(2);
@@ -71,7 +72,7 @@ const CreateAd = () => {
   };
   
   return (
-    <Container>
+    <Container isOpen={openCreateAdModal}>
       <ContainerForm>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <DivTitle>
@@ -206,7 +207,6 @@ const CreateAd = () => {
                 bgcolor={theme.colors.brand4}
                 color={theme.colors.brand1}
                 height={40}
-                width={320}
                 type="button"
                 onClick={renderInputs}
               >
