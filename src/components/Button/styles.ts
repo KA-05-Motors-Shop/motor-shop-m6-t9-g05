@@ -19,7 +19,12 @@ export const ButtonContainer = styled.button<ContainerProps>`
   background-color: ${({ bgcolor }) => bgcolor};
   color: ${({ color }) => color};
   border: 1.5px solid ${({ borderColor }) => borderColor};
+  font-weight: ${({ theme }) => theme.fonts.fontWeight600};
   border-radius: 4px;
+  cursor: pointer;
+  transition: 0.5s;
+  gap: 10px;
+
   ${({ big }) =>
     big
       ? css`
@@ -36,9 +41,4 @@ export const ButtonContainer = styled.button<ContainerProps>`
       : css`
           font-size: 14px;
         `}
-  font-weight: ${({ theme }) => theme.fonts.fontWeight600};
-  gap: 10px;
-  :hover {
-    cursor: pointer;
-  }
 `;

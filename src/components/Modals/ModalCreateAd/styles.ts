@@ -1,8 +1,12 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const Container = styled.div`
+interface ContainerProps {
+  isOpen?: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
   width: 100%;
-  min-height: fit-content;
+  height: 100vh;
   top: 0;
   position: absolute;
   display: flex;
@@ -13,13 +17,17 @@ export const Container = styled.div`
   -webkit-backdrop-filter: saturate(180%);
   background-color: rgba(17, 25, 40, 0.3);
 
+  ${({ isOpen }) =>
+    isOpen &&
+    css`
+      overflow-y: scroll;
+    `}
 `;
 
 export const ContainerForm = styled.div`
   width: 95%;
   max-width: 500px;
-  margin-bottom: 1rem;
-
+  margin-bottom: 2rem;
 `;
 
 export const Form = styled.form`
@@ -47,7 +55,7 @@ export const DivTitle = styled.div`
   > button {
     background-color: transparent;
     border: none;
-    cursor: pointer; 
+    cursor: pointer;
 
     svg {
       color: ${({ theme }) => theme.colors.grey4};
@@ -211,6 +219,10 @@ export const TextArea = styled.textarea`
 
 export const DivButton = styled.div`
   margin-top: 1rem;
+
+  > button {
+    width: 100%;
+  }
 `;
 
 export const DivExtraInputs = styled.div`

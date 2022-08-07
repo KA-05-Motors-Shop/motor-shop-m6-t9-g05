@@ -18,9 +18,15 @@ import CreateAd from "../../components/Modals/ModalCreateAd";
 import HeaderAdmin from "../../components/HeaderAdmin";
 import CardShowcase from "../../components/Cards/CardShowcase";
 import CardAuction from "../../components/Cards/CardAuction";
+import { useEffect } from "react";
 
 const ProfileViewAdmin = () => {
   const { Switch, openCreateAdModal } = useModal();
+
+  useEffect(() => {
+    openCreateAdModal && window.scrollTo({top: 0, behavior: "smooth"})
+    document.body.style.overflowY = openCreateAdModal ? "hidden" : "scroll";
+  }, [openCreateAdModal]);
 
   return (
     <Container>
@@ -55,7 +61,7 @@ const ProfileViewAdmin = () => {
       <SectionLeilao>
         <H2>Leilão</H2>
         <ul>
-        {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
             <li>
               <CardAuction />
             </li>
@@ -69,7 +75,7 @@ const ProfileViewAdmin = () => {
         <ul>
           {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
             <li>
-              <CardShowcase isUser={false}/>
+              <CardShowcase isUser={false} />
             </li>
           ))}
         </ul>
@@ -81,7 +87,7 @@ const ProfileViewAdmin = () => {
         <ul>
           {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
             <li>
-              <CardShowcase isUser={false}/>
+              <CardShowcase isUser={false} />
             </li>
           ))}
         </ul>
