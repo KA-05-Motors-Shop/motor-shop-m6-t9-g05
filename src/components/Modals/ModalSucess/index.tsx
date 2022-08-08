@@ -8,7 +8,7 @@ interface ModalProps {
   modalLogin?: boolean;
 }
 
-const ModalSucess = ({ modalLogin = false }: ModalProps) => {
+const ModalSucess = ({ modalLogin }: ModalProps) => {
   const { Switch } = useModal();
 
   return (
