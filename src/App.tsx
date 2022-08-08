@@ -1,7 +1,5 @@
-
-import CardAuction from "./components/Cards/CardAuction";
+import ModalSucess from "./components/Modals/ModalSucess";
 import ProfileViewAdmin from "./pages/ProfileViewAdmin";
-
 
 const App = () => {
   return (

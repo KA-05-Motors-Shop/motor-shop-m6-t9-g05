@@ -69,6 +69,8 @@ const CreateAd = () => {
     data.type_of_ad = typeAd;
     data.type_of_vehicle = typeVehicle;
     console.log(data);
+    Switch('ModalCreateAd')
+    Switch('ModalSucess')
   };
   
   return (

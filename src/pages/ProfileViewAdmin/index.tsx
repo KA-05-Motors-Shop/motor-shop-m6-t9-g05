@@ -20,15 +20,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { scrollToTop } from "../../utils/scrollToTop";
 import Footer from "../../components/Footer";
+import ModalSucess from "../../components/Modals/ModalSucess";
 
 
 const ProfileViewAdmin = () => {
-  const { Switch, openCreateAdModal } = useModal();
+  const { Switch, openCreateAdModal, openSucessModal } = useModal();
 
   useEffect(() => {
-    openCreateAdModal && scrollToTop()
-    document.body.style.overflowY = openCreateAdModal ? "hidden" : "scroll";
-  }, [openCreateAdModal]);
+    openCreateAdModal || openSucessModal && scrollToTop()
+    document.body.style.overflowY = openCreateAdModal || openSucessModal ? "hidden" : "scroll";
+  }, [openCreateAdModal, openSucessModal]);
 
   return (
     <Container>
@@ -37,7 +38,7 @@ const ProfileViewAdmin = () => {
         <DivUser>
           <Content>
             <div>
-              <span>SL</span>
+              <span>SL</span> 
             </div>
             <SpanName>
               Samuel Leão <span>Anunciante</span>
@@ -171,6 +172,7 @@ const ProfileViewAdmin = () => {
 
       <Footer />
       {openCreateAdModal && <CreateAd />}
+      {openSucessModal && <ModalSucess />}
     </Container>
   );
 };

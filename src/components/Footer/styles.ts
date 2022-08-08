@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Conteiner = styled.footer`
+export const Container = styled.footer`
   margin-top: 1.5rem;
   background-color: #000;
   height: 250px;
