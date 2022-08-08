@@ -1,6 +1,4 @@
 import Button from "../../components/Button";
-import { CaretUp } from "phosphor-react";
-import Logo from "../../assets/Motors-shop.png";
 import theme from "../../styles/theme";
 import {
   Container,
@@ -10,8 +8,7 @@ import {
   DivUser,
   SpanName,
   Content,
-  H2,
-  Footer,
+  H2
 } from "./styles";
 import { useModal } from "../../providers/Modal";
 import CreateAd from "../../components/Modals/ModalCreateAd";
@@ -22,6 +19,8 @@ import { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { scrollToTop } from "../../utils/scrollToTop";
+import Footer from "../../components/Footer";
+
 
 const ProfileViewAdmin = () => {
   const { Switch, openCreateAdModal } = useModal();
@@ -170,13 +169,7 @@ const ProfileViewAdmin = () => {
         </Swiper>
       </SectionVehicles>
 
-      <Footer>
-        <img src={Logo} alt="Motors Shop" />
-        <span>&copy; 2022 - Todos os direitos reservados</span>
-        <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-          <CaretUp size={20} weight="bold" />
-        </button>
-      </Footer>
+      <Footer />
       {openCreateAdModal && <CreateAd />}
     </Container>
   );
