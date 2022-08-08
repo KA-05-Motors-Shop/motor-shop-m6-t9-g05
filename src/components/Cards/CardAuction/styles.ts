@@ -3,21 +3,18 @@ import styled from "styled-components";
 export const Container = styled.div`
   position: relative;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.29) 0%, #000000 100%);
-  width: 300px;
-  min-width: 300px;
+  width: 100%;
   height: 350px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border-radius: 5px;
+  cursor: grabbing;
 
   @media screen and (min-width: 1024px) {
-    min-width: 550px;
-    height: 300px;
+    height: 325px;
   }
 `;
-
-
 
 export const DivImg = styled.div`
   position: absolute;

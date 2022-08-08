@@ -85,36 +85,26 @@ export const Content = styled.div`
 export const SectionLeilao = styled.section`
   width: 95%;
 
-  > ul {
-    display: flex;
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
-    gap: 1.5rem;
-    padding-bottom: 2rem;
-
-    li {
-      scroll-snap-align: center;
-      border-radius: 5px;
-    }
+  .swiper-slide  {
+    width: 100px;
   }
 `;
 
 export const SectionVehicles = styled.section`
   width: 95%;
+`;
 
-  > ul {
-    display: flex;
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
-    gap: 1.5rem;
+export const UlVehicles = styled.ul`
+  display: flex;
+  gap: 1.5rem;
+  background-color: red;
 
-    li {
-      min-width: 300px;
-      width: 300px;
-      margin-right: 1rem;
-      scroll-snap-align: center;
-      border-radius: 5px;
-    }
+  li {
+    min-width: 300px;
+    width: 300px;
+    margin-right: 1rem;
+    scroll-snap-align: center;
+    border-radius: 5px;
   }
 `;
 

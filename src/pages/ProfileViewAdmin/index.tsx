@@ -16,13 +16,17 @@ import HeaderAdmin from "../../components/HeaderAdmin";
 import CardShowcase from "../../components/Cards/CardShowcase";
 import CardAuction from "../../components/Cards/CardAuction";
 import { useEffect } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { scrollToTop } from "../../utils/scrollToTop";
 import Footer from "../../components/Footer";
+
 
 const ProfileViewAdmin = () => {
   const { Switch, openCreateAdModal } = useModal();
 
   useEffect(() => {
-    openCreateAdModal && window.scrollTo({top: 0, behavior: "smooth"})
+    openCreateAdModal && scrollToTop()
     document.body.style.overflowY = openCreateAdModal ? "hidden" : "scroll";
   }, [openCreateAdModal]);
 
@@ -58,37 +62,111 @@ const ProfileViewAdmin = () => {
 
       <SectionLeilao>
         <H2>Leilão</H2>
-        <ul>
+        <Swiper
+        
+          slidesPerView={2}
+          spaceBetween={30}
+          wrapperTag="ul"
+          className="mySwiper"
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            480: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 15,
+            },
+            1024: {
+              slidesPerView: 2,
+              spaceBetween: 30,
+            },
+            1200: {
+              slidesPerView: 2,
+              spaceBetween: 30,
+            },
+          }}
+        >
           {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-            <li>
+            <SwiperSlide style={{ width: "100%", maxWidth: "520px" }}>
               <CardAuction />
-            </li>
+            </SwiperSlide>
           ))}
-        </ul>
+        </Swiper>
       </SectionLeilao>
 
       <SectionVehicles>
         <H2>Carros</H2>
 
-        <ul>
+        <Swiper
+          slidesPerView={3}
+          spaceBetween={30}
+          wrapperTag="ul"
+          className="mySwiper"
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            480: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 15,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+          }}
+        >
           {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-            <li>
+            <SwiperSlide style={{ width: "100%", maxWidth: "325px" }}>
               <CardShowcase isUser={false} />
-            </li>
+            </SwiperSlide>
           ))}
-        </ul>
+        </Swiper>
       </SectionVehicles>
 
       <SectionVehicles>
         <H2>Motos</H2>
 
-        <ul>
+        <Swiper
+          slidesPerView={3}
+          spaceBetween={30}
+          wrapperTag="ul"
+          className="mySwiper"
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            480: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 15,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+          }}
+        >
           {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-            <li>
+            <SwiperSlide style={{ width: "100%", maxWidth: "325px" }}>
               <CardShowcase isUser={false} />
-            </li>
+            </SwiperSlide>
           ))}
-        </ul>
+        </Swiper>
       </SectionVehicles>
 
       <Footer />

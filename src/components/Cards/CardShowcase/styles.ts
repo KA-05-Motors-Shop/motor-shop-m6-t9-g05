@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 315px;
-  height: 375px;
+  width: 100%;
+  height: 385px;
+  cursor: grabbing;
 
   strong {
     display: block;
