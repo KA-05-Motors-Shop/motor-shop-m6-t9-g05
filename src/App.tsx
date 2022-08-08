@@ -1,10 +1,5 @@
-import ModalSucess from "./components/Modals/ModalSucess";
-import ProfileViewAdmin from "./pages/ProfileViewAdmin";
-
 const App = () => {
-  return (
-    <ProfileViewAdmin />
-  );
+  return <></>;
 };
 
 export default App;

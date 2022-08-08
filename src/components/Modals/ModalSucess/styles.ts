@@ -18,7 +18,7 @@ export const Content = styled.div`
   background-color: ${({ theme }) => theme.colors.whiteFixed};
   width: 95%;
   max-width: 520px;
-  height: 200px;
+  height: 220px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -72,3 +72,8 @@ export const DivMessage = styled.div`
     margin-top: 1rem;
   }
 `;
+
+export const DivButton = styled.div`
+  padding: 15px;
+
+`

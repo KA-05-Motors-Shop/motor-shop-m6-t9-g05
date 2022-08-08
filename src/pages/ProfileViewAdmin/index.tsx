@@ -21,10 +21,13 @@ import "swiper/css";
 import { scrollToTop } from "../../utils/scrollToTop";
 import Footer from "../../components/Footer";
 import ModalSucess from "../../components/Modals/ModalSucess";
+import { randomColors } from "../../utils/randomColors";
 
 
 const ProfileViewAdmin = () => {
   const { Switch, openCreateAdModal, openSucessModal } = useModal();
+
+  const bgColor = randomColors()
 
   useEffect(() => {
     openCreateAdModal || openSucessModal && scrollToTop()
@@ -36,7 +39,7 @@ const ProfileViewAdmin = () => {
       <HeaderAdmin />
       <SectionUser>
         <DivUser>
-          <Content>
+          <Content bgColor={bgColor}>
             <div>
               <span>SL</span> 
             </div>

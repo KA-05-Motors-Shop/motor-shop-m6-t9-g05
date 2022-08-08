@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface ContentProps {
+  bgColor?: string;
+}
+
 export const Container = styled.main`
   background-color: ${({ theme }) => theme.colors.grey8};
   width: 100%;
@@ -51,7 +55,7 @@ export const SpanName = styled.span`
   }
 `;
 
-export const Content = styled.div`
+export const Content = styled.div<ContentProps>`
   width: 95%;
   display: flex;
   flex-direction: column;
@@ -61,7 +65,7 @@ export const Content = styled.div`
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    background-color: red;
+    background-color: ${({ bgColor }) => bgColor};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -85,7 +89,7 @@ export const Content = styled.div`
 export const SectionLeilao = styled.section`
   width: 95%;
 
-  .swiper-slide  {
+  .swiper-slide {
     width: 100px;
   }
 `;
@@ -115,4 +119,3 @@ export const H2 = styled.h2`
   color: #000;
   margin: 1.5rem 0 1.5rem 0;
 `;
-
