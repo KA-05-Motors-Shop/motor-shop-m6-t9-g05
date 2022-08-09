@@ -13,11 +13,13 @@ import LogoHeader from "../../assets/logo-header.svg";
 import { List, X } from "phosphor-react";
 import { randomColors } from "../../utils/randomColors";
 
-const HeaderAdmin = () => {
+interface HeaderProps {
+  bgColor: string;
+}
+
+const HeaderAdmin = ({ bgColor }: HeaderProps) => {
   const [isActive, setIsActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-
-  const bgColor = randomColors()
 
   const handleNavLinks = () => setIsActive(!isActive);
 

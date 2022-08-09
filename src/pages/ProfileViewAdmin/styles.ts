@@ -88,14 +88,12 @@ export const Content = styled.div<ContentProps>`
 
 export const SectionLeilao = styled.section`
   width: 95%;
-
-  .swiper-slide {
-    width: 100px;
-  }
+  margin-top: 3rem;
 `;
 
 export const SectionVehicles = styled.section`
   width: 95%;
+  margin-top: 5rem;
 `;
 
 export const UlVehicles = styled.ul`

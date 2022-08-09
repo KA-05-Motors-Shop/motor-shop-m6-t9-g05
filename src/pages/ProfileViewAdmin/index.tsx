@@ -36,7 +36,7 @@ const ProfileViewAdmin = () => {
 
   return (
     <Container>
-      <HeaderAdmin />
+      <HeaderAdmin bgColor={bgColor}/>
       <SectionUser>
         <DivUser>
           <Content bgColor={bgColor}>
