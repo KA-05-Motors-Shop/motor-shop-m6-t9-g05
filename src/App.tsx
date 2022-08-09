@@ -1,5 +1,7 @@
+import ProfileViewAdmin from "./pages/ProfileViewAdmin";
+
 const App = () => {
-  return <></>;
+  return <ProfileViewAdmin />
 };
 
 export default App;
