@@ -23,6 +23,9 @@ import {
   DivName,
   DivSuggestions,
   Ul,
+  Overlay,
+  DivComments,
+  DivSection
 } from "./styles";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
@@ -113,46 +116,53 @@ const VehicleDetails = () => {
           </Aside>
         </DivMain>
         <SectionComments>
-          <H2>Comentarios</H2>
+          <DivComments>
+            <H2>Comentarios</H2>
 
-          <Ul>
-            {[1, 2, 3, 4, 5, 6].map((item) => (
-              <Comments
-                key={item}
-                username="Samuel Leão"
-                comment="Teste de comentario"
-              />
-            ))}
-          </Ul>
-          <div />
+            <Ul>
+              {[1, 2, 3, 4, 5, 6].map((item) => (
+                <Comments
+                  key={item}
+                  username="Samuel Leão"
+                  comment="Teste de comentario"
+                />
+              ))}
+            </Ul>
+          </DivComments>
+          <Overlay />
         </SectionComments>
 
         <SectionCommentUser>
-          <div>
-            <DivName bgColor={bgColor}>
-              <div>SL</div>
-              <span>Samuel Leão</span>
-            </DivName>
+          <DivSection>
+            <div>
+              <DivName bgColor={bgColor}>
+                <div>SL</div>
+                <span>Samuel Leão</span>
+              </DivName>
 
-            <DivComment>
-              <textarea placeholder="Digite seu comentario" />
-              <Button
-                width={100}
-                height={38}
-                disabled={!isLoggedIn && true}
-                bgcolor={isLoggedIn ? theme.colors.brand1 : theme.colors.grey4}
-                onClick={() => console.log("habilitado")}
-              >
-                Comentar
-              </Button>
-            </DivComment>
-          </div>
+              <DivComment>
+                <textarea placeholder="Digite seu comentario" />
+                <Button
+                  width={100}
+                  height={38}
+                  disabled={!isLoggedIn && true}
+                  bgcolor={
+                    isLoggedIn ? theme.colors.brand1 : theme.colors.grey4
+                  }
+                  onClick={() => console.log("habilitado")}
+                >
+                  Comentar
+                </Button>
+              </DivComment>
+            </div>
 
-          <DivSuggestions>
-            <span>Gostei muito!</span>
-            <span>Incrivel</span>
-            <span>Recomendarei para meus amigos!</span>
-          </DivSuggestions>
+            <DivSuggestions>
+              <span>Gostei muito!</span>
+              <span>Incrivel</span>
+              <span>Recomendarei para meus amigos!</span>
+            </DivSuggestions>
+          </DivSection>
+          <Overlay />
         </SectionCommentUser>
       </Main>
       <Footer />
