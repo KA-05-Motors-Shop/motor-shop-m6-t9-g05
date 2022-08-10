@@ -14,11 +14,17 @@ import Footer from "../../components/Footer";
 import CardShowcase from "../../components/Cards/CardShowcase";
 import Button from "../../components/Button";
 import theme from "../../styles/theme";
+import "swiper/css";
+import HeaderAdmin from "../../components/HeaderAdmin";
+import { randomColors } from "../../utils/randomColors";
 
 const Homepage = () => {
+  const isLoggedIn = false;
+  const bgColor = randomColors();
+
   return (
     <Container>
-      <Header />
+      {isLoggedIn ? <HeaderAdmin bgColor={bgColor} /> : <Header />}
 
       <SectionTop>
         <Content>
@@ -123,7 +129,7 @@ const Homepage = () => {
         >
           {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
             <SwiperSlide style={{ width: "100%", maxWidth: "325px" }}>
-              <CardShowcase isUser={false} />
+              <CardShowcase />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -158,7 +164,7 @@ const Homepage = () => {
         >
           {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
             <SwiperSlide style={{ width: "100%", maxWidth: "325px" }}>
-              <CardShowcase isUser={false} />
+              <CardShowcase />
             </SwiperSlide>
           ))}
         </Swiper>

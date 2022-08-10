@@ -29,7 +29,7 @@ const ProfileViewAdmin = () => {
   const bgColor = randomColors();
 
   useEffect(() => {
-    openCreateAdModal || (openSucessModal && scrollToTop());
+    openCreateAdModal && scrollToTop();
     document.body.style.overflowY =
       openCreateAdModal || openSucessModal ? "hidden" : "scroll";
   }, [openCreateAdModal, openSucessModal]);
