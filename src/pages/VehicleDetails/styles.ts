@@ -105,6 +105,7 @@ export const DivFooter = styled.div`
     flex-direction: column;
     justify-content: space-between;
     height: 70px;
+
     > div {
       display: flex;
       gap: 1rem;
@@ -161,7 +162,7 @@ export const SectionDescription = styled.section`
   }
 
   @media screen and (min-width: 1024px) {
-    height: 200px;
+    height: 230px;
   }
 `;
 
@@ -239,23 +240,22 @@ export const DivUser = styled.div<DivProps>`
 `;
 
 export const SectionComments = styled.section`
-  background-color: ${({ theme }) => theme.colors.whiteFixed};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 95%;
-  max-width: 700px;
   margin: 2rem auto;
-  border-radius: 5px;
 
   @media screen and (min-width: 1024px) {
-    margin-left: 0;
-    margin-right: auto;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5rem;
   }
 `;
 
 export const SectionCommentUser = styled.section`
-  background-color: ${({ theme }) => theme.colors.whiteFixed};
+  background-color: transparent;
   width: 95%;
-  height: 354px;
-  max-width: 700px;
   margin: 0 auto;
   border-radius: 5px;
   display: flex;
@@ -263,9 +263,10 @@ export const SectionCommentUser = styled.section`
   justify-content: space-around;
   margin-bottom: 1rem;
 
-  > div {
-    margin: 0 auto;
-    width: 95%;
+  @media screen and (min-width: 1024px) {
+    flex-direction: row;
+    justify-content: center;
+    gap: 5rem;
   }
 `;
 
@@ -341,6 +342,7 @@ export const DivSuggestions = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  margin-top: 1rem;
 
   > span {
     background-color: ${({ theme }) => theme.colors.grey7};
@@ -355,4 +357,35 @@ export const DivSuggestions = styled.div`
 export const Ul = styled.ul`
   max-height: 500px;
   overflow-y: auto;
+
+  li,
+  li + li {
+    margin-top: 1rem;
+  }
 `;
+
+export const Overlay = styled.div`
+  display: none;
+
+  @media screen and (min-width: 1024px) {
+    display: block;
+    min-width: 400px;
+  }
+`;
+
+export const DivComments = styled.div`
+  background-color: ${({ theme }) => theme.colors.whiteFixed};
+  width: 100%;
+  max-width: 700px;
+  border-radius: 5px;
+`;
+
+
+export const DivSection = styled.div`
+    margin: 0 auto;
+    width: 95%;
+    max-width: 700px;
+    background-color: ${({theme}) => theme.colors.whiteFixed};
+    border-radius: 5px;
+    padding: 8px;
+`

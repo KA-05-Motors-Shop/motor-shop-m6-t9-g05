@@ -5,7 +5,7 @@ interface DivProps {
 }
 
 export const Container = styled.li`
-  height: 100px;
+  height: 115px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -62,5 +62,6 @@ export const DivMessage = styled.div`
     font-weight: ${({ theme }) => theme.fonts.fontWeight400};
     color: ${({ theme }) => theme.colors.grey2};
     line-height: 1rem;
+    margin-top: 1rem;
   }
 `;
