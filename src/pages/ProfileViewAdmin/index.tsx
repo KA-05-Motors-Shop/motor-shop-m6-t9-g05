@@ -8,7 +8,7 @@ import {
   DivUser,
   SpanName,
   Content,
-  H2
+  H2,
 } from "./styles";
 import { useModal } from "../../providers/Modal";
 import CreateAd from "../../components/Modals/ModalCreateAd";
@@ -23,25 +23,25 @@ import Footer from "../../components/Footer";
 import ModalSucess from "../../components/Modals/ModalSucess";
 import { randomColors } from "../../utils/randomColors";
 
-
 const ProfileViewAdmin = () => {
   const { Switch, openCreateAdModal, openSucessModal } = useModal();
 
-  const bgColor = randomColors()
+  const bgColor = randomColors();
 
   useEffect(() => {
-    openCreateAdModal || openSucessModal && scrollToTop()
-    document.body.style.overflowY = openCreateAdModal || openSucessModal ? "hidden" : "scroll";
+    openCreateAdModal || (openSucessModal && scrollToTop());
+    document.body.style.overflowY =
+      openCreateAdModal || openSucessModal ? "hidden" : "scroll";
   }, [openCreateAdModal, openSucessModal]);
 
   return (
     <Container>
-      <HeaderAdmin bgColor={bgColor}/>
+      <HeaderAdmin bgColor={bgColor} />
       <SectionUser>
         <DivUser>
           <Content bgColor={bgColor}>
             <div>
-              <span>SL</span> 
+              <span>SL</span>
             </div>
             <SpanName>
               Samuel Leão <span>Anunciante</span>
@@ -52,7 +52,7 @@ const ProfileViewAdmin = () => {
             </p>
             <Button
               color={theme.colors.brand1}
-              bgcolor={theme.colors.gray10}
+              bgcolor={theme.colors.grey10}
               borderColor={theme.colors.brand1}
               width={160}
               height={40}
@@ -67,7 +67,6 @@ const ProfileViewAdmin = () => {
       <SectionLeilao>
         <H2>Leilão</H2>
         <Swiper
-        
           slidesPerView={2}
           spaceBetween={30}
           wrapperTag="ul"
