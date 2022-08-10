@@ -10,12 +10,16 @@ import {
 import Car from "../../../assets/car1.png";
 import Button from "../../Button";
 import theme from "../../../styles/theme";
+import { randomColors } from "../../../utils/randomColors";
 
 interface CardProps {
   isUser?: boolean;
 }
 
 const CardShowcase = ({ isUser = true }: CardProps) => {
+
+  const bgColor = randomColors()
+
   return (
     <Container>
       <ContainerImage>
@@ -28,7 +32,7 @@ const CardShowcase = ({ isUser = true }: CardProps) => {
       </p>
       {isUser ? (
         <>
-          <UserInfo>
+          <UserInfo bgColor={bgColor}>
             <div>
               <span>SL</span>
             </div>

@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface Props {
+  bgColor?: string
+}
+
 export const Container = styled.div`
   width: 100%;
   height: 385px;
@@ -39,7 +43,7 @@ export const ContainerImage = styled.div`
   }
 `;
 
-export const UserInfo = styled.div`
+export const UserInfo = styled.div<Props>`
   display: flex;
   align-items: center;
   padding: 0.5rem 0;
@@ -59,7 +63,7 @@ export const UserInfo = styled.div`
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background-color: ${({ theme }) => theme.colors.random6};
+    background-color: ${({ bgColor }) => bgColor};
 
     span {
       font-size: 0.875rem;
