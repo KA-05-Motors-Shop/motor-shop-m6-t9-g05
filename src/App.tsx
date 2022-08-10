@@ -1,7 +1,8 @@
+import ProfileViewAdmin from "./pages/ProfileViewAdmin";
 import VehicleDetails from "./pages/VehicleDetails";
 
 const App = () => {
-  return <VehicleDetails />
+  return <ProfileViewAdmin />
 };
 
 export default App;

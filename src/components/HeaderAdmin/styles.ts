@@ -45,6 +45,7 @@ export const ContainerLeft = styled.div<HeaderProps>`
     left: 0;
     -webkit-box-shadow: 0px 13px 31px -7px rgba(0, 0, 0, 0.19);
     box-shadow: 0px 13px 31px -7px rgba(0, 0, 0, 0.19);
+    z-index: 2;
 
     ul {
       width: 100%;
