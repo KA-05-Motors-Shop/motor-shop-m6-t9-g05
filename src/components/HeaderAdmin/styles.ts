@@ -3,13 +3,13 @@ import styled, { css } from "styled-components";
 interface HeaderProps {
   isActive?: boolean;
   isOpen?: boolean;
-  bgColor?: string
+  bgColor?: string;
 }
 
 export const Header = styled.header`
   width: 100%;
   height: 80px;
-  background-color: ${({ theme }) => theme.colors.gray10};
+  background-color: ${({ theme }) => theme.colors.grey10};
 `;
 
 export const Container = styled.div`
@@ -126,7 +126,7 @@ export const DivName = styled.div<HeaderProps>`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: ${({bgColor}) => bgColor};
+  background-color: ${({ bgColor }) => bgColor};
   display: flex;
   justify-content: center;
   align-items: center;

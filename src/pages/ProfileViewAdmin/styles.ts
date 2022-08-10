@@ -27,7 +27,7 @@ export const SectionUser = styled.section`
 `;
 
 export const DivUser = styled.div`
-  background-color: ${({ theme }) => theme.colors.gray10};
+  background-color: ${({ theme }) => theme.colors.grey10};
   width: 90%;
   height: 320px;
   border-radius: 8px;
