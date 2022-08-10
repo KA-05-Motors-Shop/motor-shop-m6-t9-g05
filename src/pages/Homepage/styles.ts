@@ -45,7 +45,7 @@ export const Content = styled.div`
     text-align: center;
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 768px) {
     padding: 7% 0 10%;
     width: 50%;
 
@@ -69,7 +69,7 @@ export const DivButtons = styled.div`
     width: 100%;
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 768px) {
     flex-direction: row;
 
     > button {

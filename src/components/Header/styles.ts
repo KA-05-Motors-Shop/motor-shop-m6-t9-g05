@@ -7,7 +7,7 @@ interface HeaderProps {
 export const Header = styled.header`
   width: 100%;
   height: 80px;
-  background-color: ${({ theme }) => theme.colors.gray10};
+  background-color: ${({ theme }) => theme.colors.grey10};
 `;
 
 export const Container = styled.div`

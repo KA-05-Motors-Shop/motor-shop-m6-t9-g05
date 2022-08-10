@@ -12,23 +12,10 @@ import {
 import { Swiper, SwiperSlide } from "swiper/react";
 import Footer from "../../components/Footer";
 import CardShowcase from "../../components/Cards/CardShowcase";
-import CreateAd from "../../components/Modals/ModalCreateAd";
-import ModalSucess from "../../components/Modals/ModalSucess";
-import { useEffect } from "react";
-import { scrollToTop } from "../../utils/scrollToTop";
-import { useModal } from "../../providers/Modal";
 import Button from "../../components/Button";
 import theme from "../../styles/theme";
 
 const Homepage = () => {
-  const { Switch, openCreateAdModal, openSucessModal } = useModal();
-
-  useEffect(() => {
-    openCreateAdModal || (openSucessModal && scrollToTop());
-    document.body.style.overflowY =
-      openCreateAdModal || openSucessModal ? "hidden" : "scroll";
-  }, [openCreateAdModal, openSucessModal]);
-
   return (
     <Container>
       <Header />
@@ -44,7 +31,6 @@ const Homepage = () => {
               borderColor={theme.colors.grey10}
               width={160}
               height={40}
-              onClick={() => Switch("ModalCreateAd")}
             >
               Leilão
             </Button>
@@ -54,7 +40,6 @@ const Homepage = () => {
               borderColor={theme.colors.grey10}
               width={160}
               height={40}
-              onClick={() => Switch("ModalCreateAd")}
             >
               Carros
             </Button>
@@ -64,7 +49,6 @@ const Homepage = () => {
               borderColor={theme.colors.grey10}
               width={160}
               height={40}
-              onClick={() => Switch("ModalCreateAd")}
             >
               Motos
             </Button>
@@ -181,9 +165,6 @@ const Homepage = () => {
       </SectionVehicles>
 
       <Footer />
-
-      {openCreateAdModal && <CreateAd />}
-      {openSucessModal && <ModalSucess />}
     </Container>
   );
 };

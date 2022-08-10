@@ -29,7 +29,6 @@ export const DivImg = styled.div`
     height: 200px;
     object-fit: cover;
     opacity: 0.7;
-    
   }
 `;
 
@@ -61,7 +60,7 @@ export const DivInfos = styled.div`
   margin: 0.5rem 0 0rem 0.5rem;
 
   > h2 {
-    color: ${({ theme }) => theme.colors.gray10};
+    color: ${({ theme }) => theme.colors.grey10};
     font-family: "Lexend", sans-serif;
     font-size: 1.3rem;
     font-weight: ${({ theme }) => theme.fonts.fontWeight600};
