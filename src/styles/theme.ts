@@ -14,7 +14,7 @@ const theme = {
     grey7: "#E9ECEF",
     grey8: "#F1F3F5",
     grey9: "#F8F9FA",
-    gray10: "#FDFDFD",
+    grey10: "#FDFDFD",
     whiteFixed: "#FFFFFF",
     alert1: "#CD2B31",
     alert2: "#FDD8D8",
@@ -32,14 +32,14 @@ const theme = {
     random8: "#2A7D5F",
     random9: "#153D2E",
     random10: "#6100FF",
-    random11: "#5700E3"
+    random11: "#5700E3",
   },
   fonts: {
     fontWeight700: 700,
     fontWeight600: 600,
     fontWeight500: 500,
     fontWeight400: 400,
-  }
+  },
 };
 
 export default theme;

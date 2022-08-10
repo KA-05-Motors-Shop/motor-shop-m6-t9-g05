@@ -1,68 +1,60 @@
-import Button from "../../components/Button";
-import theme from "../../styles/theme";
+import CardAuction from "../../components/Cards/CardAuction";
+import Header from "../../components/Header";
 import {
   Container,
-  SectionUser,
-  SectionVehicles,
-  SectionLeilao,
-  DivUser,
-  SpanName,
   Content,
+  DivButtons,
   H2,
+  SectionLeilao,
+  SectionTop,
+  SectionVehicles,
 } from "./styles";
-import { useModal } from "../../providers/Modal";
-import CreateAd from "../../components/Modals/ModalCreateAd";
-import HeaderAdmin from "../../components/HeaderAdmin";
-import CardShowcase from "../../components/Cards/CardShowcase";
-import CardAuction from "../../components/Cards/CardAuction";
-import { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import { scrollToTop } from "../../utils/scrollToTop";
 import Footer from "../../components/Footer";
-import ModalSucess from "../../components/Modals/ModalSucess";
-import { randomColors } from "../../utils/randomColors";
+import CardShowcase from "../../components/Cards/CardShowcase";
+import Button from "../../components/Button";
+import theme from "../../styles/theme";
 
-const ProfileViewAdmin = () => {
-  const { Switch, openCreateAdModal, openSucessModal } = useModal();
-
-  const bgColor = randomColors();
-
-  useEffect(() => {
-    openCreateAdModal || (openSucessModal && scrollToTop());
-    document.body.style.overflowY =
-      openCreateAdModal || openSucessModal ? "hidden" : "scroll";
-  }, [openCreateAdModal, openSucessModal]);
-
+const Homepage = () => {
   return (
     <Container>
-      <HeaderAdmin bgColor={bgColor} />
-      <SectionUser>
-        <DivUser>
-          <Content bgColor={bgColor}>
-            <div>
-              <span>SL</span>
-            </div>
-            <SpanName>
-              Samuel Leão <span>Anunciante</span>
-            </SpanName>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Et
-              reiciendis
-            </p>
+      <Header />
+
+      <SectionTop>
+        <Content>
+          <p>Velocidade e experiência em um lugar feito para você</p>
+          <span>Um ambiente feito para você explorar o seu melhor</span>
+          <DivButtons>
             <Button
-              color={theme.colors.brand1}
-              bgcolor={theme.colors.grey10}
-              borderColor={theme.colors.brand1}
+              color={theme.colors.grey10}
+              bgcolor={theme.colors.brand2}
+              borderColor={theme.colors.grey10}
               width={160}
               height={40}
-              onClick={() => Switch("ModalCreateAd")}
             >
-              Criar anuncio
+              Leilão
             </Button>
-          </Content>
-        </DivUser>
-      </SectionUser>
+            <Button
+              color={theme.colors.grey10}
+              bgcolor={theme.colors.brand2}
+              borderColor={theme.colors.grey10}
+              width={160}
+              height={40}
+            >
+              Carros
+            </Button>
+            <Button
+              color={theme.colors.grey10}
+              bgcolor={theme.colors.brand2}
+              borderColor={theme.colors.grey10}
+              width={160}
+              height={40}
+            >
+              Motos
+            </Button>
+          </DivButtons>
+        </Content>
+      </SectionTop>
 
       <SectionLeilao>
         <H2>Leilão</H2>
@@ -173,10 +165,8 @@ const ProfileViewAdmin = () => {
       </SectionVehicles>
 
       <Footer />
-      {openCreateAdModal && <CreateAd />}
-      {openSucessModal && <ModalSucess />}
     </Container>
   );
 };
 
-export default ProfileViewAdmin;
+export default Homepage;
