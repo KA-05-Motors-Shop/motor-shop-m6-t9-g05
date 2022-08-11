@@ -14,6 +14,8 @@ interface ModalContextData {
   stateModalCarImage: boolean;
   openCreateAdModal: boolean;
   openSucessModal: boolean;
+  openEditAdModal: boolean;
+  openDeleteModal: boolean
   setStateModalCarImage: React.Dispatch<SetStateAction<boolean>>;
   Switch: (modal: string) => void;
 }
@@ -24,6 +26,8 @@ export const ModalProvider = ({ children }: ModalProps) => {
   const [stateModalCarImage, setStateModalCarImage] = useState<boolean>(true);
   const [openCreateAdModal, setOpenCreateAdModal] = useState<boolean>(false);
   const [openSucessModal, setOpenSucessModal] = useState<boolean>(false);
+  const [openEditAdModal, setOpenEditAdModal] = useState<boolean>(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false)
 
   const Switch = (modal: string) => {
     switch (modal) {
@@ -37,6 +41,14 @@ export const ModalProvider = ({ children }: ModalProps) => {
       }
       case "ModalSucess": {
         setOpenSucessModal(!openSucessModal);
+        break;
+      }
+      case "ModalEditAd": {
+        setOpenEditAdModal(!openEditAdModal);
+        break;
+      }
+      case "ModalDelete": {
+        setOpenDeleteModal(!openDeleteModal);
         break;
       }
 
@@ -53,6 +65,8 @@ export const ModalProvider = ({ children }: ModalProps) => {
         stateModalCarImage,
         openCreateAdModal,
         openSucessModal,
+        openEditAdModal,
+        openDeleteModal,
         setStateModalCarImage,
       }}
     >
