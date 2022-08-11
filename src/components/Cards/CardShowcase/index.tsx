@@ -11,14 +11,16 @@ import Car from "../../../assets/car1.png";
 import Button from "../../Button";
 import theme from "../../../styles/theme";
 import { randomColors } from "../../../utils/randomColors";
+import { useModal } from "../../../providers/Modal";
 
 interface CardProps {
   isUser?: boolean;
 }
 
 const CardShowcase = ({ isUser = true }: CardProps) => {
+  const bgColor = randomColors();
+  const { Switch } = useModal();
 
-  const bgColor = randomColors()
 
   return (
     <Container>
@@ -72,6 +74,7 @@ const CardShowcase = ({ isUser = true }: CardProps) => {
               color={theme.colors.grey1}
               bgcolor="transparent"
               borderColor={theme.colors.grey1}
+              onClick={() => Switch("ModalEditAd")}
             >
               {" "}
               Editar{" "}

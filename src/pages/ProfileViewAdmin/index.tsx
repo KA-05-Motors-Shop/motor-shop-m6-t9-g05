@@ -22,16 +22,28 @@ import { scrollToTop } from "../../utils/scrollToTop";
 import Footer from "../../components/Footer";
 import ModalSucess from "../../components/Modals/ModalSucess";
 import { randomColors } from "../../utils/randomColors";
+import EditAd from "../../components/Modals/ModalEditAd";
+import ModalDelete from "../../components/Modals/ModalDelete";
 
 const ProfileViewAdmin = () => {
-  const { Switch, openCreateAdModal, openSucessModal } = useModal();
+  const {
+    Switch,
+    openCreateAdModal,
+    openSucessModal,
+    openEditAdModal,
+    openDeleteModal,
+  } = useModal();
 
   const bgColor = randomColors();
 
   useEffect(() => {
-    openCreateAdModal && scrollToTop()
-    document.body.style.overflowY = openCreateAdModal || openSucessModal ? "hidden" : "scroll";
-  }, [openCreateAdModal, openSucessModal]);
+    openCreateAdModal && scrollToTop();
+    openEditAdModal && scrollToTop();
+    document.body.style.overflowY =
+      openCreateAdModal || openSucessModal || openEditAdModal || openDeleteModal
+        ? "hidden"
+        : "scroll";
+  }, [openCreateAdModal, openSucessModal, openEditAdModal]);
 
   return (
     <Container>
@@ -174,6 +186,8 @@ const ProfileViewAdmin = () => {
       <Footer />
       {openCreateAdModal && <CreateAd />}
       {openSucessModal && <ModalSucess />}
+      {openEditAdModal && <EditAd />}
+      {openDeleteModal && <ModalDelete />}
     </Container>
   );
 };
