@@ -12,10 +12,11 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   width?: number;
   mask?: string;
   error?: any;
+  register?: any
 }
 
 const InputDefault: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-  { label, error, mask, width = 95, ...rest },
+  { label, error, mask, width = 95, register, ...rest },
   ref
 ) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -34,12 +35,12 @@ const InputDefault: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   }
 
   return (
-    <Container>
+    <Container width={width}>
       <Label>
         {label} {!!error && <span> - {error}</span>}{" "}
       </Label>
       <InputContainer>
-        <InputMask mask={mask} {...rest} inputRef={inputRef} />
+        <InputMask mask={mask} {...rest} inputRef={inputRef} {...register} autoComplete='off'/>
       </InputContainer>
     </Container>
   );

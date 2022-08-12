@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { CepProvider } from "./CEP";
 import { ModalProvider } from "./Modal";
 
 interface ChildrenProps {
@@ -6,7 +7,11 @@ interface ChildrenProps {
 }
 
 const AppProvider = ({ children }: ChildrenProps) => {
-  return <ModalProvider>{children}</ModalProvider>;
+  return (
+    <CepProvider>
+      <ModalProvider>{children}</ModalProvider>
+    </CepProvider>
+  );
 };
 
 export default AppProvider;

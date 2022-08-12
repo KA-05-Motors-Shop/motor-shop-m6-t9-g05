@@ -40,11 +40,8 @@ interface CreateAdProps {
   gallery_image6?: string;
 }
 
-
 const CreateAd = () => {
   const { Switch, openCreateAdModal } = useModal();
-  const [typeAd, setTypeAd] = useState<string>("");
-  const [typeVehicle, setTypeVehicle] = useState<string>("");
   const [count, setCount] = useState(2);
   const [extraInputs, setShowExtraInputs] = useState<number[]>([]);
 
@@ -53,6 +50,7 @@ const CreateAd = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm<CreateAdProps>({
     resolver: yupResolver(createAdSchema),
   });
@@ -66,13 +64,11 @@ const CreateAd = () => {
   };
 
   const onSubmit = (data: CreateAdProps) => {
-    data.type_of_ad = typeAd;
-    data.type_of_vehicle = typeVehicle;
     console.log(data);
-    Switch('ModalCreateAd')
-    Switch('ModalSucess')
+    Switch("ModalCreateAd");
+    Switch("ModalSucess");
   };
-  
+
   return (
     <Container isOpen={openCreateAdModal}>
       <ContainerForm>
@@ -84,13 +80,23 @@ const CreateAd = () => {
             </button>
           </DivTitle>
           <DivTypeAd>
-            <label>Tipo de anuncio</label>
+            <label>
+              Tipo de anuncio{" "}
+              {!!errors.type_of_ad && (
+                <span> - {errors.type_of_ad?.message}</span>
+              )}{" "}
+            </label>
             <div>
               <Button
                 width={235}
                 height={45}
                 type="button"
-                onClick={() => setTypeAd("Venda")}
+                onClick={() =>
+                  setValue("type_of_ad", "Venda", {
+                    shouldValidate: true,
+                    shouldDirty: true,
+                  })
+                }
               >
                 Venda
               </Button>
@@ -101,7 +107,12 @@ const CreateAd = () => {
                 color={theme.colors.grey0}
                 borderColor={theme.colors.grey4}
                 type="button"
-                onClick={() => setTypeAd("Leilão")}
+                onClick={() =>
+                  setValue("type_of_ad", "Leilão", {
+                    shouldValidate: true,
+                    shouldDirty: true,
+                  })
+                }
               >
                 Leilão
               </Button>
@@ -155,13 +166,23 @@ const CreateAd = () => {
               />
             </ContainerText>
             <DivTypeVehicle>
-              <label>Tipo de Veiculo</label>
+              <label>
+                Tipo de Veiculo{" "}
+                {!!errors.type_of_vehicle && (
+                  <span> - {errors.type_of_vehicle?.message}</span>
+                )}{" "}
+              </label>
               <div>
                 <Button
                   width={235}
                   height={45}
                   type="button"
-                  onClick={() => setTypeVehicle("Carro")}
+                  onClick={() =>
+                    setValue("type_of_vehicle", "Carro", {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                    })
+                  }
                 >
                   Carro
                 </Button>
@@ -172,7 +193,12 @@ const CreateAd = () => {
                   color={theme.colors.grey0}
                   borderColor={theme.colors.grey4}
                   type="button"
-                  onClick={() => setTypeVehicle("Moto")}
+                  onClick={() =>
+                    setValue("type_of_vehicle", "Moto", {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                    })
+                  }
                 >
                   Moto
                 </Button>
