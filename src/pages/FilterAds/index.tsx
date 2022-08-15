@@ -11,6 +11,8 @@ const FilterAd = () => {
   const { ads } = useAds();
   const { userAuth } = useUser();
 
+  document.title = type ? type : "Veiculos"
+
   const bgColor = randomColors();
 
   const vehicles = ads.filter(

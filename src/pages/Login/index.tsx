@@ -16,6 +16,7 @@ interface LoginProps {
 }
 
 const Login = () => {
+  document.title = 'Login'
   const {
     register,
     handleSubmit,

@@ -11,15 +11,15 @@ interface ChildrenProps {
 
 const AppProvider = ({ children }: ChildrenProps) => {
   return (
-    <UserProvider>
-      <AdsProvider>
-        <CommentProvider>
-          <CepProvider>
-            <ModalProvider>{children}</ModalProvider>
-          </CepProvider>
-        </CommentProvider>
-      </AdsProvider>
-    </UserProvider>
+    <ModalProvider>
+      <UserProvider>
+        <AdsProvider>
+          <CommentProvider>
+            <CepProvider>{children}</CepProvider>
+          </CommentProvider>
+        </AdsProvider>
+      </UserProvider>
+    </ModalProvider>
   );
 };
 

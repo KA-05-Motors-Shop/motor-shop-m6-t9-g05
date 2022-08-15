@@ -22,6 +22,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { createAdSchema } from "../../../schemas/createAd.schema";
 import { useEffect, useState } from "react";
+import { useAds } from "../../../providers/Ads";
 
 interface CreateAdProps {
   title: string;
@@ -44,6 +45,7 @@ const CreateAd = () => {
   const { Switch, openCreateAdModal } = useModal();
   const [count, setCount] = useState(2);
   const [extraInputs, setShowExtraInputs] = useState<number[]>([]);
+  const { createAd } = useAds();
 
   const {
     register,
@@ -63,10 +65,8 @@ const CreateAd = () => {
     }
   };
 
-  const onSubmit = (data: CreateAdProps) => {
-    console.log(data);
-    Switch("ModalCreateAd");
-    Switch("ModalSucess");
+  const onSubmit = async (data: CreateAdProps) => {
+    await createAd(data);
   };
 
   return (

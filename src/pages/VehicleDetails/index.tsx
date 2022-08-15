@@ -33,20 +33,50 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { useParams } from "react-router-dom";
 import { useAds } from "../../providers/Ads";
+import { useEffect } from "react";
+import { useUser } from "../../providers/User";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { commentSchema } from "../../schemas/comment.schema";
+import { useComment } from "../../providers/Comments";
+
+interface CommentProps {
+  message: string;
+}
 
 const VehicleDetails = () => {
-  const isLoggedIn = false;
   const bgColor = randomColors();
   const { id } = useParams<{ id: string }>();
-  const { ads } = useAds();
+  const { userAuth } = useUser();
+  const { ads, getAds } = useAds();
+  const { createComment } = useComment();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<CommentProps>({
+    resolver: yupResolver(commentSchema),
+  });
+
+  useEffect(() => {
+    getAds();
+  }, []);
 
   const vehicle = ads.find((ad) => ad.id === id);
 
   if (!vehicle) return <h1>teste</h1>;
 
+  const onSubmit = async (data: CommentProps) => {
+    await createComment(vehicle.id, data);
+    reset()
+  };
+  document.title = `Detalhes | ${vehicle.title}`;
+
   return (
     <>
-      {isLoggedIn ? <HeaderAdmin bgColor={bgColor} /> : <Header />}
+      {userAuth.token ? <HeaderAdmin bgColor={bgColor} /> : <Header />}
 
       <Main>
         <DivMain>
@@ -90,12 +120,22 @@ const VehicleDetails = () => {
                 className="mySwiper"
               >
                 <SwiperSlide className="mySlide">
-                  <img src={vehicle.gallery_image} alt="car" />
-                  <img src={vehicle.gallery_image2} alt="car" />
-                  <img src={vehicle.gallery_image3} alt="car" />
-                  <img src={vehicle.gallery_image4} alt="car" />
-                  <img src={vehicle.gallery_image5} alt="car" />
-                  <img src={vehicle.gallery_image6} alt="car" />
+                  <img src={vehicle.gallery_image} alt={vehicle.title} />
+                  {vehicle.gallery_image2 && (
+                    <img src={vehicle.gallery_image2} alt={vehicle.title} />
+                  )}
+                  {vehicle.gallery_image3 && (
+                    <img src={vehicle.gallery_image3} alt={vehicle.title} />
+                  )}
+                  {vehicle.gallery_image4 && (
+                    <img src={vehicle.gallery_image4} alt={vehicle.title} />
+                  )}
+                  {vehicle.gallery_image5 && (
+                    <img src={vehicle.gallery_image5} alt={vehicle.title} />
+                  )}
+                  {vehicle.gallery_image6 && (
+                    <img src={vehicle.gallery_image6} alt={vehicle.title} />
+                  )}
                 </SwiperSlide>
               </Swiper>
             </div>
@@ -144,16 +184,19 @@ const VehicleDetails = () => {
                 <span>{vehicle.owner.name}</span>
               </DivName>
 
-              <DivComment>
-                <textarea placeholder="Digite seu comentario" />
+              <DivComment onSubmit={handleSubmit(onSubmit)}>
+                <textarea
+                  placeholder="Digite seu comentario"
+                  {...register("message")}
+                />
                 <Button
                   width={100}
                   height={38}
-                  disabled={!isLoggedIn && true}
+                  disabled={!userAuth.token && true}
                   bgcolor={
-                    isLoggedIn ? theme.colors.brand1 : theme.colors.grey4
+                    userAuth.token ? theme.colors.brand1 : theme.colors.grey4
                   }
-                  onClick={() => console.log("habilitado")}
+                  type="submit"
                 >
                   Comentar
                 </Button>

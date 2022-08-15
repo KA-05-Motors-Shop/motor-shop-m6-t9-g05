@@ -69,7 +69,7 @@ const CardShowcase = ({ isUser = true, vehicle }: CardProps) => {
             <div>
               <span>SL</span>
             </div>
-            <span>{vehicle.owner?.  name}</span>
+            <span>{vehicle.owner?.name}</span>
           </UserInfo>
           <Footer>
             <DivTags>

@@ -119,7 +119,7 @@ const ProfileViewAdmin = () => {
         >
           {leilao.map((vehicle) => (
             <SwiperSlide style={{ width: "100%", maxWidth: "325px" }}>
-              <CardShowcase isUser={false} vehicle={vehicle} />
+              <CardAuction vehicle={vehicle} />
             </SwiperSlide>
           ))}
         </Swiper>

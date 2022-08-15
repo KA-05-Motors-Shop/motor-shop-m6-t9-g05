@@ -8,6 +8,7 @@ import {
 import toast from "react-hot-toast";
 import { Navigate, useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
+import { scrollToTop } from "../../utils/scrollToTop";
 import { useModal } from "../Modal";
 
 interface Props {
@@ -122,7 +123,7 @@ interface UserContextData {
 const UserContext = createContext<UserContextData>({} as UserContextData);
 
 export const UserProvider = ({ children }: Props) => {
-  const { Switch } = useModal();
+  const { Switch, openSucessModal} = useModal();
   const [userAuth, setUserAuth] = useState<UserAuth>(() => {
     const data = localStorage.getItem("@UserAuth");
 
@@ -134,13 +135,17 @@ export const UserProvider = ({ children }: Props) => {
   });
   const [user, setUser] = useState<User>({} as User);
   const [users, setUsers] = useState<User[]>([]);
+  
 
   const navigate = useNavigate();
 
   const createUser = useCallback(async (data: CreateUserProps) => {
     await api
       .post("/users", data)
-      .then(() => Switch("ModalSucess"))
+      .then(() => {
+        scrollToTop()
+        Switch("ModalSucess")
+      })
       .catch((err) => toast.error(err.response.data.message));
   }, []);
 

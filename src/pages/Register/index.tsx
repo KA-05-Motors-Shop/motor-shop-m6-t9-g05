@@ -5,6 +5,7 @@ import Button from "../../components/Button";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { Input } from "../../components/Input";
+import ModalSucess from "../../components/Modals/ModalSucess";
 import { useCep } from "../../providers/CEP";
 import { useModal } from "../../providers/Modal";
 import { useUser } from "../../providers/User";
@@ -50,9 +51,11 @@ interface Address {
 }
 
 const Register = () => {
+  document.title = 'Register'
+
   const { getAddress, address } = useCep();
   const { createUser } = useUser();
-  const {Switch} = useModal()
+  const {Switch, openSucessModal} = useModal()
 
   const {
     register,
@@ -66,7 +69,6 @@ const Register = () => {
   const onSubmit = async (data: RegisterProps) => {
     delete data.confirm_password;
     await createUser(data);
-    Switch("ModalSucess");
   };
 
   useEffect(() => {
@@ -250,7 +252,7 @@ const Register = () => {
           </Form>
         </DivForm>
       </Container>
-
+        {openSucessModal && <ModalSucess modalLogin />}
       <Footer />
     </>
   );

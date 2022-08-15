@@ -22,6 +22,7 @@ import { useAds } from "../../providers/Ads";
 import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
+  document.title = 'Home'
   const { userAuth } = useUser();
   const bgColor = randomColors();
   const history = useNavigate();
