@@ -1,9 +1,14 @@
-import Homepage from "./pages/Homepage";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import { Toaster } from "react-hot-toast";
+import Router from "./routes";
 
 const App = () => {
-  return <Register />
+  return (
+    <>
+      <Toaster />
+      <Router />
+    </>
+  )
+
 };
 
 export default App;

@@ -29,6 +29,10 @@ export const ContainerLeft = styled.div<HeaderProps>`
   justify-content: space-between;
   align-items: center;
 
+  > img {
+    cursor: pointer;
+  }
+
   svg {
     font-size: 1.9rem;
     cursor: pointer;
@@ -116,16 +120,18 @@ export const ContainerRight = styled.div`
     border-left: 2px solid ${({ theme }) => theme.colors.grey6};
   }
 
-  a {
+  > button:nth-child(1) {
     font-family: "Inter", sans-serif;
     font-size: 1rem;
     font-weight: ${({ theme }) => theme.fonts.fontWeight600};
     margin: 0 1.375rem 0 1rem;
-    text-decoration: none;
+    border: none;
     color: ${({ theme }) => theme.colors.grey2};
+    background-color: transparent;
+    cursor: pointer;
   }
 
-  button {
+  > button:nth-child(2) {
     padding: 0.75rem 1.75rem;
     font-family: "Inter", sans-serif;
     font-size: 1rem;

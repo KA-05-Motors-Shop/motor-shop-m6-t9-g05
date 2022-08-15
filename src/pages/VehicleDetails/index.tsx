@@ -25,16 +25,24 @@ import {
   Ul,
   Overlay,
   DivComments,
-  DivSection
+  DivSection,
 } from "./styles";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
+import { useParams } from "react-router-dom";
+import { useAds } from "../../providers/Ads";
 
 const VehicleDetails = () => {
   const isLoggedIn = false;
   const bgColor = randomColors();
+  const { id } = useParams<{ id: string }>();
+  const { ads } = useAds();
+
+  const vehicle = ads.find((ad) => ad.id === id);
+
+  if (!vehicle) return <h1>teste</h1>;
 
   return (
     <>
@@ -45,20 +53,18 @@ const VehicleDetails = () => {
           <DivContent>
             <SectionImg>
               <div>
-                <img src={car} alt="car" />
+                <img src={vehicle.cover_image} alt={vehicle.title} />
               </div>
             </SectionImg>
             <SectionDetails>
-              <H2>
-                Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200{" "}
-              </H2>
+              <H2>{vehicle.title}</H2>
               <DivFooter>
                 <div>
                   <div>
-                    <span>2013</span>
-                    <span>0 KM</span>
+                    <span>{vehicle.year}</span>
+                    <span>{vehicle.km} KM</span>
                   </div>
-                  <span>R$ 00,000.00</span>
+                  <span>R$ {vehicle.price}</span>
                 </div>
 
                 <Button color={theme.colors.whiteFixed} width={100} height={38}>
@@ -70,12 +76,7 @@ const VehicleDetails = () => {
             <SectionDescription>
               <H2>Descrição</H2>
 
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book.
-              </p>
+              <p>{vehicle.description}</p>
             </SectionDescription>
           </DivContent>
           <Aside>
@@ -88,16 +89,19 @@ const VehicleDetails = () => {
                 spaceBetween={30}
                 className="mySwiper"
               >
-                {[1, 2, 3, 4, 5, 6].map((item) => (
-                  <SwiperSlide className="mySlide">
-                    <img src={car} alt="car" key={item} />
-                  </SwiperSlide>
-                ))}
+                <SwiperSlide className="mySlide">
+                  <img src={vehicle.gallery_image} alt="car" />
+                  <img src={vehicle.gallery_image2} alt="car" />
+                  <img src={vehicle.gallery_image3} alt="car" />
+                  <img src={vehicle.gallery_image4} alt="car" />
+                  <img src={vehicle.gallery_image5} alt="car" />
+                  <img src={vehicle.gallery_image6} alt="car" />
+                </SwiperSlide>
               </Swiper>
             </div>
             <DivUser bgColor={bgColor}>
               <div>SL</div>
-              <span>Samuel Leao</span>
+              <span>{vehicle.owner.name}</span>
 
               <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -120,11 +124,11 @@ const VehicleDetails = () => {
             <H2>Comentarios</H2>
 
             <Ul>
-              {[1, 2, 3, 4, 5, 6].map((item) => (
+              {vehicle.comments.map((comment) => (
                 <Comments
-                  key={item}
-                  username="Samuel Leão"
-                  comment="Teste de comentario"
+                  key={comment.id}
+                  username={comment.owner.name}
+                  comment={comment.message}
                 />
               ))}
             </Ul>
@@ -137,7 +141,7 @@ const VehicleDetails = () => {
             <div>
               <DivName bgColor={bgColor}>
                 <div>SL</div>
-                <span>Samuel Leão</span>
+                <span>{vehicle.owner.name}</span>
               </DivName>
 
               <DivComment>

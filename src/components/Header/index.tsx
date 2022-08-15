@@ -9,17 +9,20 @@ import {
 } from "./styles";
 import LogoHeader from "../../assets/logo-header.svg";
 import { List, X } from "phosphor-react";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isActive, setIsActive] = useState(false);
 
   const handleNavLinks = () => setIsActive(!isActive);
 
+  const history = useNavigate()
+
   return (
     <ContainerHeader>
       <Container>
         <ContainerLeft>
-          <img src={LogoHeader} alt="logotipo Motors Shop" />
+          <img src={LogoHeader} alt="logotipo Motors Shop" onClick={() => history('/')}/>
           {isActive ? (
             <X onClick={handleNavLinks} />
           ) : (
@@ -29,31 +32,31 @@ const Header = () => {
           <nav className={`${isActive ? "active" : "inactive"}`}>
             <ul>
               <li>
-                <a href="">Carros</a>
+                <a href="/ads/filter/carros">Carros</a>
               </li>
               <li>
-                <a href="">Motos</a>
+                <a href="/ads/filter/motos">Motos</a>
               </li>
               <li>
-                <a href="">Leilão</a>
+                <a href="/ads/filter/leilao">Leilão</a>
               </li>
               <li>
-                <a href="">Fazer Login</a>
+                <a href="/login">Fazer Login</a>
               </li>
               <li>
-                <button>Cadastrar</button>
+                <button onClick={() => history('/register')}>Cadastrar</button>
               </li>
             </ul>
           </nav>
           <DivLink>
-            <a href="">Carros</a>
-            <a href="">Motos</a>
-            <a href="">Leilão</a>
+            <a href="/ads/filter/carros">Carros</a>
+            <a href="/ads/filter/motos">Motos</a>
+            <a href="/ads/filter/leilao">Leilão</a>
           </DivLink>
         </ContainerLeft>
         <ContainerRight>
-          <a href="">Login</a>
-          <button>Cadastrar</button>
+          <button onClick={() => history('/login')}>Login</button>
+          <button onClick={() => history('/register')}>Cadastrar</button>
         </ContainerRight>
       </Container>
     </ContainerHeader>

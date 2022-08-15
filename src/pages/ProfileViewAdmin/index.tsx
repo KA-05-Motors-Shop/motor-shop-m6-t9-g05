@@ -24,6 +24,7 @@ import ModalSucess from "../../components/Modals/ModalSucess";
 import { randomColors } from "../../utils/randomColors";
 import EditAd from "../../components/Modals/ModalEditAd";
 import ModalDelete from "../../components/Modals/ModalDelete";
+import { useUser } from "../../providers/User";
 
 const ProfileViewAdmin = () => {
   const {
@@ -34,6 +35,8 @@ const ProfileViewAdmin = () => {
     openDeleteModal,
   } = useModal();
 
+  const { getUser, user, userAuth } = useUser();
+
   const bgColor = randomColors();
 
   useEffect(() => {
@@ -43,7 +46,19 @@ const ProfileViewAdmin = () => {
       openCreateAdModal || openSucessModal || openEditAdModal || openDeleteModal
         ? "hidden"
         : "scroll";
+    getUser(userAuth.userId);
   }, [openCreateAdModal, openSucessModal, openEditAdModal]);
+
+  const leilao = user.vehicles
+    ? user.vehicles.filter(({ type_of_ad }) => type_of_ad === "Leilão")
+    : [];
+
+  const motos = user.vehicles
+    ? user.vehicles.filter(({ type_of_vehicle }) => type_of_vehicle === "Moto")
+    : [];
+  const carros = user.vehicles
+    ? user.vehicles.filter(({ type_of_vehicle }) => type_of_vehicle === "Carro")
+    : [];
 
   return (
     <Container>
@@ -55,12 +70,9 @@ const ProfileViewAdmin = () => {
               <span>SL</span>
             </div>
             <SpanName>
-              Samuel Leão <span>Anunciante</span>
+              {user.name} <span>{user.account_type}</span>
             </SpanName>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Et
-              reiciendis
-            </p>
+            <p>{user.description}</p>
             <Button
               color={theme.colors.brand1}
               bgcolor={theme.colors.grey10}
@@ -105,9 +117,9 @@ const ProfileViewAdmin = () => {
             },
           }}
         >
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-            <SwiperSlide style={{ width: "100%", maxWidth: "520px" }}>
-              <CardAuction />
+          {leilao.map((vehicle) => (
+            <SwiperSlide style={{ width: "100%", maxWidth: "325px" }}>
+              <CardShowcase isUser={false} vehicle={vehicle} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -140,9 +152,9 @@ const ProfileViewAdmin = () => {
             },
           }}
         >
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+          {carros.map((vehicle) => (
             <SwiperSlide style={{ width: "100%", maxWidth: "325px" }}>
-              <CardShowcase isUser={false} />
+              <CardShowcase isUser={false} vehicle={vehicle} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -175,9 +187,9 @@ const ProfileViewAdmin = () => {
             },
           }}
         >
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+          {motos.map((vehicle) => (
             <SwiperSlide style={{ width: "100%", maxWidth: "325px" }}>
-              <CardShowcase isUser={false} />
+              <CardShowcase isUser={false} vehicle={vehicle} />
             </SwiperSlide>
           ))}
         </Swiper>

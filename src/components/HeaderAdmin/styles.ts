@@ -31,6 +31,10 @@ export const ContainerLeft = styled.div<HeaderProps>`
   justify-content: space-between;
   align-items: center;
 
+  > img {
+    cursor: pointer;
+  }
+
   svg {
     font-size: 1.9rem;
     cursor: pointer;
@@ -133,6 +137,7 @@ export const DivName = styled.div<HeaderProps>`
   font-family: "Inter", sans-serif;
   font-weight: ${({ theme }) => theme.fonts.fontWeight700};
   color: ${({ theme }) => theme.colors.whiteFixed};
+  cursor: pointer;
 `;
 
 export const DivLink = styled.div`
