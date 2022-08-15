@@ -1,6 +1,9 @@
 import { ReactNode } from "react";
+import { AdsProvider } from "./Ads";
 import { CepProvider } from "./CEP";
+import { CommentProvider } from "./Comments";
 import { ModalProvider } from "./Modal";
+import { UserProvider } from "./User";
 
 interface ChildrenProps {
   children: ReactNode;
@@ -8,9 +11,15 @@ interface ChildrenProps {
 
 const AppProvider = ({ children }: ChildrenProps) => {
   return (
-    <CepProvider>
-      <ModalProvider>{children}</ModalProvider>
-    </CepProvider>
+    <UserProvider>
+      <AdsProvider>
+        <CommentProvider>
+          <CepProvider>
+            <ModalProvider>{children}</ModalProvider>
+          </CepProvider>
+        </CommentProvider>
+      </AdsProvider>
+    </UserProvider>
   );
 };
 
