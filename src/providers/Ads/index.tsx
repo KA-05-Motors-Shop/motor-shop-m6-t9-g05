@@ -7,6 +7,7 @@ import {
 } from "react";
 import toast from "react-hot-toast";
 import { api } from "../../services/api";
+import { scrollToTop } from "../../utils/scrollToTop";
 import { useModal } from "../Modal";
 import { useUser } from "../User";
 
@@ -108,6 +109,8 @@ export const AdsProvider = ({ children }: Props) => {
       })
       .then(() => {
         Switch("ModalCreateAd");
+        scrollToTop()
+        Switch('ModalSucess')
         getAds();
       })
       .catch((err) => console.log(err));

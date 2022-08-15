@@ -6,9 +6,10 @@ import {
   useState,
 } from "react";
 import toast from "react-hot-toast";
+import { Navigate, useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
+import { scrollToTop } from "../../utils/scrollToTop";
 import { useModal } from "../Modal";
-import { useNavigate } from "react-router-dom";
 
 interface Props {
   children: ReactNode;
@@ -122,8 +123,7 @@ interface UserContextData {
 const UserContext = createContext<UserContextData>({} as UserContextData);
 
 export const UserProvider = ({ children }: Props) => {
-  const { Switch } = useModal();
-  const history = useNavigate();
+  const { Switch, openSucessModal} = useModal();
   const [userAuth, setUserAuth] = useState<UserAuth>(() => {
     const data = localStorage.getItem("@UserAuth");
 
@@ -135,12 +135,18 @@ export const UserProvider = ({ children }: Props) => {
   });
   const [user, setUser] = useState<User>({} as User);
   const [users, setUsers] = useState<User[]>([]);
+  
+
+  const navigate = useNavigate();
 
   const createUser = useCallback(async (data: CreateUserProps) => {
     await api
       .post("/users", data)
-      .then(() => Switch("ModalSucess"))
-      .catch((err) => console.log(err));
+      .then(() => {
+        scrollToTop()
+        Switch("ModalSucess")
+      })
+      .catch((err) => toast.error(err.response.data.message));
   }, []);
 
   const getUser = useCallback(async (id: string) => {
@@ -187,17 +193,20 @@ export const UserProvider = ({ children }: Props) => {
     await api
       .post("/login", data)
       .then((res) => {
+        localStorage.setItem("@UserAuth", JSON.stringify(res.data));
         setUserAuth(res.data);
         toast.success("Login efetuado");
-        history("/");
+        navigate("/profile_admin");
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>
+        toast.error(err.response.data.message || "Erro ao efetuar login")
+      );
   }, []);
 
   const logout = useCallback(() => {
     localStorage.clear();
     setUserAuth({} as UserAuth);
-    history("/");
+    navigate("/");
   }, []);
 
   return (

@@ -58,6 +58,17 @@ export const SectionImg = styled.section`
   align-items: center;
   justify-content: center;
 
+  > div {
+    width: 100%;
+
+    > img {
+      width: 100%;
+      height: 100%;
+      max-height: 250px;
+      object-fit: cover;
+    }
+  }
+
   @media screen and (min-width: 1024px) {
     height: 350px;
 
@@ -147,6 +158,7 @@ export const SectionDescription = styled.section`
   background-color: ${({ theme }) => theme.colors.whiteFixed};
   margin-top: 2rem;
   border-radius: 5px;
+  width: 100%;
 
   display: flex;
   flex-direction: column;
@@ -189,6 +201,7 @@ export const Aside = styled.aside`
       margin-right: 0;
 
       img {
+        width: 100%;
         object-fit: cover;
       }
     }
@@ -298,7 +311,7 @@ export const DivName = styled.div<DivProps>`
   }
 `;
 
-export const DivComment = styled.div`
+export const DivComment = styled.form`
   position: relative;
 
   > textarea {
@@ -380,12 +393,11 @@ export const DivComments = styled.div`
   border-radius: 5px;
 `;
 
-
 export const DivSection = styled.div`
-    margin: 0 auto;
-    width: 95%;
-    max-width: 700px;
-    background-color: ${({theme}) => theme.colors.whiteFixed};
-    border-radius: 5px;
-    padding: 8px;
-`
+  margin: 0 auto;
+  width: 95%;
+  max-width: 700px;
+  background-color: ${({ theme }) => theme.colors.whiteFixed};
+  border-radius: 5px;
+  padding: 8px;
+`;

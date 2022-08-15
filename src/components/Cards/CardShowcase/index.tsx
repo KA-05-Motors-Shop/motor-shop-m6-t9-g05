@@ -12,44 +12,75 @@ import Button from "../../Button";
 import theme from "../../../styles/theme";
 import { randomColors } from "../../../utils/randomColors";
 import { useModal } from "../../../providers/Modal";
+import { useNavigate } from "react-router-dom";
+
+interface Comments {
+  id: string;
+  message: string;
+  owner: {
+    id: string;
+    name: string;
+  };
+}
+
+interface VehicleProps {
+  id?: string;
+  title: string;
+  type_of_ad: string;
+  year: number;
+  km: number;
+  price: number;
+  description: string;
+  type_of_vehicle: string;
+  cover_image: string;
+  gallery_image: string;
+  gallery_image2?: string;
+  gallery_image3?: string;
+  gallery_image4?: string;
+  gallery_image5?: string;
+  gallery_image6?: string;
+  owner?: {
+    id?: string;
+    name?: string;
+  };
+  comments?: Comments[];
+}
 
 interface CardProps {
   isUser?: boolean;
+  vehicle: VehicleProps;
 }
 
-const CardShowcase = ({ isUser = true }: CardProps) => {
+const CardShowcase = ({ isUser = true, vehicle }: CardProps) => {
   const bgColor = randomColors();
   const { Switch } = useModal();
-
+  const history = useNavigate()
 
   return (
-    <Container>
+    <Container onClick={() => history(`/vehicle/${vehicle.id}`)}>
       <ContainerImage>
-        <img src={Car} alt="" />
+        <img src={vehicle.cover_image} alt={vehicle.title} />
       </ContainerImage>
-      <strong>Product title stays here - max 1 line </strong>
-      <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem...
-      </p>
+      <strong>{vehicle.title} </strong>
+      <p>{vehicle.description}</p>
       {isUser ? (
         <>
           <UserInfo bgColor={bgColor}>
             <div>
               <span>SL</span>
             </div>
-            <span>Samuel Leão</span>
+            <span>{vehicle.owner?.name}</span>
           </UserInfo>
           <Footer>
             <DivTags>
               <div>
-                <span>0 KM</span>
+                <span>{vehicle.km} KM</span>
               </div>
               <div>
-                <span>2019</span>
+                <span>{vehicle.year}</span>
               </div>
               <DivPrice>
-                <span>R$ 00.000,00</span>
+                <span>R$ {vehicle.price}</span>
               </DivPrice>
             </DivTags>
           </Footer>
@@ -58,13 +89,13 @@ const CardShowcase = ({ isUser = true }: CardProps) => {
         <Footer>
           <DivTags>
             <div>
-              <span>0 KM</span>
+              <span>{vehicle.km} KM</span>
             </div>
             <div>
-              <span>2019</span>
+              <span>{vehicle.year}</span>
             </div>
             <DivPrice>
-              <span>R$ 00.000,00</span>
+              <span>R$ {vehicle.price}</span>
             </DivPrice>
           </DivTags>
           <DivButtons>

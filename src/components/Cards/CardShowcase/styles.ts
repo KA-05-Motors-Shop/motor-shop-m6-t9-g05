@@ -93,7 +93,7 @@ export const DivTags = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 51px;
+    width: 100px;
     height: 32px;
     background-color: ${({ theme }) => theme.colors.brand4};
     border-radius: 4px;

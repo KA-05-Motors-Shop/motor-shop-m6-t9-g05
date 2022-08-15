@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Container,
@@ -11,7 +11,8 @@ import {
 } from "./styles";
 import LogoHeader from "../../assets/logo-header.svg";
 import { List, X } from "phosphor-react";
-import { randomColors } from "../../utils/randomColors";
+import { useUser } from "../../providers/User";
+import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
   bgColor: string;
@@ -20,14 +21,20 @@ interface HeaderProps {
 const HeaderAdmin = ({ bgColor }: HeaderProps) => {
   const [isActive, setIsActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const { getUser, user, userAuth, logout } = useUser();
 
   const handleNavLinks = () => setIsActive(!isActive);
+  const history = useNavigate()
+
+  useEffect(() => {
+    getUser(userAuth.userId);
+  }, []);
 
   return (
     <ContainerHeader>
       <Container>
         <ContainerLeft>
-          <img src={LogoHeader} alt="logotipo Motors Shop" />
+          <img src={LogoHeader} alt="logotipo Motors Shop" onClick={() => history('/')}/>
           {isActive ? (
             <X onClick={handleNavLinks} />
           ) : (
@@ -37,13 +44,13 @@ const HeaderAdmin = ({ bgColor }: HeaderProps) => {
           <nav className={`${isActive ? "active" : "inactive"}`}>
             <ul>
               <li>
-                <a href="">Carros</a>
+                <a href="/ads/filter/carros">Carros</a>
               </li>
               <li>
-                <a href="">Motos</a>
+                <a href="/ads/filter/motos">Motos</a>
               </li>
               <li>
-                <a href="">Leilão</a>
+                <a href="/ads/filter/leilao">Leilão</a>
               </li>
               <li>
                 <button>Editar endereço</button>
@@ -55,27 +62,27 @@ const HeaderAdmin = ({ bgColor }: HeaderProps) => {
                 <button>Minhas compras</button>
               </li>
               <li>
-                <button>Sair</button>
+                <button onClick={logout}>Sair</button>
               </li>
             </ul>
           </nav>
           <DivLink>
-            <a href="">Carros</a>
-            <a href="">Motos</a>
-            <a href="">Leilão</a>
+            <a href="/ads/filter/carros">Carros</a>
+            <a href="/ads/filter/motos">Motos</a>
+            <a href="/ads/filter/leilao">Leilão</a>
           </DivLink>
         </ContainerLeft>
         <ContainerRight
           onMouseEnter={() => setIsOpen(true)}
           onMouseLeave={() => setIsOpen(false)}
         >
-          <DivName bgColor={bgColor}>SL</DivName>
-          <span>Samuel Leão</span>
+          <DivName bgColor={bgColor} onClick={() => history('/profile_admin')}>SL</DivName>
+          <span>{user.name && user.name}</span>
           <DropMenu isOpen={isOpen}>
             <button>Editar perfil</button>
             <button>Editar endereço</button>
             <button>Minhas compras</button>
-            <button>Sair</button>
+            <button onClick={logout}>Sair</button>
           </DropMenu>
         </ContainerRight>
       </Container>

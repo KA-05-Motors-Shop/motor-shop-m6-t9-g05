@@ -27,7 +27,7 @@ const CommentContext = createContext<CommentContextData>(
 
 export const CommentProvider = ({ children }: Props) => {
   const { userAuth } = useUser();
-  const { getOneAd } = useAds();
+  const { getAds } = useAds();
 
   const createComment = useCallback(
     async (vehicle_id: string, data: CommentProps) => {
@@ -37,34 +37,31 @@ export const CommentProvider = ({ children }: Props) => {
             Authorization: `Bearer ${userAuth.token}`,
           },
         })
-        .then(() => getOneAd(vehicle_id))
+        .then(() => getAds())
         .catch((err) => console.log(err));
     },
     []
   );
 
-  const updateComment = useCallback(
-    async (id: string, data: CommentProps, vehicle_id: string) => {
-      await api
-        .patch(`/comments/${id}`, data, {
-          headers: {
-            Authorization: `Bearer ${userAuth.token}`,
-          },
-        })
-        .then(() => getOneAd(vehicle_id))
-        .catch((err) => console.log(err));
-    },
-    []
-  );
+  const updateComment = useCallback(async (id: string, data: CommentProps) => {
+    await api
+      .patch(`/comments/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${userAuth.token}`,
+        },
+      })
+      .then(() => getAds())
+      .catch((err) => console.log(err));
+  }, []);
 
-  const deleteComment = useCallback(async (id: string, vehicle_id: string) => {
+  const deleteComment = useCallback(async (id: string) => {
     await api
       .delete(`/comments/${id}`, {
         headers: {
           Authorization: `Bearer ${userAuth.token}`,
         },
       })
-      .then(() => getOneAd(vehicle_id))
+      .then(() => getAds())
       .catch((err) => console.log(err));
   }, []);
 

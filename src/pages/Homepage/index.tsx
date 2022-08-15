@@ -17,14 +17,27 @@ import theme from "../../styles/theme";
 import "swiper/css";
 import HeaderAdmin from "../../components/HeaderAdmin";
 import { randomColors } from "../../utils/randomColors";
+import { useUser } from "../../providers/User";
+import { useAds } from "../../providers/Ads";
+import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
-  const isLoggedIn = false;
+  document.title = 'Home'
+  const { userAuth } = useUser();
   const bgColor = randomColors();
+  const history = useNavigate();
+
+  const { ads } = useAds();
+
+  const leilao = ads.filter(({ type_of_ad }) => type_of_ad === "Leilão");
+  const carros = ads.filter(
+    ({ type_of_vehicle }) => type_of_vehicle === "Carro"
+  );
+  const motos = ads.filter(({ type_of_vehicle }) => type_of_vehicle === "Moto");
 
   return (
     <Container>
-      {isLoggedIn ? <HeaderAdmin bgColor={bgColor} /> : <Header />}
+      {userAuth.token ? <HeaderAdmin bgColor={bgColor} /> : <Header />}
 
       <SectionTop>
         <Content>
@@ -37,6 +50,7 @@ const Homepage = () => {
               borderColor={theme.colors.grey10}
               width={160}
               height={40}
+              onClick={() => history("/ads/filter/leilao")}
             >
               Leilão
             </Button>
@@ -46,6 +60,7 @@ const Homepage = () => {
               borderColor={theme.colors.grey10}
               width={160}
               height={40}
+              onClick={() => history("/ads/filter/carros")}
             >
               Carros
             </Button>
@@ -55,6 +70,7 @@ const Homepage = () => {
               borderColor={theme.colors.grey10}
               width={160}
               height={40}
+              onClick={() => history("/ads/filter/motos")}
             >
               Motos
             </Button>
@@ -92,11 +108,15 @@ const Homepage = () => {
             },
           }}
         >
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-            <SwiperSlide style={{ width: "100%", maxWidth: "520px" }}>
-              <CardAuction />
-            </SwiperSlide>
-          ))}
+          {leilao.length > 0 ? (
+            leilao.map((vehicle) => (
+              <SwiperSlide style={{ width: "100%", maxWidth: "325px" }}>
+                <CardAuction vehicle={vehicle} />
+              </SwiperSlide>
+            ))
+          ) : (
+            <h1>teste</h1>
+          )}
         </Swiper>
       </SectionLeilao>
 
@@ -127,11 +147,15 @@ const Homepage = () => {
             },
           }}
         >
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-            <SwiperSlide style={{ width: "100%", maxWidth: "325px" }}>
-              <CardShowcase />
-            </SwiperSlide>
-          ))}
+          {carros.length > 0 ? (
+            carros.map((vehicle) => (
+              <SwiperSlide style={{ width: "100%", maxWidth: "325px" }}>
+                <CardShowcase vehicle={vehicle} />
+              </SwiperSlide>
+            ))
+          ) : (
+            <h1>teste</h1>
+          )}
         </Swiper>
       </SectionVehicles>
 
@@ -162,11 +186,15 @@ const Homepage = () => {
             },
           }}
         >
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-            <SwiperSlide style={{ width: "100%", maxWidth: "325px" }}>
-              <CardShowcase />
-            </SwiperSlide>
-          ))}
+          {motos.length > 0 ? (
+            motos.map((vehicle) => (
+              <SwiperSlide style={{ width: "100%", maxWidth: "325px" }}>
+                <CardShowcase vehicle={vehicle} />
+              </SwiperSlide>
+            ))
+          ) : (
+            <h1>teste</h1>
+          )}
         </Swiper>
       </SectionVehicles>
 

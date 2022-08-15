@@ -1,13 +1,17 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import Button from "../../components/Button";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { Input } from "../../components/Input";
+import ModalSucess from "../../components/Modals/ModalSucess";
 import { useCep } from "../../providers/CEP";
+import { useModal } from "../../providers/Modal";
+import { useUser } from "../../providers/User";
 import { registerSchema } from "../../schemas/register.schema";
 import theme from "../../styles/theme";
+import { scrollToTop } from "../../utils/scrollToTop";
 import {
   TextArea,
   ContainerText,
@@ -47,7 +51,11 @@ interface Address {
 }
 
 const Register = () => {
+  document.title = 'Register'
+
   const { getAddress, address } = useCep();
+  const { createUser } = useUser();
+  const {Switch, openSucessModal} = useModal()
 
   const {
     register,
@@ -58,11 +66,14 @@ const Register = () => {
     resolver: yupResolver(registerSchema),
   });
 
-  const onSubmit = (data: RegisterProps) => {
+  const onSubmit = async (data: RegisterProps) => {
     delete data.confirm_password;
-
-    console.log(data);
+    await createUser(data);
   };
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   return (
     <>
@@ -241,7 +252,7 @@ const Register = () => {
           </Form>
         </DivForm>
       </Container>
-
+        {openSucessModal && <ModalSucess modalLogin />}
       <Footer />
     </>
   );
