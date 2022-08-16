@@ -39,7 +39,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { commentSchema } from "../../schemas/comment.schema";
 import { useComment } from "../../providers/Comments";
-
+import Loading from "../../components/Loading";
 
 interface CommentProps {
   message: string;
@@ -49,10 +49,10 @@ const VehicleDetails = () => {
   const bgColor = randomColors();
   const { id } = useParams<{ id: string }>();
   const { userAuth, getUser, user } = useUser();
-  const { ads, getAds } = useAds();
+  const { ad, getOneAd } = useAds();
   const { createComment } = useComment();
 
-  const history = useNavigate()
+  const history = useNavigate();
 
   const {
     register,
@@ -64,23 +64,25 @@ const VehicleDetails = () => {
   });
 
   useEffect(() => {
-    getAds();
+    if (id) {
+      getOneAd(id);
+    }
 
     if (userAuth.userId) {
       getUser(userAuth.userId);
     }
   }, []);
 
-  const vehicle = ads.find((ad) => ad.id === id);
-
-  if (!vehicle) return <h1>teste</h1>;
+  if (!ad) {
+    return <Loading bgColor={bgColor} />;
+  }
 
   const onSubmit = async (data: CommentProps) => {
-    await createComment(vehicle.id, data);
+    await createComment(ad.id, data);
     reset();
   };
 
-  document.title = `Detalhes | ${vehicle.title}`;
+  document.title = `Detalhes | ${ad.title}`;
 
   return (
     <>
@@ -91,18 +93,18 @@ const VehicleDetails = () => {
           <DivContent>
             <SectionImg>
               <div>
-                <img src={vehicle.cover_image} alt={vehicle.title} />
+                <img src={ad.cover_image} alt={ad.title} />
               </div>
             </SectionImg>
             <SectionDetails>
-              <H2>{vehicle.title}</H2>
+              <H2>{ad.title}</H2>
               <DivFooter>
                 <div>
                   <div>
-                    <span>{vehicle.year}</span>
-                    <span>{vehicle.km} KM</span>
+                    <span>{ad.year}</span>
+                    <span>{ad.km} KM</span>
                   </div>
-                  <span>R$ {vehicle.price}</span>
+                  <span>R$ {ad.price}</span>
                 </div>
 
                 <Button color={theme.colors.whiteFixed} width={100} height={38}>
@@ -114,7 +116,7 @@ const VehicleDetails = () => {
             <SectionDescription>
               <H2>Descrição</H2>
 
-              <p>{vehicle.description}</p>
+              <p>{ad.description}</p>
             </SectionDescription>
           </DivContent>
           <Aside>
@@ -128,38 +130,38 @@ const VehicleDetails = () => {
                 className="mySwiper"
               >
                 <SwiperSlide className="mySlide">
-                  <img src={vehicle.gallery_image} alt={vehicle.title} />
+                  <img src={ad.gallery_image} alt={ad.title} />
                 </SwiperSlide>
-                {vehicle.gallery_image2 && (
+                {ad.gallery_image2 && (
                   <SwiperSlide className="mySlide">
-                    <img src={vehicle.gallery_image2} alt={vehicle.title} />
+                    <img src={ad.gallery_image2} alt={ad.title} />
                   </SwiperSlide>
                 )}
-                {vehicle.gallery_image3 && (
+                {ad.gallery_image3 && (
                   <SwiperSlide className="mySlide">
-                    <img src={vehicle.gallery_image3} alt={vehicle.title} />
+                    <img src={ad.gallery_image3} alt={ad.title} />
                   </SwiperSlide>
                 )}
-                {vehicle.gallery_image4 && (
+                {ad.gallery_image4 && (
                   <SwiperSlide className="mySlide">
-                    <img src={vehicle.gallery_image4} alt={vehicle.title} />
+                    <img src={ad.gallery_image4} alt={ad.title} />
                   </SwiperSlide>
                 )}
-                {vehicle.gallery_image5 && (
+                {ad.gallery_image5 && (
                   <SwiperSlide className="mySlide">
-                    <img src={vehicle.gallery_image5} alt={vehicle.title} />
+                    <img src={ad.gallery_image5} alt={ad.title} />
                   </SwiperSlide>
                 )}
-                {vehicle.gallery_image6 && (
+                {ad.gallery_image6 && (
                   <SwiperSlide className="mySlide">
-                    <img src={vehicle.gallery_image6} alt={vehicle.title} />
+                    <img src={ad.gallery_image6} alt={ad.title} />
                   </SwiperSlide>
                 )}
               </Swiper>
             </div>
             <DivUser bgColor={bgColor}>
               <div>SL</div>
-              <span>{vehicle.owner.name}</span>
+              <span>{ad.owner.name}</span>
 
               <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -171,7 +173,7 @@ const VehicleDetails = () => {
                 height={48}
                 bgcolor={theme.colors.grey0}
                 color={theme.colors.whiteFixed}
-                onClick={() => history(`/profile/user/${vehicle.owner.id}`)}
+                onClick={() => history(`/profile/user/${ad.owner.id}`)}
               >
                 Ver todos anuncios
               </Button>
@@ -183,11 +185,8 @@ const VehicleDetails = () => {
             <H2>Comentarios</H2>
 
             <Ul>
-              {vehicle.comments.map((comment) => (
-                <Comments
-                  key={comment.id}
-                  {...comment}
-                />
+              {ad.comments.map((comment) => (
+                <Comments key={comment.id} {...comment} vehicle_id={ad.id}/>
               ))}
             </Ul>
           </DivComments>
@@ -199,8 +198,8 @@ const VehicleDetails = () => {
             <div>
               <DivName bgColor={bgColor}>
                 <div>SL</div>
-                {user.name ? (
-                  <span>{user.name}</span>
+                {user?.name ? (
+                  <span>{user?.name}</span>
                 ) : (
                   <span>Sem usuario</span>
                 )}

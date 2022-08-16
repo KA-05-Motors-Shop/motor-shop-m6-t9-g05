@@ -50,9 +50,10 @@ interface VehicleProps {
 interface CardProps {
   vehicle: VehicleProps;
   setVehicleId?: any;
+  isUser?: boolean;
 }
 
-const CardAuction = ({ vehicle, setVehicleId }: CardProps) => {
+const CardAuction = ({ vehicle, setVehicleId, isUser = true }: CardProps) => {
   const { Switch } = useModal();
 
   return (
@@ -100,11 +101,12 @@ const CardAuction = ({ vehicle, setVehicleId }: CardProps) => {
         >
           Ver como
         </Button>
-        {vehicle.published ? (
-          <Published>Publicado</Published>
-        ) : (
-          <Inactive>Inativo</Inactive>
-        )}
+        {!isUser &&
+          (vehicle.published ? (
+            <Published>Publicado</Published>
+          ) : (
+            <Inactive>Inativo</Inactive>
+          ))}
       </DivButtons>
     </Container>
   );

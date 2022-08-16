@@ -76,6 +76,11 @@ const EditAd = ({ vehicle_id }: Props) => {
     getOneAd(vehicle_id);
   }, []);
 
+  if (!ad) {
+    return (<h1>teste</h1>)
+  }
+
+
   const onSubmit = async (data: EditAdProps) => {
     const newData = getOnlyPastValues(data);
     await updateAd(ad.id, newData)

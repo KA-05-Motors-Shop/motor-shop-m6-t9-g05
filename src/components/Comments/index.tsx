@@ -22,6 +22,7 @@ interface CommentsProps {
     id: string;
     name: string;
   };
+  vehicle_id: string;
 }
 
 const Comments = (comment: CommentsProps) => {
@@ -30,8 +31,8 @@ const Comments = (comment: CommentsProps) => {
   const { updateComment, deleteComment } = useComment();
   const [openEdit, setOpenEdit] = useState<boolean>(false);
 
-  const days = calculateDate(comment.created_at)
-  
+  const days = calculateDate(comment.created_at);
+
   const handleClick = () => setOpenEdit(!openEdit);
 
   return (
@@ -41,7 +42,7 @@ const Comments = (comment: CommentsProps) => {
           <DivName bgColor={bgColor}>
             <div>SL</div>
             <span>{comment.owner.name}</span>
-            <span>{days > 0 ? `há ${days}` : 'Hoje'}</span>
+            <span>{days > 0 ? `há ${days}` : "Hoje"}</span>
           </DivName>
           {openEdit ? (
             <DivTextArea>
@@ -52,7 +53,11 @@ const Comments = (comment: CommentsProps) => {
                 defaultValue={comment.message}
                 onKeyPress={(e) => {
                   if (e.key === "Enter") {
-                    updateComment(comment.id, { message: e.target.value });
+                    updateComment(
+                      comment.id,
+                      { message: e.target.value },
+                      comment.vehicle_id
+                    );
                     handleClick();
                   }
                 }}
@@ -74,7 +79,7 @@ const Comments = (comment: CommentsProps) => {
               Editar
             </Button>
             <Button
-              onClick={() => deleteComment(comment.id)}
+              onClick={() => deleteComment(comment.id, comment.vehicle_id)}
               bgcolor={"transparent"}
               color={theme.colors.grey0}
               borderColor={theme.colors.grey0}

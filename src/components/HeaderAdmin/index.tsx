@@ -86,7 +86,7 @@ const HeaderAdmin = ({ bgColor }: HeaderProps) => {
           <DivName bgColor={bgColor} onClick={() => history("/profile_admin")}>
             SL
           </DivName>
-          <span>{user.name && user.name}</span>
+          <span>{user?.name && user.name}</span>
           <DropMenu isOpen={isOpen}>
             <button>Editar perfil</button>
             <button>Editar endereço</button>

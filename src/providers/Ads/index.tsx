@@ -53,6 +53,7 @@ interface UpdateAdProps {
 interface Comments {
   id: string;
   message: string;
+  created_at: string
   owner: {
     id: string;
     name: string;
@@ -84,8 +85,8 @@ interface AdProps {
 }
 
 interface AdsContextData {
-  ads: AdProps[];
-  ad: AdProps;
+  ads?: AdProps[];
+  ad?: AdProps;
   createAd: (data: CreateAdProps) => Promise<void>;
   getAds: () => Promise<void>;
   getOneAd: (id: string) => Promise<void>;
@@ -99,8 +100,8 @@ export const AdsProvider = ({ children }: Props) => {
   const { userAuth, getUser } = useUser();
   const { Switch } = useModal();
 
-  const [ads, setAds] = useState<AdProps[]>([]);
-  const [ad, setAd] = useState<AdProps>({} as AdProps);
+  const [ads, setAds] = useState<AdProps[]>();
+  const [ad, setAd] = useState<AdProps>();
 
   const createAd = useCallback(async (data: CreateAdProps) => {
     await api

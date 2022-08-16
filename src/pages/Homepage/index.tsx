@@ -21,6 +21,7 @@ import { useUser } from "../../providers/User";
 import { useAds } from "../../providers/Ads";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import Loading from "../../components/Loading";
 
 const Homepage = () => {
   document.title = "Home";
@@ -33,6 +34,10 @@ const Homepage = () => {
   useEffect(() => {
     getAds();
   }, []);
+
+  if (!ads) {
+    return <Loading bgColor={bgColor}/>
+  }
 
   const leilao = ads.filter(({ type_of_ad }) => type_of_ad === "Leilão");
   const carros = ads.filter(
