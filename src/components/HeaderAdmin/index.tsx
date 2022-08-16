@@ -16,16 +16,17 @@ import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
   bgColor: string;
-  user: any
 }
 
-const HeaderAdmin = ({ bgColor, user }: HeaderProps) => {
+const HeaderAdmin = ({ bgColor }: HeaderProps) => {
   const [isActive, setIsActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { logout } = useUser();
+  const { logout, user } = useUser();
 
   const handleNavLinks = () => setIsActive(!isActive);
   const history = useNavigate();
+
+
 
   return (
     <ContainerHeader>
@@ -85,7 +86,7 @@ const HeaderAdmin = ({ bgColor, user }: HeaderProps) => {
           <DivName bgColor={bgColor} onClick={() => history("/profile_admin")}>
             SL
           </DivName>
-          <span>{user?.name && user.name}</span>
+          <span>{user.name && user.name}</span>
           <DropMenu isOpen={isOpen}>
             <button>Editar perfil</button>
             <button>Editar endereço</button>

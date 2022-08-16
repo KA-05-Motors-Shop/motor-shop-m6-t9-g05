@@ -2,22 +2,26 @@ import { randomColors } from "../../utils/randomColors";
 import { Container, DivName, DivMessage } from "./styles";
 
 interface CommentsProps {
-  username: string;
-  comment: string;
+  id: string
+  message: string;
+  owner: {
+    id: string
+    name: string
+  }
 }
 
-const Comments = ({ username, comment }: CommentsProps) => {
+const Comments = (comment: CommentsProps) => {
   const bgColor = randomColors();
 
   return (
     <Container>
       <DivName bgColor={bgColor}>
         <div>SL</div>
-        <span>{username}</span>
+        <span>{comment.owner.name}</span>
         <span>há 7 dias</span>
       </DivName>
       <DivMessage>
-        <p>{comment}</p>
+        <p>{comment.message}</p>
       </DivMessage>
     </Container>
   );

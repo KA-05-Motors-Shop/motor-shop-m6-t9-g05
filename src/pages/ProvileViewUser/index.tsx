@@ -24,10 +24,19 @@ const ProfileViewUser = () => {
   const { getUsers, users, userAuth } = useUser();
 
   useEffect(() => {
-    getUsers();
+    const get = async () => {
+      await getUsers()
+    }
+
+    get()
   }, []);
 
+  if (!users) {
+    return (<h1>carregando....</h1>)
+  }
+
   const user = users.find((user) => user.id === id);
+  
 
   const bgColor = randomColors();
 
@@ -43,7 +52,7 @@ const ProfileViewUser = () => {
   return (
     <Container>
       {userAuth.token ? (
-        <HeaderAdmin bgColor={bgColor} user={user} />
+        <HeaderAdmin bgColor={bgColor} />
       ) : (
         <Header />
       )}
