@@ -65,3 +65,43 @@ export const DivMessage = styled.div`
     margin-top: 1rem;
   }
 `;
+
+export const DivButton = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+`;
+
+export const DivTextArea = styled.div`
+  width: 100%;
+  margin-top: 1rem;
+  position: relative;
+
+  > button {
+    position: absolute;
+    top: -22px;
+    right: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  > textarea {
+    width: 99%;
+    border: 1px solid ${({ theme }) => theme.colors.grey4};
+    border-radius: 0.3rem;
+    transition: 0.5s;
+    resize: none;
+    transition: 0.5s;
+
+    :hover {
+      background-color: ${({ theme }) => theme.colors.grey8};
+    }
+
+    :focus {
+      outline: none;
+      border: 1px solid ${({ theme }) => theme.colors.brand2};
+    }
+  }
+`;
