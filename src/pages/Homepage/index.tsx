@@ -20,14 +20,19 @@ import { randomColors } from "../../utils/randomColors";
 import { useUser } from "../../providers/User";
 import { useAds } from "../../providers/Ads";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Homepage = () => {
-  document.title = 'Home'
+  document.title = "Home";
   const { userAuth } = useUser();
   const bgColor = randomColors();
   const history = useNavigate();
 
-  const { ads } = useAds();
+  const { ads, getAds } = useAds();
+
+  useEffect(() => {
+    getAds();
+  }, []);
 
   const leilao = ads.filter(({ type_of_ad }) => type_of_ad === "Leilão");
   const carros = ads.filter(
@@ -91,7 +96,7 @@ const Homepage = () => {
               spaceBetween: 10,
             },
             480: {
-              slidesPerView: 2,
+              slidesPerView: 1,
               spaceBetween: 10,
             },
             768: {
@@ -110,8 +115,8 @@ const Homepage = () => {
         >
           {leilao.length > 0 ? (
             leilao.map((vehicle) => (
-              <SwiperSlide style={{ width: "100%", maxWidth: "325px" }}>
-                <CardAuction vehicle={vehicle} />
+              <SwiperSlide style={{ width: "100%", maxWidth: "500px" }} key={vehicle.id}>
+                <CardAuction vehicle={vehicle} key={vehicle.id}/>
               </SwiperSlide>
             ))
           ) : (
@@ -134,7 +139,7 @@ const Homepage = () => {
               spaceBetween: 10,
             },
             480: {
-              slidesPerView: 2,
+              slidesPerView: 1,
               spaceBetween: 10,
             },
             768: {
@@ -149,8 +154,8 @@ const Homepage = () => {
         >
           {carros.length > 0 ? (
             carros.map((vehicle) => (
-              <SwiperSlide style={{ width: "100%", maxWidth: "325px" }}>
-                <CardShowcase vehicle={vehicle} />
+              <SwiperSlide style={{ width: "100%", maxWidth: "400px" }} key={vehicle.id}>
+                <CardShowcase vehicle={vehicle} key={vehicle.id}/>
               </SwiperSlide>
             ))
           ) : (
@@ -173,7 +178,7 @@ const Homepage = () => {
               spaceBetween: 10,
             },
             480: {
-              slidesPerView: 2,
+              slidesPerView: 1,
               spaceBetween: 10,
             },
             768: {
@@ -188,8 +193,8 @@ const Homepage = () => {
         >
           {motos.length > 0 ? (
             motos.map((vehicle) => (
-              <SwiperSlide style={{ width: "100%", maxWidth: "325px" }}>
-                <CardShowcase vehicle={vehicle} />
+              <SwiperSlide style={{ width: "100%", maxWidth: "400px" }} key={vehicle.id}>
+                <CardShowcase vehicle={vehicle} key={vehicle.id}/>
               </SwiperSlide>
             ))
           ) : (

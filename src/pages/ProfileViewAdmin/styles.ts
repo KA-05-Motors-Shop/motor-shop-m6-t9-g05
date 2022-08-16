@@ -94,6 +94,7 @@ export const SectionLeilao = styled.section`
 export const SectionVehicles = styled.section`
   width: 95%;
   margin-top: 5rem;
+  margin-bottom: 2rem;
 `;
 
 export const UlVehicles = styled.ul`

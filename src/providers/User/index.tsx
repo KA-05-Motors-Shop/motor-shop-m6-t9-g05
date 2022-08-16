@@ -85,6 +85,7 @@ interface Vehicles {
   gallery_image4?: string;
   gallery_image5?: string;
   gallery_image6?: string;
+  published: boolean
   comments: Comments[];
 }
 

@@ -47,7 +47,7 @@ interface CommentProps {
 const VehicleDetails = () => {
   const bgColor = randomColors();
   const { id } = useParams<{ id: string }>();
-  const { userAuth } = useUser();
+  const { userAuth, getUser, user } = useUser();
   const { ads, getAds } = useAds();
   const { createComment } = useComment();
 
@@ -62,6 +62,10 @@ const VehicleDetails = () => {
 
   useEffect(() => {
     getAds();
+
+    if (userAuth.userId) {
+      getUser(userAuth.userId);
+    }
   }, []);
 
   const vehicle = ads.find((ad) => ad.id === id);
@@ -70,7 +74,7 @@ const VehicleDetails = () => {
 
   const onSubmit = async (data: CommentProps) => {
     await createComment(vehicle.id, data);
-    reset()
+    reset();
   };
   document.title = `Detalhes | ${vehicle.title}`;
 
@@ -121,22 +125,32 @@ const VehicleDetails = () => {
               >
                 <SwiperSlide className="mySlide">
                   <img src={vehicle.gallery_image} alt={vehicle.title} />
-                  {vehicle.gallery_image2 && (
-                    <img src={vehicle.gallery_image2} alt={vehicle.title} />
-                  )}
-                  {vehicle.gallery_image3 && (
-                    <img src={vehicle.gallery_image3} alt={vehicle.title} />
-                  )}
-                  {vehicle.gallery_image4 && (
-                    <img src={vehicle.gallery_image4} alt={vehicle.title} />
-                  )}
-                  {vehicle.gallery_image5 && (
-                    <img src={vehicle.gallery_image5} alt={vehicle.title} />
-                  )}
-                  {vehicle.gallery_image6 && (
-                    <img src={vehicle.gallery_image6} alt={vehicle.title} />
-                  )}
                 </SwiperSlide>
+                {vehicle.gallery_image2 && (
+                  <SwiperSlide className="mySlide">
+                    <img src={vehicle.gallery_image2} alt={vehicle.title} />
+                  </SwiperSlide>
+                )}
+                {vehicle.gallery_image3 && (
+                  <SwiperSlide className="mySlide">
+                    <img src={vehicle.gallery_image3} alt={vehicle.title} />
+                  </SwiperSlide>
+                )}
+                {vehicle.gallery_image4 && (
+                  <SwiperSlide className="mySlide">
+                    <img src={vehicle.gallery_image4} alt={vehicle.title} />
+                  </SwiperSlide>
+                )}
+                {vehicle.gallery_image5 && (
+                  <SwiperSlide className="mySlide">
+                    <img src={vehicle.gallery_image5} alt={vehicle.title} />
+                  </SwiperSlide>
+                )}
+                {vehicle.gallery_image6 && (
+                  <SwiperSlide className="mySlide">
+                    <img src={vehicle.gallery_image6} alt={vehicle.title} />
+                  </SwiperSlide>
+                )}
               </Swiper>
             </div>
             <DivUser bgColor={bgColor}>
@@ -181,7 +195,11 @@ const VehicleDetails = () => {
             <div>
               <DivName bgColor={bgColor}>
                 <div>SL</div>
-                <span>{vehicle.owner.name}</span>
+                {user.name ? (
+                  <span>{user.name}</span>
+                ) : (
+                  <span>Sem usuario</span>
+                )}
               </DivName>
 
               <DivComment onSubmit={handleSubmit(onSubmit)}>

@@ -110,8 +110,7 @@ export const ContainerRight = styled.div`
 
   @media (min-width: 768px) {
     display: flex;
-    justify-content: space-between;
-    width: 170px;
+    gap: 1rem;
     height: 100%;
     padding: 0 3rem 0 1.375rem;
     align-items: center;

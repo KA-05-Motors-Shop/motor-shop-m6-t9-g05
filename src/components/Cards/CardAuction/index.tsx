@@ -9,7 +9,10 @@ import {
   DivHour,
   DivInfos,
   DivImg,
+  Published,
+  Inactive,
 } from "./styles";
+import { useModal } from "../../../providers/Modal";
 
 interface Comments {
   id: string;
@@ -41,13 +44,17 @@ interface VehicleProps {
     name?: string;
   };
   comments?: Comments[];
+  published?: boolean;
 }
 
 interface CardProps {
   vehicle: VehicleProps;
+  setVehicleId?: any;
 }
 
-const CardAuction = ({ vehicle }: CardProps) => {
+const CardAuction = ({ vehicle, setVehicleId }: CardProps) => {
+  const { Switch } = useModal();
+
   return (
     <Container>
       <DivImg>
@@ -76,6 +83,10 @@ const CardAuction = ({ vehicle }: CardProps) => {
           color={theme.colors.whiteFixed}
           bgcolor="transparent"
           borderColor={theme.colors.whiteFixed}
+          onClick={() => {
+            setVehicleId(() => (vehicle.id ? vehicle.id : ""));
+            Switch("ModalEditAd");
+          }}
         >
           {" "}
           Editar{" "}
@@ -89,6 +100,11 @@ const CardAuction = ({ vehicle }: CardProps) => {
         >
           Ver como
         </Button>
+        {vehicle.published ? (
+          <Published>Publicado</Published>
+        ) : (
+          <Inactive>Inativo</Inactive>
+        )}
       </DivButtons>
     </Container>
   );
