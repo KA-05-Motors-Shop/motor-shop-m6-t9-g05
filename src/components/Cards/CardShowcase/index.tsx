@@ -61,6 +61,7 @@ const CardShowcase = ({ isUser = true, vehicle, setVehicleId }: CardProps) => {
   const { Switch } = useModal();
   const history = useNavigate();
 
+
   return (
     <Container>
       <ContainerImage onClick={() => history(`/vehicle/${vehicle.id}`)}>
