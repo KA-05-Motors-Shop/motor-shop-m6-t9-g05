@@ -12,10 +12,12 @@ import { useComment } from "../../providers/Comments";
 import Button from "../Button";
 import theme from "../../styles/theme";
 import { X } from "phosphor-react";
+import { calculateDate } from "../../utils/calculateDate";
 
 interface CommentsProps {
   id: string;
   message: string;
+  created_at: string;
   owner: {
     id: string;
     name: string;
@@ -28,6 +30,8 @@ const Comments = (comment: CommentsProps) => {
   const { updateComment, deleteComment } = useComment();
   const [openEdit, setOpenEdit] = useState<boolean>(false);
 
+  const days = calculateDate(comment.created_at)
+  
   const handleClick = () => setOpenEdit(!openEdit);
 
   return (
@@ -37,7 +41,7 @@ const Comments = (comment: CommentsProps) => {
           <DivName bgColor={bgColor}>
             <div>SL</div>
             <span>{comment.owner.name}</span>
-            <span>há 7 dias</span>
+            <span>{days > 0 ? `há ${days}` : 'Hoje'}</span>
           </DivName>
           {openEdit ? (
             <DivTextArea>
