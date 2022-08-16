@@ -67,6 +67,7 @@ const CreateAd = () => {
 
   const onSubmit = async (data: CreateAdProps) => {
     await createAd(data);
+    reset()
   };
 
   return (

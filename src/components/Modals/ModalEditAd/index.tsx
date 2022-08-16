@@ -17,13 +17,14 @@ import {
   DivFooter,
   DivButton,
   DivExtraInputs,
-  DivPublished
+  DivPublished,
 } from "./styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { updateAdSchema } from "../../../schemas/updateAd.schema";
 import { getOnlyPastValues } from "../../../utils/onlyPastValues";
+import { useAds } from "../../../providers/Ads";
 
 interface EditAdProps {
   title?: string;
@@ -40,23 +41,25 @@ interface EditAdProps {
   gallery_image4?: string;
   gallery_image5?: string;
   gallery_image6?: string;
-  published?: boolean
+  published?: boolean | string;
 }
 
+interface Props {
+  vehicle_id: string;
+}
 
-const EditAd = () => {
+const EditAd = ({ vehicle_id }: Props) => {
   const { Switch, openEditAdModal } = useModal();
-  const [typeAd, setTypeAd] = useState<string>("");
-  const [typeVehicle, setTypeVehicle] = useState<string>("");
-  const [published, setPublished] = useState<boolean>(true)
   const [count, setCount] = useState(2);
   const [extraInputs, setShowExtraInputs] = useState<number[]>([]);
+  const { getOneAd, ad, updateAd } = useAds();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm<EditAdProps>({
     resolver: yupResolver(updateAdSchema),
   });
@@ -69,15 +72,15 @@ const EditAd = () => {
     }
   };
 
-  const onSubmit = (data: EditAdProps) => {
-    data.type_of_ad = typeAd;
-    data.type_of_vehicle = typeVehicle;
-    data.published = published
+  useEffect(() => {
+    getOneAd(vehicle_id);
+  }, []);
 
-    const newData = getOnlyPastValues(data)
-    console.log(newData);
+  const onSubmit = async (data: EditAdProps) => {
+    const newData = getOnlyPastValues(data);
+    await updateAd(ad.id, newData)
   };
-  
+
   return (
     <Container isOpen={openEditAdModal}>
       <ContainerForm>
@@ -95,7 +98,12 @@ const EditAd = () => {
                 width={235}
                 height={45}
                 type="button"
-                onClick={() => setTypeAd("Venda")}
+                onClick={() =>
+                  setValue("type_of_ad", "Venda", {
+                    shouldValidate: true,
+                    shouldDirty: true,
+                  })
+                }
               >
                 Venda
               </Button>
@@ -106,7 +114,12 @@ const EditAd = () => {
                 color={theme.colors.grey0}
                 borderColor={theme.colors.grey4}
                 type="button"
-                onClick={() => setTypeAd("Leilão")}
+                onClick={() =>
+                  setValue("type_of_ad", "Leilão", {
+                    shouldValidate: true,
+                    shouldDirty: true,
+                  })
+                }
               >
                 Leilão
               </Button>
@@ -118,6 +131,7 @@ const EditAd = () => {
               label="Titulo"
               width={100}
               placeholder="Digitar titulo"
+              defaultValue={ad.title}
               {...register("title")}
               error={errors.title?.message}
             />
@@ -127,6 +141,7 @@ const EditAd = () => {
                 width={100}
                 placeholder="Digitar ano"
                 type="number"
+                defaultValue={ad.year}
                 {...register("year")}
                 error={errors.year?.message}
               />
@@ -135,6 +150,7 @@ const EditAd = () => {
                 width={100}
                 placeholder="0"
                 type="number"
+                defaultValue={ad.km}
                 {...register("km")}
                 error={errors.km?.message}
               />
@@ -143,6 +159,7 @@ const EditAd = () => {
                 width={100}
                 placeholder="Digitar preço"
                 type="number"
+                defaultValue={ad.price}
                 {...register("price")}
                 error={errors.price?.message}
               />
@@ -156,6 +173,7 @@ const EditAd = () => {
               </label>
               <TextArea
                 placeholder="Digitar descrição"
+                defaultValue={ad.description}
                 {...register("description")}
               />
             </ContainerText>
@@ -166,7 +184,12 @@ const EditAd = () => {
                   width={235}
                   height={45}
                   type="button"
-                  onClick={() => setTypeVehicle("Carro")}
+                  onClick={() =>
+                    setValue("type_of_vehicle", "Carro", {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                    })
+                  }
                 >
                   Carro
                 </Button>
@@ -177,7 +200,12 @@ const EditAd = () => {
                   color={theme.colors.grey0}
                   borderColor={theme.colors.grey4}
                   type="button"
-                  onClick={() => setTypeVehicle("Moto")}
+                  onClick={() =>
+                    setValue("type_of_vehicle", "Moto", {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                    })
+                  }
                 >
                   Moto
                 </Button>
@@ -193,7 +221,12 @@ const EditAd = () => {
                   bgcolor={theme.colors.whiteFixed}
                   color={theme.colors.grey0}
                   borderColor={theme.colors.grey4}
-                  onClick={() => setPublished(true)}
+                  onClick={() =>
+                    setValue("published", "true", {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                    })
+                  }
                 >
                   Sim
                 </Button>
@@ -201,7 +234,12 @@ const EditAd = () => {
                   width={235}
                   height={45}
                   type="button"
-                  onClick={() => setTypeVehicle("Moto")}
+                  onClick={() =>
+                    setValue("published", "false", {
+                      shouldValidate: false,
+                      shouldDirty: false,
+                    })
+                  }
                 >
                   Não
                 </Button>
@@ -211,6 +249,7 @@ const EditAd = () => {
               label="Imagem de capa"
               width={100}
               placeholder="Inserir URL da imagem"
+              defaultValue={ad.cover_image}
               {...register("cover_image")}
               error={errors.cover_image?.message}
             />
@@ -218,6 +257,7 @@ const EditAd = () => {
               label="1° Imagem da galeria"
               width={100}
               placeholder="Inserir URL da imagem"
+              defaultValue={ad.gallery_image}
               {...register("gallery_image")}
               error={errors.gallery_image?.message}
             />
@@ -254,8 +294,8 @@ const EditAd = () => {
                   color={theme.colors.grey0}
                   type="button"
                   onClick={() => {
-                    Switch('ModalEditAd')
-                    Switch('ModalDelete')
+                    Switch("ModalEditAd");
+                    Switch("ModalDelete");
                   }}
                 >
                   Excluir anuncio

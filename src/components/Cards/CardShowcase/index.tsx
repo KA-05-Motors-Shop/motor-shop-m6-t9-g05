@@ -6,6 +6,8 @@ import {
   DivTags,
   DivPrice,
   DivButtons,
+  Published,
+  Inactive,
 } from "./styles";
 import Car from "../../../assets/car1.png";
 import Button from "../../Button";
@@ -13,6 +15,7 @@ import theme from "../../../styles/theme";
 import { randomColors } from "../../../utils/randomColors";
 import { useModal } from "../../../providers/Modal";
 import { useNavigate } from "react-router-dom";
+import { SetStateAction } from "react";
 
 interface Comments {
   id: string;
@@ -44,21 +47,23 @@ interface VehicleProps {
     name?: string;
   };
   comments?: Comments[];
+  published: boolean | string;
 }
 
 interface CardProps {
   isUser?: boolean;
   vehicle: VehicleProps;
+  setVehicleId?: any;
 }
 
-const CardShowcase = ({ isUser = true, vehicle }: CardProps) => {
+const CardShowcase = ({ isUser = true, vehicle, setVehicleId }: CardProps) => {
   const bgColor = randomColors();
   const { Switch } = useModal();
-  const history = useNavigate()
+  const history = useNavigate();
 
   return (
-    <Container onClick={() => history(`/vehicle/${vehicle.id}`)}>
-      <ContainerImage>
+    <Container>
+      <ContainerImage onClick={() => history(`/vehicle/${vehicle.id}`)}>
         <img src={vehicle.cover_image} alt={vehicle.title} />
       </ContainerImage>
       <strong>{vehicle.title} </strong>
@@ -105,7 +110,10 @@ const CardShowcase = ({ isUser = true, vehicle }: CardProps) => {
               color={theme.colors.grey1}
               bgcolor="transparent"
               borderColor={theme.colors.grey1}
-              onClick={() => Switch("ModalEditAd")}
+              onClick={() => {
+                setVehicleId(() => (vehicle.id ? vehicle.id : ""));
+                Switch("ModalEditAd");
+              }}
             >
               {" "}
               Editar{" "}
@@ -119,6 +127,11 @@ const CardShowcase = ({ isUser = true, vehicle }: CardProps) => {
             >
               Ver como
             </Button>
+            {vehicle.published ? (
+              <Published>Publicado</Published>
+            ) : (
+              <Inactive>Inativo</Inactive>
+            )}
           </DivButtons>
         </Footer>
       )}

@@ -47,6 +47,7 @@ interface UpdateAdProps {
   gallery_image4?: string;
   gallery_image5?: string;
   gallery_image6?: string;
+  published?: boolean
 }
 
 interface Comments {
@@ -79,6 +80,7 @@ interface AdProps {
     name: string;
   };
   comments: Comments[];
+  published: boolean
 }
 
 interface AdsContextData {
@@ -94,7 +96,7 @@ interface AdsContextData {
 const AdsContext = createContext<AdsContextData>({} as AdsContextData);
 
 export const AdsProvider = ({ children }: Props) => {
-  const { userAuth } = useUser();
+  const { userAuth, getUser } = useUser();
   const { Switch } = useModal();
 
   const [ads, setAds] = useState<AdProps[]>([]);
@@ -111,7 +113,7 @@ export const AdsProvider = ({ children }: Props) => {
         Switch("ModalCreateAd");
         scrollToTop()
         Switch('ModalSucess')
-        getAds();
+        getUser(userAuth.userId);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -135,7 +137,8 @@ export const AdsProvider = ({ children }: Props) => {
       })
       .then(() => {
         toast.success("Informações atualizadas");
-        getAds();
+        Switch('ModalEditAd')
+        getUser(userAuth.userId);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -149,7 +152,7 @@ export const AdsProvider = ({ children }: Props) => {
       })
       .then(() => {
         toast.success("Veiculo deletado");
-        getAds();
+        getUser(userAuth.userId);
       })
       .catch((err) => console.log(err));
   }, []);

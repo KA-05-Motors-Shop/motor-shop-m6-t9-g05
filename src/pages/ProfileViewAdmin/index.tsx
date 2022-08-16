@@ -15,7 +15,7 @@ import CreateAd from "../../components/Modals/ModalCreateAd";
 import HeaderAdmin from "../../components/HeaderAdmin";
 import CardShowcase from "../../components/Cards/CardShowcase";
 import CardAuction from "../../components/Cards/CardAuction";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { scrollToTop } from "../../utils/scrollToTop";
@@ -35,6 +35,8 @@ const ProfileViewAdmin = () => {
     openDeleteModal,
   } = useModal();
 
+  const [vehicle_id, setVehicleId] = useState<string>("");
+
   const { getUser, user, userAuth } = useUser();
 
   const bgColor = randomColors();
@@ -47,7 +49,7 @@ const ProfileViewAdmin = () => {
         ? "hidden"
         : "scroll";
     getUser(userAuth.userId);
-  }, [openCreateAdModal, openSucessModal, openEditAdModal]);
+  }, [openCreateAdModal, openSucessModal, openEditAdModal, openDeleteModal]);
 
   const leilao = user.vehicles
     ? user.vehicles.filter(({ type_of_ad }) => type_of_ad === "Leilão")
@@ -59,6 +61,8 @@ const ProfileViewAdmin = () => {
   const carros = user.vehicles
     ? user.vehicles.filter(({ type_of_vehicle }) => type_of_vehicle === "Carro")
     : [];
+
+  document.title = `Profile | ${user.name}`;
 
   return (
     <Container>
@@ -100,7 +104,7 @@ const ProfileViewAdmin = () => {
               spaceBetween: 10,
             },
             480: {
-              slidesPerView: 2,
+              slidesPerView: 1,
               spaceBetween: 10,
             },
             768: {
@@ -118,8 +122,15 @@ const ProfileViewAdmin = () => {
           }}
         >
           {leilao.map((vehicle) => (
-            <SwiperSlide style={{ width: "100%", maxWidth: "325px" }}>
-              <CardAuction vehicle={vehicle} />
+            <SwiperSlide
+              style={{ width: "100%", maxWidth: "550px" }}
+              key={vehicle.title}
+            >
+              <CardAuction
+                vehicle={vehicle}
+                key={vehicle.title}
+                setVehicleId={setVehicleId}
+              />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -139,7 +150,7 @@ const ProfileViewAdmin = () => {
               spaceBetween: 10,
             },
             480: {
-              slidesPerView: 2,
+              slidesPerView: 1,
               spaceBetween: 10,
             },
             768: {
@@ -153,8 +164,16 @@ const ProfileViewAdmin = () => {
           }}
         >
           {carros.map((vehicle) => (
-            <SwiperSlide style={{ width: "100%", maxWidth: "325px" }}>
-              <CardShowcase isUser={false} vehicle={vehicle} />
+            <SwiperSlide
+              style={{ width: "100%", maxWidth: "400px" }}
+              key={vehicle.title}
+            >
+              <CardShowcase
+                isUser={false}
+                vehicle={vehicle}
+                setVehicleId={setVehicleId}
+                key={vehicle.title}
+              />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -174,7 +193,7 @@ const ProfileViewAdmin = () => {
               spaceBetween: 10,
             },
             480: {
-              slidesPerView: 2,
+              slidesPerView: 1,
               spaceBetween: 10,
             },
             768: {
@@ -188,8 +207,16 @@ const ProfileViewAdmin = () => {
           }}
         >
           {motos.map((vehicle) => (
-            <SwiperSlide style={{ width: "100%", maxWidth: "325px" }}>
-              <CardShowcase isUser={false} vehicle={vehicle} />
+            <SwiperSlide
+              style={{ width: "100%", maxWidth: "400px" }}
+              key={vehicle.title}
+            >
+              <CardShowcase
+                isUser={false}
+                vehicle={vehicle}
+                setVehicleId={setVehicleId}
+                key={vehicle.title}
+              />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -198,8 +225,8 @@ const ProfileViewAdmin = () => {
       <Footer />
       {openCreateAdModal && <CreateAd />}
       {openSucessModal && <ModalSucess />}
-      {openEditAdModal && <EditAd />}
-      {openDeleteModal && <ModalDelete />}
+      {openEditAdModal && <EditAd vehicle_id={vehicle_id} />}
+      {openDeleteModal && <ModalDelete vehicle_id={vehicle_id} />}
     </Container>
   );
 };

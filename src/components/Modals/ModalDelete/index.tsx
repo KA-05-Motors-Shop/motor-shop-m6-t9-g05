@@ -1,12 +1,19 @@
 import { X } from "phosphor-react";
+import { useEffect } from "react";
+import { useAds } from "../../../providers/Ads";
 import { useModal } from "../../../providers/Modal";
 import theme from "../../../styles/theme";
 import Button from "../../Button";
 
 import { Container, Content, Div, DivMessage, DivButton } from "./styles";
 
-const ModalDelete = () => {
+interface Props {
+  vehicle_id: string;
+}
+
+const ModalDelete = ({ vehicle_id }: Props) => {
   const { Switch } = useModal();
+  const {deleteAd} = useAds()
 
   return (
     <Container>
@@ -37,6 +44,10 @@ const ModalDelete = () => {
             bgcolor={theme.colors.alert2}
             height={48}
             color={theme.colors.alert1}
+            onClick={() => {
+              deleteAd(vehicle_id)
+              Switch("ModalDelete")
+            }}
           >
             Sim, excluir anuncio
           </Button>

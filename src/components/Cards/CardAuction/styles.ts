@@ -27,7 +27,7 @@ export const DivImg = styled.div`
   > img {
     width: 250px;
     height: 200px;
-    object-fit: cover;
+    object-fit: contain;
     opacity: 0.7;
   }
 `;
@@ -120,6 +120,7 @@ export const DivButtons = styled.div`
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   z-index: 1;
+  align-items: center;
 
   @media screen and (min-width: 1024px) {
     justify-content: flex-start;
@@ -128,4 +129,18 @@ export const DivButtons = styled.div`
       width: 90px;
     }
   }
+`;
+
+export const Published = styled.span`
+  font-size: 0.875rem;
+  font-family: "Inter", sans-serif;
+  font-weight: ${({ theme }) => theme.fonts.fontWeight600};
+  color: ${({ theme }) => theme.colors.sucess2};
+`;
+
+export const Inactive = styled.span`
+  font-size: 0.875rem;
+  font-family: "Inter", sans-serif;
+  font-weight: ${({ theme }) => theme.fonts.fontWeight600};
+  color: ${({ theme }) => theme.colors.alert1};
 `;

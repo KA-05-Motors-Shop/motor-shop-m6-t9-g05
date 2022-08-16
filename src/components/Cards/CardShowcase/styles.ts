@@ -1,13 +1,16 @@
 import styled from "styled-components";
 
 interface Props {
-  bgColor?: string
+  bgColor?: string;
 }
 
 export const Container = styled.div`
   width: 100%;
   height: 385px;
   cursor: grabbing;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 
   strong {
     display: block;
@@ -16,6 +19,7 @@ export const Container = styled.div`
     font-weight: ${({ theme }) => theme.fonts.fontWeight600};
     color: ${({ theme }) => theme.colors.grey1};
     padding: 1rem 0 0.5rem 0;
+    word-break: break-all;
   }
 
   p {
@@ -26,11 +30,13 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.colors.grey2};
     line-height: 1.3rem;
     padding: 0.5rem 0;
+    word-break: break-all;
   }
 `;
 
 export const ContainerImage = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,6 +46,7 @@ export const ContainerImage = styled.div`
     width: 262px;
     filter: drop-shadow(5px 5px 3px #00000073);
     object-fit: cover;
+    cursor: pointer;
   }
 `;
 
@@ -122,5 +129,19 @@ export const DivButtons = styled.div`
   width: 100%;
   display: flex;
   gap: 1rem;
+  align-items: center;
+`;
 
+export const Published = styled.span`
+  font-size: 0.875rem;
+  font-family: "Inter", sans-serif;
+  font-weight: ${({ theme }) => theme.fonts.fontWeight600};
+  color: ${({ theme }) => theme.colors.sucess1};
+`;
+
+export const Inactive = styled.span`
+  font-size: 0.875rem;
+  font-family: "Inter", sans-serif;
+  font-weight: ${({ theme }) => theme.fonts.fontWeight600};
+  color: ${({ theme }) => theme.colors.alert1};
 `;

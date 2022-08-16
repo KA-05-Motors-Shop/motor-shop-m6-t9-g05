@@ -53,6 +53,9 @@ const HeaderAdmin = ({ bgColor }: HeaderProps) => {
                 <a href="/ads/filter/leilao">Leilão</a>
               </li>
               <li>
+                <button onClick={() => history('/profile_admin')}>Perfil</button>
+              </li>
+              <li>
                 <button>Editar endereço</button>
               </li>
               <li>
