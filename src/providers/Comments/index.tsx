@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useCallback, useContext } from "react";
+import toast from "react-hot-toast";
 import { api } from "../../services/api";
 import { useAds } from "../Ads";
 import { useUser } from "../User";
@@ -16,9 +17,8 @@ interface CommentContextData {
   updateComment: (
     id: string,
     data: CommentProps,
-    vehicle_id: string
   ) => Promise<void>;
-  deleteComment: (id: string, vehicle_id: string) => Promise<void>;
+  deleteComment: (id: string) => Promise<void>;
 }
 
 const CommentContext = createContext<CommentContextData>(
@@ -50,7 +50,10 @@ export const CommentProvider = ({ children }: Props) => {
           Authorization: `Bearer ${userAuth.token}`,
         },
       })
-      .then(() => getAds())
+      .then(() =>{
+        getAds()
+        toast.success('Comentario atualizado')
+      })
       .catch((err) => console.log(err));
   }, []);
 
