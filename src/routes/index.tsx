@@ -5,6 +5,7 @@ import Register from "../pages/Register";
 import VehicleDetails from "../pages/VehicleDetails";
 import { Route, Routes } from "react-router-dom";
 import FilterAd from "../pages/FilterAds";
+import ProfileViewUser from "../pages/ProvileViewUser";
 
 const Router = () => {
   return (
@@ -13,6 +14,7 @@ const Router = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/profile_admin" element={<ProfileViewAdmin />} />
+      <Route path="/profile/user/:id" element={<ProfileViewUser />}/>
       <Route path="/vehicle/:id" element={<VehicleDetails />} />
       <Route path="/ads/filter/:type" element={<FilterAd />} />
       <Route path="*" element={<Homepage />}/>

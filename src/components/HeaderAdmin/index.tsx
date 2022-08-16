@@ -16,25 +16,26 @@ import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
   bgColor: string;
+  user: any
 }
 
-const HeaderAdmin = ({ bgColor }: HeaderProps) => {
+const HeaderAdmin = ({ bgColor, user }: HeaderProps) => {
   const [isActive, setIsActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { getUser, user, userAuth, logout } = useUser();
+  const { logout } = useUser();
 
   const handleNavLinks = () => setIsActive(!isActive);
-  const history = useNavigate()
-
-  useEffect(() => {
-    getUser(userAuth.userId);
-  }, []);
+  const history = useNavigate();
 
   return (
     <ContainerHeader>
       <Container>
         <ContainerLeft>
-          <img src={LogoHeader} alt="logotipo Motors Shop" onClick={() => history('/')}/>
+          <img
+            src={LogoHeader}
+            alt="logotipo Motors Shop"
+            onClick={() => history("/")}
+          />
           {isActive ? (
             <X onClick={handleNavLinks} />
           ) : (
@@ -53,7 +54,9 @@ const HeaderAdmin = ({ bgColor }: HeaderProps) => {
                 <a href="/ads/filter/leilao">Leilão</a>
               </li>
               <li>
-                <button onClick={() => history('/profile_admin')}>Perfil</button>
+                <button onClick={() => history("/profile_admin")}>
+                  Perfil
+                </button>
               </li>
               <li>
                 <button>Editar endereço</button>
@@ -79,8 +82,10 @@ const HeaderAdmin = ({ bgColor }: HeaderProps) => {
           onMouseEnter={() => setIsOpen(true)}
           onMouseLeave={() => setIsOpen(false)}
         >
-          <DivName bgColor={bgColor} onClick={() => history('/profile_admin')}>SL</DivName>
-          <span>{user.name && user.name}</span>
+          <DivName bgColor={bgColor} onClick={() => history("/profile_admin")}>
+            SL
+          </DivName>
+          <span>{user?.name && user.name}</span>
           <DropMenu isOpen={isOpen}>
             <button>Editar perfil</button>
             <button>Editar endereço</button>

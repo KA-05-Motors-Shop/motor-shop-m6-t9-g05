@@ -31,7 +31,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAds } from "../../providers/Ads";
 import { useEffect } from "react";
 import { useUser } from "../../providers/User";
@@ -39,6 +39,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { commentSchema } from "../../schemas/comment.schema";
 import { useComment } from "../../providers/Comments";
+
 
 interface CommentProps {
   message: string;
@@ -50,6 +51,8 @@ const VehicleDetails = () => {
   const { userAuth, getUser, user } = useUser();
   const { ads, getAds } = useAds();
   const { createComment } = useComment();
+
+  const history = useNavigate()
 
   const {
     register,
@@ -76,11 +79,12 @@ const VehicleDetails = () => {
     await createComment(vehicle.id, data);
     reset();
   };
+
   document.title = `Detalhes | ${vehicle.title}`;
 
   return (
     <>
-      {userAuth.token ? <HeaderAdmin bgColor={bgColor} /> : <Header />}
+      {userAuth.token ? <HeaderAdmin bgColor={bgColor} user={user}/> : <Header />}
 
       <Main>
         <DivMain>
@@ -167,6 +171,7 @@ const VehicleDetails = () => {
                 height={48}
                 bgcolor={theme.colors.grey0}
                 color={theme.colors.whiteFixed}
+                onClick={() => history(`/profile/user/${vehicle.owner.id}`)}
               >
                 Ver todos anuncios
               </Button>
