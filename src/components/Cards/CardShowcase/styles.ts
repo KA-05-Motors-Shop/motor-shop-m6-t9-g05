@@ -11,6 +11,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  margin-bottom: 1rem;
 
   strong {
     display: block;

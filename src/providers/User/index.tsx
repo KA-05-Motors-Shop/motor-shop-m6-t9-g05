@@ -110,7 +110,7 @@ interface LoginProps {
 
 interface UserContextData {
   userAuth: UserAuth;
-  user: User;
+  user?: User;
   users: User[];
   createUser: (data: CreateUserProps) => Promise<void>;
   getUser: (id: string) => Promise<void>;
@@ -136,7 +136,7 @@ export const UserProvider = ({ children }: Props) => {
     return {} as UserAuth;
   });
 
-  const [user, setUser] = useState<User>({} as User);
+  const [user, setUser] = useState<User>();
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {

@@ -25,6 +25,7 @@ import { randomColors } from "../../utils/randomColors";
 import EditAd from "../../components/Modals/ModalEditAd";
 import ModalDelete from "../../components/Modals/ModalDelete";
 import { useUser } from "../../providers/User";
+import Loading from "../../components/Loading";
 
 const ProfileViewAdmin = () => {
   const {
@@ -50,6 +51,10 @@ const ProfileViewAdmin = () => {
         : "scroll";
     getUser(userAuth.userId);
   }, [openCreateAdModal, openSucessModal, openEditAdModal, openDeleteModal]);
+
+  if (!user) {
+    return <Loading bgColor={bgColor} />;
+  }
 
   const leilao = user.vehicles
     ? user.vehicles.filter(({ type_of_ad }) => type_of_ad === "Leilão")
@@ -130,6 +135,7 @@ const ProfileViewAdmin = () => {
                 vehicle={vehicle}
                 key={vehicle.title}
                 setVehicleId={setVehicleId}
+                isUser={false}
               />
             </SwiperSlide>
           ))}

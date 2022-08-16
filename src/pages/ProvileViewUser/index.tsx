@@ -17,45 +17,36 @@ import { randomColors } from "../../utils/randomColors";
 import { useUser } from "../../providers/User";
 import { useParams } from "react-router-dom";
 import Header from "../../components/Header";
+import Loading from "../../components/Loading";
 
 const ProfileViewUser = () => {
   const { id } = useParams<{ id: string }>();
+  const bgColor = randomColors();
 
   const { getUsers, users, userAuth } = useUser();
 
   useEffect(() => {
-    const get = async () => {
-      await getUsers()
-    }
-
-    get()
+      getUsers()
   }, []);
 
-  if (!users) {
-    return (<h1>carregando....</h1>)
+  const user = users.find((user) => user.id === id)
+
+  if (!user) {
+    return <Loading bgColor={bgColor} />;
   }
 
-  const user = users.find((user) => user.id === id);
-  
-
-  const bgColor = randomColors();
-
-  const motos = user?.vehicles
+  const motos = user.vehicles
     ? user.vehicles.filter(({ type_of_vehicle }) => type_of_vehicle === "Moto")
     : [];
-  const carros = user?.vehicles
+  const carros = user.vehicles
     ? user.vehicles.filter(({ type_of_vehicle }) => type_of_vehicle === "Carro")
     : [];
 
-  document.title = `Profile | ${user?.name}`;
+  document.title = `Profile | ${user.name}`;
 
   return (
     <Container>
-      {userAuth.token ? (
-        <HeaderAdmin bgColor={bgColor} />
-      ) : (
-        <Header />
-      )}
+      {userAuth.token ? <HeaderAdmin bgColor={bgColor} /> : <Header />}
       <SectionUser>
         <DivUser>
           <Content bgColor={bgColor}>
@@ -63,9 +54,9 @@ const ProfileViewUser = () => {
               <span>SL</span>
             </div>
             <SpanName>
-              {user?.name} <span>{user?.account_type}</span>
+              {user.name} <span>{user.account_type}</span>
             </SpanName>
-            <p>{user?.description}</p>
+            <p>{user.description}</p>
           </Content>
         </DivUser>
       </SectionUser>
