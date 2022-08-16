@@ -17,7 +17,7 @@ const Router = () => {
       <Route path="/profile/user/:id" element={<ProfileViewUser />}/>
       <Route path="/vehicle/:id" element={<VehicleDetails />} />
       <Route path="/ads/filter/:type" element={<FilterAd />} />
-      <Route path="*" element={<Homepage />}/>
+      <Route path="*" element={<Homepage />} />
     </Routes>
   );
 };

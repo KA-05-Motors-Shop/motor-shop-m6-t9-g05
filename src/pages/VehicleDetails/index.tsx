@@ -84,7 +84,7 @@ const VehicleDetails = () => {
 
   return (
     <>
-      {userAuth.token ? <HeaderAdmin bgColor={bgColor} user={user}/> : <Header />}
+      {userAuth.token ? <HeaderAdmin bgColor={bgColor} /> : <Header />}
 
       <Main>
         <DivMain>
@@ -186,8 +186,7 @@ const VehicleDetails = () => {
               {vehicle.comments.map((comment) => (
                 <Comments
                   key={comment.id}
-                  username={comment.owner.name}
-                  comment={comment.message}
+                  {...comment}
                 />
               ))}
             </Ul>

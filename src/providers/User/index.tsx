@@ -3,6 +3,7 @@ import {
   ReactNode,
   useCallback,
   useContext,
+  useEffect,
   useState,
 } from "react";
 import toast from "react-hot-toast";
@@ -85,7 +86,7 @@ interface Vehicles {
   gallery_image4?: string;
   gallery_image5?: string;
   gallery_image6?: string;
-  published: boolean
+  published: boolean;
   comments: Comments[];
 }
 
@@ -124,7 +125,7 @@ interface UserContextData {
 const UserContext = createContext<UserContextData>({} as UserContextData);
 
 export const UserProvider = ({ children }: Props) => {
-  const { Switch, openSucessModal} = useModal();
+  const { Switch } = useModal();
   const [userAuth, setUserAuth] = useState<UserAuth>(() => {
     const data = localStorage.getItem("@UserAuth");
 
@@ -134,9 +135,15 @@ export const UserProvider = ({ children }: Props) => {
 
     return {} as UserAuth;
   });
+
   const [user, setUser] = useState<User>({} as User);
   const [users, setUsers] = useState<User[]>([]);
-  
+
+  useEffect(() => {
+    if (userAuth.userId) {
+      getUser(userAuth.userId);
+    }
+  }, []);
 
   const navigate = useNavigate();
 
@@ -144,8 +151,8 @@ export const UserProvider = ({ children }: Props) => {
     await api
       .post("/users", data)
       .then(() => {
-        scrollToTop()
-        Switch("ModalSucess")
+        scrollToTop();
+        Switch("ModalSucess");
       })
       .catch((err) => toast.error(err.response.data.message));
   }, []);
