@@ -8,6 +8,9 @@ export const Header = styled.header`
   width: 100%;
   height: 80px;
   background-color: ${({ theme }) => theme.colors.grey10};
+  position: sticky;
+  top: 0;
+  z-index: 2;
 `;
 
 export const Container = styled.div`

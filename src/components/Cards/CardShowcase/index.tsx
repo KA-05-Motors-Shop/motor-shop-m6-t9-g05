@@ -16,6 +16,7 @@ import { randomColors } from "../../../utils/randomColors";
 import { useModal } from "../../../providers/Modal";
 import { useNavigate } from "react-router-dom";
 import { SetStateAction } from "react";
+import { initalLetters } from "../../../utils/initialLetters";
 
 interface Comments {
   id: string;
@@ -60,6 +61,7 @@ const CardShowcase = ({ isUser = true, vehicle, setVehicleId }: CardProps) => {
   const bgColor = randomColors();
   const { Switch } = useModal();
   const history = useNavigate();
+  const initials = initalLetters(vehicle.owner?.name)
 
 
   return (
@@ -73,7 +75,7 @@ const CardShowcase = ({ isUser = true, vehicle, setVehicleId }: CardProps) => {
         <>
           <UserInfo bgColor={bgColor}>
             <div>
-              <span>SL</span>
+              <span>{initials}</span>
             </div>
             <span>{vehicle.owner?.name}</span>
           </UserInfo>

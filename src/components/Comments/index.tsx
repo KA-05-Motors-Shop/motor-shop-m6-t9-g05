@@ -13,6 +13,7 @@ import Button from "../Button";
 import theme from "../../styles/theme";
 import { X } from "phosphor-react";
 import { calculateDate } from "../../utils/calculateDate";
+import { initalLetters } from "../../utils/initialLetters";
 
 interface CommentsProps {
   id: string;
@@ -32,6 +33,7 @@ const Comments = (comment: CommentsProps) => {
   const [openEdit, setOpenEdit] = useState<boolean>(false);
 
   const days = calculateDate(comment.created_at);
+  const initials = initalLetters(comment.owner.name);
 
   const handleClick = () => setOpenEdit(!openEdit);
 
@@ -40,9 +42,9 @@ const Comments = (comment: CommentsProps) => {
       {comment.owner.id === userAuth.userId ? (
         <>
           <DivName bgColor={bgColor}>
-            <div>SL</div>
+            <div>{initials}</div>
             <span>{comment.owner.name}</span>
-            <span>{days > 0 ? `há ${days}` : "Hoje"}</span>
+            <span>{days > 0 ? `há ${days} dia(s)` : "Hoje"}</span>
           </DivName>
           {openEdit ? (
             <DivTextArea>
@@ -91,9 +93,9 @@ const Comments = (comment: CommentsProps) => {
       ) : (
         <>
           <DivName bgColor={bgColor}>
-            <div>SL</div>
+            <div>{initials}</div>
             <span>{comment.owner.name}</span>
-            <span>há 7 dias</span>
+            <span>{days > 0 ? `há ${days} dia(s)` : "Hoje"}</span>
           </DivName>
           <DivMessage>
             <p>{comment.message}</p>

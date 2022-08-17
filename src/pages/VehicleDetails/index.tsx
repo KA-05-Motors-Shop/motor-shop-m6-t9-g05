@@ -40,6 +40,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { commentSchema } from "../../schemas/comment.schema";
 import { useComment } from "../../providers/Comments";
 import Loading from "../../components/Loading";
+import { initalLetters } from "../../utils/initialLetters";
 
 interface CommentProps {
   message: string;
@@ -81,6 +82,9 @@ const VehicleDetails = () => {
     await createComment(ad.id, data);
     reset();
   };
+
+  const initialsOwner = initalLetters(ad.owner.name)
+  const initiaslUser = initalLetters(user?.name)
 
   document.title = `Detalhes | ${ad.title}`;
 
@@ -160,7 +164,7 @@ const VehicleDetails = () => {
               </Swiper>
             </div>
             <DivUser bgColor={bgColor}>
-              <div>SL</div>
+              <div>{initialsOwner}</div>
               <span>{ad.owner.name}</span>
 
               <p>
@@ -197,7 +201,7 @@ const VehicleDetails = () => {
           <DivSection>
             <div>
               <DivName bgColor={bgColor}>
-                <div>SL</div>
+                <div>{initiaslUser}</div>
                 {user?.name ? (
                   <span>{user?.name}</span>
                 ) : (

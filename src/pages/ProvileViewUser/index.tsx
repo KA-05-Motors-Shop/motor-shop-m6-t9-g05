@@ -18,12 +18,14 @@ import { useUser } from "../../providers/User";
 import { useParams } from "react-router-dom";
 import Header from "../../components/Header";
 import Loading from "../../components/Loading";
+import { initalLetters } from "../../utils/initialLetters";
 
 const ProfileViewUser = () => {
   const { id } = useParams<{ id: string }>();
   const bgColor = randomColors();
 
   const { getUsers, users, userAuth } = useUser();
+  
 
   useEffect(() => {
       getUsers()
@@ -42,6 +44,8 @@ const ProfileViewUser = () => {
     ? user.vehicles.filter(({ type_of_vehicle }) => type_of_vehicle === "Carro")
     : [];
 
+  const initials = initalLetters(user.name)
+
   document.title = `Profile | ${user.name}`;
 
   return (
@@ -51,7 +55,7 @@ const ProfileViewUser = () => {
         <DivUser>
           <Content bgColor={bgColor}>
             <div>
-              <span>SL</span>
+              <span>{initials}</span>
             </div>
             <SpanName>
               {user.name} <span>{user.account_type}</span>
