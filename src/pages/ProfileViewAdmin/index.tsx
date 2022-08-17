@@ -26,6 +26,7 @@ import EditAd from "../../components/Modals/ModalEditAd";
 import ModalDelete from "../../components/Modals/ModalDelete";
 import { useUser } from "../../providers/User";
 import Loading from "../../components/Loading";
+import EmptyList from "../../components/EmptyList";
 
 const ProfileViewAdmin = () => {
   const {
@@ -126,19 +127,23 @@ const ProfileViewAdmin = () => {
             },
           }}
         >
-          {leilao.map((vehicle) => (
-            <SwiperSlide
-              style={{ width: "100%", maxWidth: "550px" }}
-              key={vehicle.title}
-            >
-              <CardAuction
-                vehicle={vehicle}
+          {leilao.length > 0 ? (
+            leilao.map((vehicle) => (
+              <SwiperSlide
+                style={{ width: "100%", maxWidth: "400px" }}
                 key={vehicle.title}
-                setVehicleId={setVehicleId}
-                isUser={false}
-              />
-            </SwiperSlide>
-          ))}
+              >
+                <CardAuction
+                  isUser={false}
+                  vehicle={vehicle}
+                  setVehicleId={setVehicleId}
+                  key={vehicle.title}
+                />
+              </SwiperSlide>
+            ))
+          ) : (
+            <EmptyList admin={true} />
+          )}
         </Swiper>
       </SectionLeilao>
 
@@ -169,19 +174,23 @@ const ProfileViewAdmin = () => {
             },
           }}
         >
-          {carros.map((vehicle) => (
-            <SwiperSlide
-              style={{ width: "100%", maxWidth: "400px" }}
-              key={vehicle.title}
-            >
-              <CardShowcase
-                isUser={false}
-                vehicle={vehicle}
-                setVehicleId={setVehicleId}
+          {carros.length > 0 ? (
+            carros.map((vehicle) => (
+              <SwiperSlide
+                style={{ width: "100%", maxWidth: "400px" }}
                 key={vehicle.title}
-              />
-            </SwiperSlide>
-          ))}
+              >
+                <CardShowcase
+                  isUser={false}
+                  vehicle={vehicle}
+                  setVehicleId={setVehicleId}
+                  key={vehicle.title}
+                />
+              </SwiperSlide>
+            ))
+          ) : (
+            <EmptyList admin={true} />
+          )}
         </Swiper>
       </SectionVehicles>
 
@@ -212,19 +221,23 @@ const ProfileViewAdmin = () => {
             },
           }}
         >
-          {motos.map((vehicle) => (
-            <SwiperSlide
-              style={{ width: "100%", maxWidth: "400px" }}
-              key={vehicle.title}
-            >
-              <CardShowcase
-                isUser={false}
-                vehicle={vehicle}
-                setVehicleId={setVehicleId}
+          {motos.length > 0 ? (
+            motos.map((vehicle) => (
+              <SwiperSlide
+                style={{ width: "100%", maxWidth: "400px" }}
                 key={vehicle.title}
-              />
-            </SwiperSlide>
-          ))}
+              >
+                <CardShowcase
+                  isUser={false}
+                  vehicle={vehicle}
+                  setVehicleId={setVehicleId}
+                  key={vehicle.title}
+                />
+              </SwiperSlide>
+            ))
+          ) : (
+            <EmptyList admin={true} />
+          )}
         </Swiper>
       </SectionVehicles>
 
