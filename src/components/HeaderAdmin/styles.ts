@@ -10,6 +10,9 @@ export const Header = styled.header`
   width: 100%;
   height: 80px;
   background-color: ${({ theme }) => theme.colors.grey10};
+  position: sticky;
+  top: 0;
+  z-index: 2;
 `;
 
 export const Container = styled.div`
@@ -110,9 +113,12 @@ export const ContainerRight = styled.div`
 
   @media (min-width: 768px) {
     display: flex;
+    justify-content: space-around;
+    padding-right: 1rem;
     gap: 1rem;
+    width: 180px;
     height: 100%;
-    padding: 0 3rem 0 1.375rem;
+    position: relative;
     align-items: center;
     border-left: 2px solid ${({ theme }) => theme.colors.grey6};
   }
@@ -165,6 +171,7 @@ export const DropMenu = styled.div<HeaderProps>`
       width: 150px;
       position: absolute;
       top: 70px;
+      right: 5px;
       z-index: 2;
       background-color: ${({ theme }) => theme.colors.grey9};
       height: 130px;

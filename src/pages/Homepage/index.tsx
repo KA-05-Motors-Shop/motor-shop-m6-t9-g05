@@ -12,8 +12,6 @@ import {
 import { Swiper, SwiperSlide } from "swiper/react";
 import Footer from "../../components/Footer";
 import CardShowcase from "../../components/Cards/CardShowcase";
-import Button from "../../components/Button";
-import theme from "../../styles/theme";
 import "swiper/css";
 import HeaderAdmin from "../../components/HeaderAdmin";
 import { randomColors } from "../../utils/randomColors";
@@ -36,7 +34,7 @@ const Homepage = () => {
   }, []);
 
   if (!ads) {
-    return <Loading bgColor={bgColor}/>
+    return <Loading bgColor={bgColor} />;
   }
 
   const leilao = ads.filter(({ type_of_ad }) => type_of_ad === "Leilão");
@@ -54,41 +52,14 @@ const Homepage = () => {
           <p>Velocidade e experiência em um lugar feito para você</p>
           <span>Um ambiente feito para você explorar o seu melhor</span>
           <DivButtons>
-            <Button
-              color={theme.colors.grey10}
-              bgcolor={theme.colors.brand2}
-              borderColor={theme.colors.grey10}
-              width={160}
-              height={40}
-              onClick={() => history("/ads/filter/leilao")}
-            >
-              Leilão
-            </Button>
-            <Button
-              color={theme.colors.grey10}
-              bgcolor={theme.colors.brand2}
-              borderColor={theme.colors.grey10}
-              width={160}
-              height={40}
-              onClick={() => history("/ads/filter/carros")}
-            >
-              Carros
-            </Button>
-            <Button
-              color={theme.colors.grey10}
-              bgcolor={theme.colors.brand2}
-              borderColor={theme.colors.grey10}
-              width={160}
-              height={40}
-              onClick={() => history("/ads/filter/motos")}
-            >
-              Motos
-            </Button>
+            <a href="#leilao">Leilão</a>
+            <a href="#carros">Carros</a>
+            <a href="#motos">Motos</a>
           </DivButtons>
         </Content>
       </SectionTop>
 
-      <SectionLeilao>
+      <SectionLeilao id="leilao">
         <H2>Leilão</H2>
         <Swiper
           slidesPerView={2}
@@ -120,8 +91,11 @@ const Homepage = () => {
         >
           {leilao.length > 0 ? (
             leilao.map((vehicle) => (
-              <SwiperSlide style={{ width: "100%", maxWidth: "500px" }} key={vehicle.id}>
-                <CardAuction vehicle={vehicle} key={vehicle.id}/>
+              <SwiperSlide
+                style={{ width: "100%", maxWidth: "500px" }}
+                key={vehicle.id}
+              >
+                <CardAuction vehicle={vehicle} key={vehicle.id} />
               </SwiperSlide>
             ))
           ) : (
@@ -130,7 +104,7 @@ const Homepage = () => {
         </Swiper>
       </SectionLeilao>
 
-      <SectionVehicles>
+      <SectionVehicles id="carros">
         <H2>Carros</H2>
 
         <Swiper
@@ -159,8 +133,11 @@ const Homepage = () => {
         >
           {carros.length > 0 ? (
             carros.map((vehicle) => (
-              <SwiperSlide style={{ width: "100%", maxWidth: "400px" }} key={vehicle.id}>
-                <CardShowcase vehicle={vehicle} key={vehicle.id}/>
+              <SwiperSlide
+                style={{ width: "100%", maxWidth: "400px" }}
+                key={vehicle.id}
+              >
+                <CardShowcase vehicle={vehicle} key={vehicle.id} />
               </SwiperSlide>
             ))
           ) : (
@@ -169,7 +146,7 @@ const Homepage = () => {
         </Swiper>
       </SectionVehicles>
 
-      <SectionVehicles>
+      <SectionVehicles id="motos">
         <H2>Motos</H2>
 
         <Swiper
@@ -198,8 +175,11 @@ const Homepage = () => {
         >
           {motos.length > 0 ? (
             motos.map((vehicle) => (
-              <SwiperSlide style={{ width: "100%", maxWidth: "400px" }} key={vehicle.id}>
-                <CardShowcase vehicle={vehicle} key={vehicle.id}/>
+              <SwiperSlide
+                style={{ width: "100%", maxWidth: "400px" }}
+                key={vehicle.id}
+              >
+                <CardShowcase vehicle={vehicle} key={vehicle.id} />
               </SwiperSlide>
             ))
           ) : (
