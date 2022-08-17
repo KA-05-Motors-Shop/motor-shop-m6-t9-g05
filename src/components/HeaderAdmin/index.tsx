@@ -13,6 +13,7 @@ import LogoHeader from "../../assets/logo-header.svg";
 import { List, X } from "phosphor-react";
 import { useUser } from "../../providers/User";
 import { useNavigate } from "react-router-dom";
+import { initalLetters } from "../../utils/initialLetters";
 
 interface HeaderProps {
   bgColor: string;
@@ -25,6 +26,7 @@ const HeaderAdmin = ({ bgColor }: HeaderProps) => {
 
   const handleNavLinks = () => setIsActive(!isActive);
   const history = useNavigate();
+  const initials = initalLetters(user?.name)
 
 
 
@@ -84,7 +86,7 @@ const HeaderAdmin = ({ bgColor }: HeaderProps) => {
           onMouseLeave={() => setIsOpen(false)}
         >
           <DivName bgColor={bgColor} onClick={() => history("/profile_admin")}>
-            SL
+            {initials}
           </DivName>
           <span>{user?.name && user.name}</span>
           <DropMenu isOpen={isOpen}>
