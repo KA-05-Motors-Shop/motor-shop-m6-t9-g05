@@ -6,6 +6,7 @@ import VehicleDetails from "../pages/VehicleDetails";
 import { Route, Routes } from "react-router-dom";
 import FilterAd from "../pages/FilterAds";
 import ProfileViewUser from "../pages/ProvileViewUser";
+import PageError from "../pages/PageError";
 
 const Router = () => {
   return (
@@ -17,6 +18,7 @@ const Router = () => {
       <Route path="/profile/user/:id" element={<ProfileViewUser />}/>
       <Route path="/vehicle/:id" element={<VehicleDetails />} />
       <Route path="/ads/filter/:type" element={<FilterAd />} />
+      <Route path="/error" element={<PageError />}/>
       <Route path="*" element={<Homepage />} />
     </Routes>
   );

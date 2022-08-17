@@ -22,14 +22,17 @@ interface HeaderProps {
 const HeaderAdmin = ({ bgColor }: HeaderProps) => {
   const [isActive, setIsActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { logout, user } = useUser();
+  const { logout, users, getUsers, userAuth } = useUser();
 
   const handleNavLinks = () => setIsActive(!isActive);
   const history = useNavigate();
+  
+  useEffect(() => {
+    getUsers()
+  },[])
+  const user = users.find(({id}) => id === userAuth.userId)
   const initials = initalLetters(user?.name)
-
-
-
+  
   return (
     <ContainerHeader>
       <Container>
