@@ -6,6 +6,7 @@ import {
   useState,
 } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import { scrollToTop } from "../../utils/scrollToTop";
 import { useModal } from "../Modal";
@@ -103,6 +104,8 @@ export const AdsProvider = ({ children }: Props) => {
   const [ads, setAds] = useState<AdProps[]>();
   const [ad, setAd] = useState<AdProps>();
 
+  const navigate = useNavigate()
+
   const createAd = useCallback(async (data: CreateAdProps) => {
     await api
       .post("/vehicles", data, {
@@ -125,8 +128,9 @@ export const AdsProvider = ({ children }: Props) => {
   }, []);
 
   const getOneAd = useCallback(async (id: string) => {
-    const { data } = await api.get(`/vehicles/${id}`);
-    setAd(data);
+    await api.get(`/vehicles/${id}`)
+    .then(({data}) =>setAd(data))
+    .catch(() => navigate('/error'))
   }, []);
 
   const updateAd = useCallback(async (id: string, data: UpdateAdProps) => {

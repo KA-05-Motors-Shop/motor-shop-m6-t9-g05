@@ -24,14 +24,11 @@ const ProfileViewUser = () => {
   const { id } = useParams<{ id: string }>();
   const bgColor = randomColors();
 
-  const { getUsers, users, userAuth } = useUser();
-  
+  const { getUser, user, userAuth } = useUser();
 
   useEffect(() => {
-      getUsers()
+    if (id) getUser(id);
   }, []);
-
-  const user = users.find((user) => user.id === id)
 
   if (!user) {
     return <Loading bgColor={bgColor} />;
@@ -44,7 +41,7 @@ const ProfileViewUser = () => {
     ? user.vehicles.filter(({ type_of_vehicle }) => type_of_vehicle === "Carro")
     : [];
 
-  const initials = initalLetters(user.name)
+  const initials = initalLetters(user.name);
 
   document.title = `Profile | ${user.name}`;
 

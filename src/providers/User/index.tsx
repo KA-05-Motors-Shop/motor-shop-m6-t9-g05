@@ -139,12 +139,6 @@ export const UserProvider = ({ children }: Props) => {
   const [user, setUser] = useState<User>();
   const [users, setUsers] = useState<User[]>([]);
 
-  useEffect(() => {
-    if (userAuth.userId) {
-      getUser(userAuth.userId);
-    }
-  }, []);
-
   const navigate = useNavigate();
 
   const createUser = useCallback(async (data: CreateUserProps) => {
@@ -158,8 +152,10 @@ export const UserProvider = ({ children }: Props) => {
   }, []);
 
   const getUser = useCallback(async (id: string) => {
-    const { data } = await api.get(`/users/${id}`);
-    setUser(data);
+    await api.get(`/users/${id}`)
+    .then(({data}) => setUser(data))
+    .catch(() => navigate('/error'))
+    
   }, []);
 
   const getUsers = useCallback(async () => {
