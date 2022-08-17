@@ -22,6 +22,7 @@ import { useAds } from "../../providers/Ads";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Loading from "../../components/Loading";
+import EmptyList from "../../components/EmptyList";
 
 const Homepage = () => {
   document.title = "Home";
@@ -36,7 +37,7 @@ const Homepage = () => {
   }, []);
 
   if (!ads) {
-    return <Loading bgColor={bgColor}/>
+    return <Loading bgColor={bgColor} />;
   }
 
   const leilao = ads.filter(({ type_of_ad }) => type_of_ad === "Leilão");
@@ -120,12 +121,15 @@ const Homepage = () => {
         >
           {leilao.length > 0 ? (
             leilao.map((vehicle) => (
-              <SwiperSlide style={{ width: "100%", maxWidth: "500px" }} key={vehicle.id}>
-                <CardAuction vehicle={vehicle} key={vehicle.id}/>
+              <SwiperSlide
+                style={{ width: "100%", maxWidth: "500px" }}
+                key={vehicle.id}
+              >
+                <CardAuction vehicle={vehicle} key={vehicle.id} />
               </SwiperSlide>
             ))
           ) : (
-            <h1>teste</h1>
+            <EmptyList />
           )}
         </Swiper>
       </SectionLeilao>
@@ -159,12 +163,15 @@ const Homepage = () => {
         >
           {carros.length > 0 ? (
             carros.map((vehicle) => (
-              <SwiperSlide style={{ width: "100%", maxWidth: "400px" }} key={vehicle.id}>
-                <CardShowcase vehicle={vehicle} key={vehicle.id}/>
+              <SwiperSlide
+                style={{ width: "100%", maxWidth: "400px" }}
+                key={vehicle.id}
+              >
+                <CardShowcase vehicle={vehicle} key={vehicle.id} />
               </SwiperSlide>
             ))
           ) : (
-            <h1>teste</h1>
+            <EmptyList />
           )}
         </Swiper>
       </SectionVehicles>
@@ -198,12 +205,15 @@ const Homepage = () => {
         >
           {motos.length > 0 ? (
             motos.map((vehicle) => (
-              <SwiperSlide style={{ width: "100%", maxWidth: "400px" }} key={vehicle.id}>
-                <CardShowcase vehicle={vehicle} key={vehicle.id}/>
+              <SwiperSlide
+                style={{ width: "100%", maxWidth: "400px" }}
+                key={vehicle.id}
+              >
+                <CardShowcase vehicle={vehicle} key={vehicle.id} />
               </SwiperSlide>
             ))
           ) : (
-            <h1>teste</h1>
+            <EmptyList />
           )}
         </Swiper>
       </SectionVehicles>
