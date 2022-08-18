@@ -130,7 +130,7 @@ const ProfileViewAdmin = () => {
           {leilao.length > 0 ? (
             leilao.map((vehicle) => (
               <SwiperSlide
-                style={{ width: "100%", maxWidth: "400px" }}
+                style={{ width: "100%", maxWidth: "500px" }}
                 key={vehicle.title}
               >
                 <CardAuction

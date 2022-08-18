@@ -19,6 +19,7 @@ import { useParams } from "react-router-dom";
 import Header from "../../components/Header";
 import Loading from "../../components/Loading";
 import { initalLetters } from "../../utils/initialLetters";
+import EmptyList from "../../components/EmptyList";
 
 const ProfileViewUser = () => {
   const { id } = useParams<{ id: string }>();
@@ -88,14 +89,18 @@ const ProfileViewUser = () => {
             },
           }}
         >
-          {carros.map((vehicle) => (
-            <SwiperSlide
-              style={{ width: "100%", maxWidth: "400px" }}
-              key={vehicle.title}
-            >
-              <CardShowcase vehicle={vehicle} key={vehicle.title} />
-            </SwiperSlide>
-          ))}
+          {carros.length > 0 ? (
+            carros.map((vehicle) => (
+              <SwiperSlide
+                style={{ width: "100%", maxWidth: "400px" }}
+                key={vehicle.title}
+              >
+                <CardShowcase vehicle={vehicle} key={vehicle.title} />
+              </SwiperSlide>
+            ))
+          ) : (
+            <EmptyList />
+          )}
         </Swiper>
       </SectionVehicles>
 
@@ -126,14 +131,18 @@ const ProfileViewUser = () => {
             },
           }}
         >
-          {motos.map((vehicle) => (
-            <SwiperSlide
-              style={{ width: "100%", maxWidth: "400px" }}
-              key={vehicle.title}
-            >
-              <CardShowcase vehicle={vehicle} key={vehicle.title} />
-            </SwiperSlide>
-          ))}
+          {motos.length > 0 ? (
+            motos.map((vehicle) => (
+              <SwiperSlide
+                style={{ width: "100%", maxWidth: "400px" }}
+                key={vehicle.title}
+              >
+                <CardShowcase vehicle={vehicle} key={vehicle.title} />
+              </SwiperSlide>
+            ))
+          ) : (
+            <EmptyList />
+          )}
         </Swiper>
       </SectionVehicles>
 

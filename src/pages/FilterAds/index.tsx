@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CardAuction from "../../components/Cards/CardAuction";
 import CardShowcase from "../../components/Cards/CardShowcase";
+import EmptyList from "../../components/EmptyList";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HeaderAdmin from "../../components/HeaderAdmin";
@@ -57,7 +58,7 @@ const FilterAd = () => {
                 ))
               )
             ) : (
-              <> teste</>
+              <EmptyList />
             )}
           </DivSection>
         </Section>
