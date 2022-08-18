@@ -12,9 +12,9 @@ export const registerSchema = yup.object().shape({
   description: yup.string().max(500).required("Description is required"),
   address: yup.object({
     cep: yup.string().required("CEP is required"),
-    state: yup.string().required("State is required"),
-    city: yup.string().required("City is required"),
-    street: yup.string().required("Street is required"),
+    state: yup.string(),
+    city: yup.string(),
+    street: yup.string(),
     number: yup.string().required("Number is required"),
     complement: yup.string(),
   }),

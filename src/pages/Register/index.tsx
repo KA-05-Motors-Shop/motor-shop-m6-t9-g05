@@ -51,11 +51,11 @@ interface Address {
 }
 
 const Register = () => {
-  document.title = 'Register'
+  document.title = "Register";
 
   const { getAddress, address } = useCep();
   const { createUser } = useUser();
-  const {Switch, openSucessModal} = useModal()
+  const { Switch, openSucessModal } = useModal();
 
   const {
     register,
@@ -65,6 +65,21 @@ const Register = () => {
   } = useForm<RegisterProps>({
     resolver: yupResolver(registerSchema),
   });
+
+  const setValues = () => {
+    setValue("address.street", address.logradouro, {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+    setValue("address.city", address.localidade, {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+    setValue("address.state", address.uf, {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+  };
 
   const onSubmit = async (data: RegisterProps) => {
     delete data.confirm_password;
@@ -146,6 +161,7 @@ const Register = () => {
                   if (e.key === "Enter") {
                     e.preventDefault();
                     getAddress(e.target.value);
+                    setValues();
                   }
                 }}
               />
@@ -153,14 +169,14 @@ const Register = () => {
                 <Input
                   label="Estado"
                   placeholder="Digite o estado"
+                  defaultValue={address.uf}
                   {...register("address.state")}
-                  value={address.uf}
                   error={errors.address?.state?.message}
                 />
                 <Input
                   label="Cidade"
                   placeholder="Digite a cidade"
-                  value={address.localidade}
+                  defaultValue={address.localidade}
                   {...register("address.city")}
                   error={errors.address?.city?.message}
                 />
@@ -168,7 +184,7 @@ const Register = () => {
               <Input
                 label="Rua"
                 placeholder="Digite a rua"
-                value={address.logradouro}
+                defaultValue={address.logradouro}
                 {...register("address.street")}
                 error={errors.address?.street?.message}
               />
@@ -252,7 +268,7 @@ const Register = () => {
           </Form>
         </DivForm>
       </Container>
-        {openSucessModal && <ModalSucess modalLogin />}
+      {openSucessModal && <ModalSucess modalLogin />}
       <Footer />
     </>
   );
