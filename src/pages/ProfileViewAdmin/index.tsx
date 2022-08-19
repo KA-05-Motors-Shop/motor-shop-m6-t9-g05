@@ -27,6 +27,7 @@ import ModalDelete from "../../components/Modals/ModalDelete";
 import { useUser } from "../../providers/User";
 import Loading from "../../components/Loading";
 import EmptyList from "../../components/EmptyList";
+import { calculateDate } from "../../utils/calculateDate";
 
 const ProfileViewAdmin = () => {
   const {
@@ -39,7 +40,13 @@ const ProfileViewAdmin = () => {
 
   const [vehicle_id, setVehicleId] = useState<string>("");
 
-  const { getUser, user, userAuth } = useUser();
+  const { getUser, user, userAuth, logout } = useUser();
+  const days = calculateDate(userAuth.loggedIn);
+
+  if (days === 3) {
+    logout();
+    return;
+  }
 
   const bgColor = randomColors();
 

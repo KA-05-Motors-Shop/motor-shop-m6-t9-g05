@@ -13,6 +13,7 @@ import {
   Inactive,
 } from "./styles";
 import { useModal } from "../../../providers/Modal";
+import { useNavigate } from "react-router-dom";
 
 interface Comments {
   id: string;
@@ -55,10 +56,11 @@ interface CardProps {
 
 const CardAuction = ({ vehicle, setVehicleId, isUser = true }: CardProps) => {
   const { Switch } = useModal();
+  const navigate = useNavigate()
 
   return (
     <Container>
-      <DivImg>
+      <DivImg onClick={() => navigate(`/vehicle/${vehicle.id}`)}>
         <img src={vehicle.cover_image} alt={vehicle.title} />
       </DivImg>
       <DivHour>

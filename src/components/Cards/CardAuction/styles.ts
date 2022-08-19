@@ -23,6 +23,7 @@ export const DivImg = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 
   > img {
     width: 250px;

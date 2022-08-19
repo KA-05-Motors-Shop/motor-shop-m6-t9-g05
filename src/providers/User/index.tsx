@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 import toast from "react-hot-toast";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import { scrollToTop } from "../../utils/scrollToTop";
 import { useModal } from "../Modal";
@@ -19,6 +19,7 @@ interface Props {
 interface UserAuth {
   userId: string;
   token: string;
+  loggedIn: string
 }
 
 interface CreateUserProps {
@@ -120,6 +121,7 @@ interface UserContextData {
   deleteUser: (id: string) => Promise<void>;
   login: (data: LoginProps) => Promise<void>;
   logout: () => void;
+  endSession: () => void
 }
 
 const UserContext = createContext<UserContextData>({} as UserContextData);
@@ -197,8 +199,8 @@ export const UserProvider = ({ children }: Props) => {
     await api
       .post("/login", data)
       .then((res) => {
-        localStorage.setItem("@UserAuth", JSON.stringify(res.data));
-        setUserAuth(res.data);
+        localStorage.setItem("@UserAuth", JSON.stringify({...res.data, loggedIn: new Date()}));
+        setUserAuth({...res.data, loggedIn: new Date()});
         toast.success("Login efetuado");
         navigate("/profile_admin");
       })
@@ -213,6 +215,11 @@ export const UserProvider = ({ children }: Props) => {
     navigate("/");
   }, []);
 
+  const endSession = useCallback(() => {
+    localStorage.clear()
+    setUserAuth({} as UserAuth);
+  },[])
+
   return (
     <UserContext.Provider
       value={{
@@ -224,6 +231,7 @@ export const UserProvider = ({ children }: Props) => {
         updateUser,
         login,
         logout,
+        endSession,
         user,
         userAuth,
         users,

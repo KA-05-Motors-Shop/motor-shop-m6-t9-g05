@@ -17,20 +17,27 @@ import HeaderAdmin from "../../components/HeaderAdmin";
 import { randomColors } from "../../utils/randomColors";
 import { useUser } from "../../providers/User";
 import { useAds } from "../../providers/Ads";
-import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Loading from "../../components/Loading";
 import EmptyList from "../../components/EmptyList";
+import { calculateDate } from "../../utils/calculateDate";
+import toast from "react-hot-toast";
 
 const Homepage = () => {
   document.title = "Home";
-  const { userAuth } = useUser();
+  const { userAuth, endSession } = useUser();
   const bgColor = randomColors();
-  const history = useNavigate();
+  const days = calculateDate(userAuth.loggedIn);
 
   const { ads, getAds } = useAds();
 
   useEffect(() => {
+    if (days === 3) {
+      endSession();
+      toast.error("Sua sessão expirou, faça login novamente!!");
+      return;
+    }
+
     getAds();
   }, []);
 

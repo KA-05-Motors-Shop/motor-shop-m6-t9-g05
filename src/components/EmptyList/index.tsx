@@ -6,7 +6,7 @@ interface EmptyListProps {
 
 const EmptyList = ({ admin = false }: EmptyListProps) => {
   return (
-    <Container>Nenhum item {admin ? "registrado" : "disponível"}</Container>
+    <Container>Nenhum veiculo {admin ? "registrado" : "disponível"}</Container>
   );
 };
 
