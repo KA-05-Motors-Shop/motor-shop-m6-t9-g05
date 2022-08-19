@@ -14,6 +14,8 @@ import { List, X } from "phosphor-react";
 import { useUser } from "../../providers/User";
 import { useNavigate } from "react-router-dom";
 import { initalLetters } from "../../utils/initialLetters";
+import { useModal } from "../../providers/Modal";
+import { scrollToTop } from "../../utils/scrollToTop";
 
 interface HeaderProps {
   bgColor: string;
@@ -26,13 +28,16 @@ const HeaderAdmin = ({ bgColor }: HeaderProps) => {
 
   const handleNavLinks = () => setIsActive(!isActive);
   const history = useNavigate();
-  
+
   useEffect(() => {
-    getUsers()
-  },[])
-  const user = users.find(({id}) => id === userAuth.userId)
-  const initials = initalLetters(user?.name)
-  
+    getUsers();
+  }, []);
+
+  const user = users.find(({ id }) => id === userAuth.userId);
+  const initials = initalLetters(user?.name);
+
+  const { Switch } = useModal();
+
   return (
     <ContainerHeader>
       <Container>
@@ -68,7 +73,9 @@ const HeaderAdmin = ({ bgColor }: HeaderProps) => {
                 <button>Editar endereço</button>
               </li>
               <li>
-                <button>Editar perfil</button>
+                <button onClick={() => Switch("ModalEditProfile")}>
+                  Editar perfil
+                </button>
               </li>
               <li>
                 <button>Minhas compras</button>
@@ -93,7 +100,9 @@ const HeaderAdmin = ({ bgColor }: HeaderProps) => {
           </DivName>
           <span>{user?.name && user.name}</span>
           <DropMenu isOpen={isOpen}>
-            <button>Editar perfil</button>
+            <button onClick={() => Switch("ModalEditProfile")}>
+              Editar perfil
+            </button>
             <button>Editar endereço</button>
             <button>Minhas compras</button>
             <button onClick={logout}>Sair</button>

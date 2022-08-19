@@ -28,6 +28,7 @@ import { useUser } from "../../providers/User";
 import Loading from "../../components/Loading";
 import EmptyList from "../../components/EmptyList";
 import { calculateDate } from "../../utils/calculateDate";
+import EditProfile from "../../components/Modals/ModalEditProfile";
 
 const ProfileViewAdmin = () => {
   const {
@@ -36,6 +37,7 @@ const ProfileViewAdmin = () => {
     openSucessModal,
     openEditAdModal,
     openDeleteModal,
+    openEditProfileModal,
   } = useModal();
 
   const [vehicle_id, setVehicleId] = useState<string>("");
@@ -54,11 +56,21 @@ const ProfileViewAdmin = () => {
     openCreateAdModal && scrollToTop();
     openEditAdModal && scrollToTop();
     document.body.style.overflowY =
-      openCreateAdModal || openSucessModal || openEditAdModal || openDeleteModal
+      openCreateAdModal ||
+      openSucessModal ||
+      openEditAdModal ||
+      openDeleteModal ||
+      openEditProfileModal
         ? "hidden"
         : "scroll";
     getUser(userAuth.userId);
-  }, [openCreateAdModal, openSucessModal, openEditAdModal, openDeleteModal]);
+  }, [
+    openCreateAdModal,
+    openSucessModal,
+    openEditAdModal,
+    openDeleteModal,
+    openEditProfileModal,
+  ]);
 
   if (!user) {
     return <Loading bgColor={bgColor} />;
@@ -253,6 +265,7 @@ const ProfileViewAdmin = () => {
       {openSucessModal && <ModalSucess />}
       {openEditAdModal && <EditAd vehicle_id={vehicle_id} />}
       {openDeleteModal && <ModalDelete vehicle_id={vehicle_id} />}
+      {openEditProfileModal && <EditProfile {...user} />}
     </Container>
   );
 };
