@@ -4,11 +4,16 @@ import Router from "./routes";
 const App = () => {
   return (
     <>
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          style: {
+            fontFamily: "Inter, sans-serif",
+          },
+        }}
+      />
       <Router />
     </>
-  )
-
+  );
 };
 
 export default App;

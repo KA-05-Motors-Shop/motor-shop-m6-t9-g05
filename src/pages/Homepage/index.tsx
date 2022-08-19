@@ -35,7 +35,6 @@ const Homepage = () => {
     if (days === 3) {
       endSession();
       toast.error("Sua sessão expirou, faça login novamente!!");
-      return;
     }
 
     getAds();
