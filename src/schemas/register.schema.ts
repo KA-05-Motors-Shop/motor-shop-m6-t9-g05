@@ -18,10 +18,10 @@ export const registerSchema = yup.object().shape({
     number: yup.string().required("Number is required"),
     complement: yup.string(),
   }),
-  account_type: yup.string().required('This field is required'),
+  account_type: yup.string().required("This field is required"),
   password: yup.string().required("Password is required"),
   confirm_password: yup
     .string()
     .oneOf([yup.ref("password")], "Different passwords")
-    .required("This field is required"),
+    .required("Confirmation is required"),
 });

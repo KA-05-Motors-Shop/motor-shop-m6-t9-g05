@@ -8,8 +8,9 @@ export const updateProfileSchema = yup.object().shape({
   birth_date: yup.string(),
   description: yup.string().max(500),
   account_type: yup.string(),
-  password: yup.string(),
+  password: yup.string().required("Password is required"),
   confirm_password: yup
     .string()
-    .oneOf([yup.ref("password")], "Different passwords"),
+    .oneOf([yup.ref("password")], "Different passwords")
+    .required("Confirmation is required"),
 });

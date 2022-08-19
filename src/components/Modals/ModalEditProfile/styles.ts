@@ -63,54 +63,6 @@ export const DivTitle = styled.div`
   }
 `;
 
-export const DivTypeAd = styled.div`
-  width: 95%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 1rem;
-
-  > label {
-    font-family: "Lexend", sans-serif;
-    font-size: 0.875rem;
-    color: ${({ theme }) => theme.colors.grey0};
-    font-weight: ${({ theme }) => theme.fonts.fontWeight500};
-  }
-
-  > div {
-    margin-top: 1rem;
-    width: 100%;
-    display: flex;
-
-    > button:first-child {
-      margin-right: 10px;
-    }
-  }
-`;
-
-export const DivTypeVehicle = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-
-  > label {
-    font-family: "Lexend", sans-serif;
-    font-size: 0.875rem;
-    color: ${({ theme }) => theme.colors.grey0};
-    font-weight: ${({ theme }) => theme.fonts.fontWeight500};
-  }
-
-  > div {
-    margin-top: 1rem;
-    width: 100%;
-    display: flex;
-
-    > button:first-child {
-      margin-right: 10px;
-    }
-  }
-`;
-
 export const DivInfos = styled.div`
   width: 95%;
   height: 100%;
@@ -119,31 +71,20 @@ export const DivInfos = styled.div`
   justify-content: space-between;
   margin-top: 1rem;
 
+  > div {
+    margin-top: 1rem;
+  }
+
   > label {
     font-family: "Lexend", sans-serif;
     font-size: 0.875rem;
     color: ${({ theme }) => theme.colors.grey0};
     font-weight: ${({ theme }) => theme.fonts.fontWeight500};
+    margin-top: 1rem;
 
     :first-child {
       margin-bottom: 1rem;
     }
-  }
-
-  div:nth-child(7) {
-    margin-bottom: 1rem;
-  }
-`;
-
-export const Details = styled.div`
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 1rem;
-
-  @media screen and (min-width: 768px) {
-    flex-wrap: nowrap;
   }
 `;
 
@@ -158,8 +99,6 @@ export const DivFooter = styled.div`
     margin-bottom: 1rem;
 
     > button {
-      width: 50%;
-
       :first-child {
         margin-right: 10px;
       }
@@ -167,10 +106,6 @@ export const DivFooter = styled.div`
 
     @media screen and (min-width: 768px) {
       justify-content: flex-end;
-
-      > button:nth-child(1) {
-        width: 70%;
-      }
     }
   }
 `;
@@ -213,47 +148,5 @@ export const TextArea = styled.textarea`
   ::placeholder {
     font-family: "Inter", sans-serif;
     font-size: 0.9rem;
-  }
-`;
-
-export const DivButton = styled.div`
-  margin-top: 1rem;
-
-  > button {
-    width: 100%;
-  }
-`;
-
-export const DivExtraInputs = styled.div`
-  div:first-child {
-    margin-top: 1rem;
-  }
-
-  div + div {
-    margin-top: 1rem;
-  }
-`;
-
-export const DivPublished = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-
-  > label {
-    font-family: "Lexend", sans-serif;
-    font-size: 0.875rem;
-    color: ${({ theme }) => theme.colors.grey0};
-    font-weight: ${({ theme }) => theme.fonts.fontWeight500};
-  }
-
-  > div {
-    margin-top: 1rem;
-    width: 100%;
-    display: flex;
-
-    > button:first-child {
-      margin-right: 10px;
-    }
   }
 `;

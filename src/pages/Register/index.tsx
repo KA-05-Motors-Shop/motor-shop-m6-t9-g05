@@ -192,7 +192,7 @@ const Register = () => {
               <DivNumber>
                 <Input
                   label="Número"
-                  placeholder="Digiar numero"
+                  placeholder="Digitar numero"
                   {...register("address.number")}
                   error={errors.address?.number?.message}
                 />
