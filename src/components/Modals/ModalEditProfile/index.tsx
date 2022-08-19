@@ -22,26 +22,20 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { updateAdSchema } from "../../../schemas/updateAd.schema";
 import { getOnlyPastValues } from "../../../utils/onlyPastValues";
 import { useAds } from "../../../providers/Ads";
+import { useUser } from "../../../providers/User";
+import { updateProfileSchema } from "../../../schemas/updateProfile.schema";
 
-interface EditAdProps {
-  title?: string;
-  type_of_ad?: string;
-  year?: number;
-  km?: number;
-  price?: number;
+interface EditProfileProps {
+  name?: string;
+  email?: string;
+  cel?: string;
+  birth_date?: string;
   description?: string;
-  type_of_vehicle?: string;
-  cover_image?: string;
-  gallery_image?: string;
-  gallery_image2?: string;
-  gallery_image3?: string;
-  gallery_image4?: string;
-  gallery_image5?: string;
-  gallery_image6?: string;
-  published?: boolean | string;
+  account_type?: string;
+  password?: string;
+  confirm_password?: string;
 }
 
 interface User {
@@ -58,20 +52,23 @@ interface User {
 const EditProfile = (user: User) => {
   console.log(user);
 
-  // const { Switch, openEditAdModal } = useModal();
+  const { Switch, openEditProfileModal } = useModal();
   // const [count, setCount] = useState(2);
   // const [extraInputs, setShowExtraInputs] = useState<number[]>([]);
   // const { getOneAd, ad, updateAd } = useAds();
+  const { getUser, updateUser } = useUser();
 
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  //   reset,
-  //   setValue,
-  // } = useForm<EditAdProps>({
-  //   resolver: yupResolver(updateAdSchema),
-  // });
+  const [isShown, setIsSHown] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    setValue,
+  } = useForm<EditProfileProps>({
+    resolver: yupResolver(updateProfileSchema),
+  });
 
   // const renderInputs = () => {
   //   setCount(count + 1);
@@ -81,257 +78,181 @@ const EditProfile = (user: User) => {
   //   }
   // };
 
-  // useEffect(() => {
-  //   getOneAd(user_id);
-  // }, []);
+  useEffect(() => {
+    getUser(user.id);
+  }, []);
 
   // if (!ad) {
   //   return <h1>teste</h1>;
   // }
 
-  // const onSubmit = async (data: EditAdProps) => {
-  //   const newData = getOnlyPastValues(data);
-  //   await updateAd(ad.id, newData);
-  // };
+  const onSubmit = async (data: EditProfileProps) => {
+    // const newData = getOnlyPastValues(data);
+    await updateUser(user.id, data);
+  };
 
-  const hello = () => console.log("hello");
+  const togglePassword = () => {
+    setIsSHown((isShown) => !isShown);
+  };
+
   return (
-    <>
-      {hello}
-      <Container>ola</Container>
-    </>
-    // <Container isOpen={openEditAdModal}>
-    //   <ContainerForm>
-    //     <Form onSubmit={handleSubmit(onSubmit)}>
-    //       <DivTitle>
-    //         <span>Criar anuncio</span>
-    //         <button onClick={() => Switch("ModalEditAd")} type="button">
-    //           <X size={20} weight="bold" />
-    //         </button>
-    //       </DivTitle>
-    //       <DivTypeAd>
-    //         <label>Tipo de anuncio</label>
-    //         <div>
-    //           <Button
-    //             width={235}
-    //             height={45}
-    //             type="button"
-    //             onClick={() =>
-    //               setValue("type_of_ad", "Venda", {
-    //                 shouldValidate: true,
-    //                 shouldDirty: true,
-    //               })
-    //             }
-    //           >
-    //             Venda
-    //           </Button>
-    //           <Button
-    //             width={235}
-    //             height={45}
-    //             bgcolor={theme.colors.whiteFixed}
-    //             color={theme.colors.grey0}
-    //             borderColor={theme.colors.grey4}
-    //             type="button"
-    //             onClick={() =>
-    //               setValue("type_of_ad", "Leilão", {
-    //                 shouldValidate: true,
-    //                 shouldDirty: true,
-    //               })
-    //             }
-    //           >
-    //             Leilão
-    //           </Button>
-    //         </div>
-    //       </DivTypeAd>
-    //       <DivInfos>
-    //         <label>Informações do veiculo</label>
-    //         <Input
-    //           label="Titulo"
-    //           width={100}
-    //           placeholder="Digitar titulo"
-    //           defaultValue={ad.title}
-    //           {...register("title")}
-    //           error={errors.title?.message}
-    //         />
-    //         <Details>
-    //           <Input
-    //             label="Ano"
-    //             width={100}
-    //             placeholder="Digitar ano"
-    //             type="number"
-    //             defaultValue={ad.year}
-    //             {...register("year")}
-    //             error={errors.year?.message}
-    //           />
-    //           <Input
-    //             label="Quilometragem"
-    //             width={100}
-    //             placeholder="0"
-    //             type="number"
-    //             defaultValue={ad.km}
-    //             {...register("km")}
-    //             error={errors.km?.message}
-    //           />
-    //           <Input
-    //             label="Preço"
-    //             width={100}
-    //             placeholder="Digitar preço"
-    //             type="number"
-    //             defaultValue={ad.price}
-    //             {...register("price")}
-    //             error={errors.price?.message}
-    //           />
-    //         </Details>
-    //         <ContainerText>
-    //           <label>
-    //             Descrição{" "}
-    //             {!!errors.description && (
-    //               <span> - {errors.description?.message}</span>
-    //             )}{" "}
-    //           </label>
-    //           <TextArea
-    //             placeholder="Digitar descrição"
-    //             defaultValue={ad.description}
-    //             {...register("description")}
-    //           />
-    //         </ContainerText>
-    //         <DivTypeVehicle>
-    //           <label>Tipo de Veiculo</label>
-    //           <div>
-    //             <Button
-    //               width={235}
-    //               height={45}
-    //               type="button"
-    //               onClick={() =>
-    //                 setValue("type_of_vehicle", "Carro", {
-    //                   shouldValidate: true,
-    //                   shouldDirty: true,
-    //                 })
-    //               }
-    //             >
-    //               Carro
-    //             </Button>
-    //             <Button
-    //               width={235}
-    //               height={45}
-    //               bgcolor={theme.colors.whiteFixed}
-    //               color={theme.colors.grey0}
-    //               borderColor={theme.colors.grey4}
-    //               type="button"
-    //               onClick={() =>
-    //                 setValue("type_of_vehicle", "Moto", {
-    //                   shouldValidate: true,
-    //                   shouldDirty: true,
-    //                 })
-    //               }
-    //             >
-    //               Moto
-    //             </Button>
-    //           </div>
-    //         </DivTypeVehicle>
-    //         <DivPublished>
-    //           <label>Publicado</label>
-    //           <div>
-    //             <Button
-    //               width={235}
-    //               height={45}
-    //               type="button"
-    //               bgcolor={theme.colors.whiteFixed}
-    //               color={theme.colors.grey0}
-    //               borderColor={theme.colors.grey4}
-    //               onClick={() =>
-    //                 setValue("published", "true", {
-    //                   shouldValidate: true,
-    //                   shouldDirty: true,
-    //                 })
-    //               }
-    //             >
-    //               Sim
-    //             </Button>
-    //             <Button
-    //               width={235}
-    //               height={45}
-    //               type="button"
-    //               onClick={() =>
-    //                 setValue("published", "false", {
-    //                   shouldValidate: false,
-    //                   shouldDirty: false,
-    //                 })
-    //               }
-    //             >
-    //               Não
-    //             </Button>
-    //           </div>
-    //         </DivPublished>
-    //         <Input
-    //           label="Imagem de capa"
-    //           width={100}
-    //           placeholder="Inserir URL da imagem"
-    //           defaultValue={ad.cover_image}
-    //           {...register("cover_image")}
-    //           error={errors.cover_image?.message}
-    //         />
-    //         <Input
-    //           label="1° Imagem da galeria"
-    //           width={100}
-    //           placeholder="Inserir URL da imagem"
-    //           defaultValue={ad.gallery_image}
-    //           {...register("gallery_image")}
-    //           error={errors.gallery_image?.message}
-    //         />
-    //         <DivExtraInputs>
-    //           {extraInputs.map((num) => (
-    //             <Input
-    //               key={num}
-    //               label={`${num}° Imagem da galeria`}
-    //               width={100}
-    //               placeholder="Inserir URL da imagem"
-    //               {...register(`gallery_image${num}` as "gallery_image2")}
-    //               error={errors.gallery_image2?.message}
-    //             />
-    //           ))}
-    //         </DivExtraInputs>
-    //         <DivButton>
-    //           <Button
-    //             bgcolor={theme.colors.brand4}
-    //             color={theme.colors.brand1}
-    //             height={40}
-    //             type="button"
-    //             onClick={renderInputs}
-    //           >
-    //             Adicionar campo para imagem da galeria
-    //           </Button>
-    //         </DivButton>
+    <Container isOpen={openEditProfileModal}>
+      <ContainerForm>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <DivTitle>
+            <span>Editar perfil</span>
+            <button onClick={() => Switch("ModalEditProfile")} type="button">
+              <X size={20} weight="bold" />
+            </button>
+          </DivTitle>
 
-    //         <DivFooter>
-    //           <div>
-    //             <Button
-    //               width={262}
-    //               height={45}
-    //               bgcolor={theme.colors.grey6}
-    //               color={theme.colors.grey0}
-    //               type="button"
-    //               onClick={() => {
-    //                 Switch("ModalEditAd");
-    //                 Switch("ModalDelete");
-    //               }}
-    //             >
-    //               Excluir anuncio
-    //             </Button>
-    //             <Button
-    //               width={193}
-    //               height={45}
-    //               bgcolor={theme.colors.brand3}
-    //               type="submit"
-    //             >
-    //               Salvar alterações
-    //             </Button>
-    //           </div>
-    //         </DivFooter>
-    //       </DivInfos>
-    //     </Form>
-    //   </ContainerForm>
-    // </Container>
+          <DivInfos>
+            <label>Informações do usuário</label>
+            <Input
+              label="Nome"
+              width={100}
+              placeholder="Digitar nome"
+              defaultValue={user.name}
+              {...register("name")}
+              error={errors.name?.message}
+            />
+            <Input
+              label="E-mail"
+              width={100}
+              placeholder="Digitar e-mail"
+              defaultValue={user.email}
+              {...register("email")}
+              error={errors.email?.message}
+            />
+            <Details>
+              <Input
+                label="CPF"
+                width={100}
+                defaultValue={user.cpf}
+                disabled={true}
+              />
+              <Input
+                label="Celular"
+                width={100}
+                placeholder="Digitar celular"
+                defaultValue={user.cel}
+                {...register("cel")}
+                error={errors.cel?.message}
+              />
+              <Input
+                label="Nascimento"
+                width={100}
+                placeholder="0"
+                defaultValue={user.birth_date}
+                {...register("birth_date")}
+                error={errors.birth_date?.message}
+              />
+            </Details>
+            <ContainerText>
+              <label>
+                Descrição{" "}
+                {!!errors.description && (
+                  <span> - {errors.description?.message}</span>
+                )}{" "}
+              </label>
+              <TextArea
+                placeholder="Digitar descrição"
+                defaultValue={user.description}
+                {...register("description")}
+              />
+            </ContainerText>
+            <DivTypeVehicle>
+              <label>Tipo de Conta</label>
+              <div>
+                <Button
+                  width={235}
+                  height={45}
+                  type="button"
+                  onClick={() =>
+                    setValue("account_type", "Comprador", {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                    })
+                  }
+                >
+                  Comprador
+                </Button>
+                <Button
+                  width={235}
+                  height={45}
+                  bgcolor={theme.colors.whiteFixed}
+                  color={theme.colors.grey0}
+                  borderColor={theme.colors.grey4}
+                  type="button"
+                  onClick={() =>
+                    setValue("account_type", "Anunciante", {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                    })
+                  }
+                >
+                  Anunciante
+                </Button>
+              </div>
+            </DivTypeVehicle>
+
+            <Details>
+              <Input
+                label="Senha"
+                width={100}
+                type={isShown ? "text" : "password"}
+                placeholder="Digitar senha"
+                {...register("password")}
+                error={errors.password?.message}
+              />
+              <Input
+                label="Confirmar senha"
+                width={100}
+                type={isShown ? "text" : "password"}
+                placeholder="Confirmar senha"
+                {...register("confirm_password")}
+                error={errors.confirm_password?.message}
+              />
+            </Details>
+            <div className="checkbox-container">
+              <label htmlFor="checkbox">Mostrar senha</label>
+              <input
+                id="checkbox"
+                type="checkbox"
+                checked={isShown}
+                onChange={togglePassword}
+              />
+            </div>
+
+            <DivFooter>
+              <div>
+                <Button
+                  width={262}
+                  height={45}
+                  bgcolor={theme.colors.grey6}
+                  color={theme.colors.grey0}
+                  type="button"
+                  onClick={() => {
+                    Switch("ModalEditProfile");
+                    Switch("ModalDelete");
+                  }}
+                >
+                  Excluir usuário
+                </Button>
+                <Button
+                  width={193}
+                  height={45}
+                  bgcolor={theme.colors.brand3}
+                  type="submit"
+                >
+                  Salvar alterações
+                </Button>
+              </div>
+            </DivFooter>
+          </DivInfos>
+        </Form>
+      </ContainerForm>
+    </Container>
   );
 };
 
