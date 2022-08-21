@@ -45,7 +45,7 @@ const ProfileViewAdmin = () => {
   const { getUser, user, userAuth, logout } = useUser();
   const days = calculateDate(userAuth.loggedIn);
 
-  if (days === 3) {
+  if (days >= 3) {
     logout();
     return;
   }
