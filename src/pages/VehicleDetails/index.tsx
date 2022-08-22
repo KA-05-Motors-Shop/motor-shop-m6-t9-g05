@@ -83,8 +83,8 @@ const VehicleDetails = () => {
     reset();
   };
 
-  const initialsOwner = initalLetters(ad.owner.name)
-  const initiaslUser = initalLetters(user?.name)
+  const initialsOwner = initalLetters(ad.owner.name);
+  const initiaslUser = initalLetters(user?.name);
 
   document.title = `Detalhes | ${ad.title}`;
 
@@ -167,9 +167,7 @@ const VehicleDetails = () => {
               <div>{initialsOwner}</div>
               <span>{ad.owner.name}</span>
 
-              <p>
-               {ad.owner.description}
-              </p>
+              <p>{ad.owner.description}</p>
 
               <Button
                 width={206}
@@ -189,7 +187,7 @@ const VehicleDetails = () => {
 
             <Ul>
               {ad.comments.map((comment) => (
-                <Comments key={comment.id} {...comment} vehicle_id={ad.id}/>
+                <Comments key={comment.id} {...comment} vehicle_id={ad.id} />
               ))}
             </Ul>
           </DivComments>

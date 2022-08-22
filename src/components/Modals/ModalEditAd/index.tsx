@@ -25,6 +25,7 @@ import { useEffect, useState } from "react";
 import { updateAdSchema } from "../../../schemas/updateAd.schema";
 import { useAds } from "../../../providers/Ads";
 import EmptyList from "../../EmptyList";
+import { useUser } from "../../../providers/User";
 
 interface EditAdProps {
   title?: string;
@@ -52,7 +53,8 @@ const EditAd = ({ vehicle_id }: Props) => {
   const { Switch, openEditAdModal } = useModal();
   const [count, setCount] = useState(2);
   const [extraInputs, setShowExtraInputs] = useState<number[]>([]);
-  const { getOneAd, ad, updateAd } = useAds();
+  const { updateAd } = useAds();
+  const { user } = useUser();
 
   const {
     register,
@@ -71,9 +73,7 @@ const EditAd = ({ vehicle_id }: Props) => {
     }
   };
 
-  useEffect(() => {
-    getOneAd(vehicle_id);
-  }, []);
+  const ad = user?.vehicles.find((vehicle) => vehicle.id === vehicle_id);
 
   if (!ad) {
     return <EmptyList />;

@@ -73,6 +73,7 @@ interface Comments {
 }
 
 interface Vehicles {
+  id: string
   title: string;
   type_of_ad: string;
   year: number;
