@@ -29,6 +29,7 @@ import Loading from "../../components/Loading";
 import EmptyList from "../../components/EmptyList";
 import { calculateDate } from "../../utils/calculateDate";
 import EditProfile from "../../components/Modals/ModalEditProfile";
+import { initalLetters } from "../../utils/initialLetters";
 
 const ProfileViewAdmin = () => {
   const {
@@ -44,6 +45,7 @@ const ProfileViewAdmin = () => {
 
   const { getUser, user, userAuth, logout } = useUser();
   const days = calculateDate(userAuth.loggedIn);
+  const initials = initalLetters(user?.name)
 
   if (days >= 3) {
     logout();
@@ -96,7 +98,7 @@ const ProfileViewAdmin = () => {
         <DivUser>
           <Content bgColor={bgColor}>
             <div>
-              <span>SL</span>
+              <span>{initials}</span>
             </div>
             <SpanName>
               {user.name} <span>{user.account_type}</span>

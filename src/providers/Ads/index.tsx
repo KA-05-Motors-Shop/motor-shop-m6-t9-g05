@@ -48,13 +48,13 @@ interface UpdateAdProps {
   gallery_image4?: string;
   gallery_image5?: string;
   gallery_image6?: string;
-  published?: boolean
+  published?: boolean;
 }
 
 interface Comments {
   id: string;
   message: string;
-  created_at: string
+  created_at: string;
   owner: {
     id: string;
     name: string;
@@ -80,9 +80,11 @@ interface AdProps {
   owner: {
     id: string;
     name: string;
+    cel: string;
+    description: string;
   };
   comments: Comments[];
-  published: boolean
+  published: boolean;
 }
 
 interface AdsContextData {
@@ -104,7 +106,7 @@ export const AdsProvider = ({ children }: Props) => {
   const [ads, setAds] = useState<AdProps[]>();
   const [ad, setAd] = useState<AdProps>();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const createAd = useCallback(async (data: CreateAdProps) => {
     await api
@@ -115,8 +117,8 @@ export const AdsProvider = ({ children }: Props) => {
       })
       .then(() => {
         Switch("ModalCreateAd");
-        scrollToTop()
-        Switch('ModalSucess')
+        scrollToTop();
+        Switch("ModalSucess");
         getUser(userAuth.userId);
       })
       .catch((err) => console.log(err));
@@ -128,9 +130,10 @@ export const AdsProvider = ({ children }: Props) => {
   }, []);
 
   const getOneAd = useCallback(async (id: string) => {
-    await api.get(`/vehicles/${id}`)
-    .then(({data}) =>setAd(data))
-    .catch(() => navigate('/error'))
+    await api
+      .get(`/vehicles/${id}`)
+      .then(({ data }) => setAd(data))
+      .catch(() => navigate("/error"));
   }, []);
 
   const updateAd = useCallback(async (id: string, data: UpdateAdProps) => {
@@ -142,7 +145,7 @@ export const AdsProvider = ({ children }: Props) => {
       })
       .then(() => {
         toast.success("Informações atualizadas");
-        Switch('ModalEditAd')
+        Switch("ModalEditAd");
         getUser(userAuth.userId);
       })
       .catch((err) => console.log(err));

@@ -23,8 +23,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { updateAdSchema } from "../../../schemas/updateAd.schema";
-import { getOnlyPastValues } from "../../../utils/onlyPastValues";
 import { useAds } from "../../../providers/Ads";
+import EmptyList from "../../EmptyList";
 
 interface EditAdProps {
   title?: string;
@@ -41,7 +41,7 @@ interface EditAdProps {
   gallery_image4?: string;
   gallery_image5?: string;
   gallery_image6?: string;
-  published?: boolean | string;
+  published?: boolean;
 }
 
 interface Props {
@@ -58,7 +58,6 @@ const EditAd = ({ vehicle_id }: Props) => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
     setValue,
   } = useForm<EditAdProps>({
     resolver: yupResolver(updateAdSchema),
@@ -77,13 +76,12 @@ const EditAd = ({ vehicle_id }: Props) => {
   }, []);
 
   if (!ad) {
-    return (<h1>teste</h1>)
+    return <EmptyList />;
   }
 
-
   const onSubmit = async (data: EditAdProps) => {
-    const newData = getOnlyPastValues(data);
-    await updateAd(ad.id, newData)
+    await updateAd(ad.id, data);
+    Switch("ModalEditAd");
   };
 
   return (
@@ -227,7 +225,7 @@ const EditAd = ({ vehicle_id }: Props) => {
                   color={theme.colors.grey0}
                   borderColor={theme.colors.grey4}
                   onClick={() =>
-                    setValue("published", "true", {
+                    setValue("published", true, {
                       shouldValidate: true,
                       shouldDirty: true,
                     })
@@ -240,9 +238,9 @@ const EditAd = ({ vehicle_id }: Props) => {
                   height={45}
                   type="button"
                   onClick={() =>
-                    setValue("published", "false", {
-                      shouldValidate: false,
-                      shouldDirty: false,
+                    setValue("published", false, {
+                      shouldValidate: true,
+                      shouldDirty: true,
                     })
                   }
                 >

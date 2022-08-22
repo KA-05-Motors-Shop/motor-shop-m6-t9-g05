@@ -180,6 +180,7 @@ export const UserProvider = ({ children }: Props) => {
       await api
         .patch(`/users/${id}/address`, data)
         .then(() => {
+          Switch('ModalEditProfile')
           toast.success("Endereço atualizado");
           getUser(id);
         })

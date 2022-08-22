@@ -168,8 +168,7 @@ const VehicleDetails = () => {
               <span>{ad.owner.name}</span>
 
               <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's
+               {ad.owner.description}
               </p>
 
               <Button

@@ -39,7 +39,7 @@ interface User {
 
 const EditProfile = (user: User) => {
   const { Switch, openEditProfileModal } = useModal();
-  const { getUser, updateUser } = useUser();
+  const { updateUser } = useUser();
 
   const {
     register,
@@ -49,12 +49,9 @@ const EditProfile = (user: User) => {
     resolver: yupResolver(updateProfileSchema),
   });
 
-  useEffect(() => {
-    getUser(user.id);
-  }, []);
-
   const onSubmit = async (data: EditProfileProps) => {
     await updateUser(user.id, data);
+    Switch('ModalEditProfile')
   };
 
   return (

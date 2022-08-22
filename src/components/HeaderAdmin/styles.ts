@@ -112,6 +112,7 @@ export const ContainerRight = styled.div`
     display: flex;
     justify-content: space-around;
     padding-right: 1rem;
+    padding-left: 1rem;
     gap: 1rem;
     width: 180px;
     height: 100%;
@@ -125,6 +126,9 @@ export const ContainerRight = styled.div`
     font-family: "Inter", sans-serif;
     font-weight: ${({ theme }) => theme.fonts.fontWeight400};
     color: ${({ theme }) => theme.colors.grey2};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 
