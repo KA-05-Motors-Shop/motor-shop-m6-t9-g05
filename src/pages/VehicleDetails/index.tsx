@@ -95,6 +95,7 @@ const VehicleDetails = () => {
 
   const initialsOwner = initalLetters(ad.owner.name);
   const initiaslUser = initalLetters(user?.name);
+  const cel = ad.owner.cel.replace(/\D+/g, "");
 
   document.title = `Detalhes | ${ad.title}`;
 
@@ -121,9 +122,12 @@ const VehicleDetails = () => {
                   <span>R$ {ad.price}</span>
                 </div>
 
-                <Button color={theme.colors.whiteFixed} width={100} height={38}>
+                <a
+                  href={`https://api.whatsapp.com/send?phone=55${cel}&text=Ola! Me interessei no seu veiculo`}
+                  target="_blank"
+                >
                   Comprar
-                </Button>
+                </a>
               </DivFooter>
             </SectionDetails>
 
