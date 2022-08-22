@@ -138,6 +138,19 @@ export const DivFooter = styled.div`
     }
   }
 
+  > a {
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: ${({theme}) => theme.fonts.fontWeight500};
+    color: ${({theme}) => theme.colors.whiteFixed};
+    text-decoration: none;
+    background-color: ${({theme}) => theme.colors.brand1};
+    padding: 0.6rem;
+    width: 100px;
+    text-align: center;
+    border-radius: 5px;
+  }
+
   span {
     font-family: "Lexend", sans-serif;
     font-size: 1rem;
