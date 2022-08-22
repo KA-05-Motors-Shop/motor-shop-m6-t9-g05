@@ -170,6 +170,7 @@ const Register = () => {
                   label="Estado"
                   placeholder="Digite o estado"
                   defaultValue={address.uf}
+                  key={address.uf}
                   {...register("address.state")}
                   error={errors.address?.state?.message}
                 />
@@ -177,6 +178,7 @@ const Register = () => {
                   label="Cidade"
                   placeholder="Digite a cidade"
                   defaultValue={address.localidade}
+                  key={address.localidade}
                   {...register("address.city")}
                   error={errors.address?.city?.message}
                 />
@@ -185,6 +187,7 @@ const Register = () => {
                 label="Rua"
                 placeholder="Digite a rua"
                 defaultValue={address.logradouro}
+                key={address.logradouro}
                 {...register("address.street")}
                 error={errors.address?.street?.message}
               />
