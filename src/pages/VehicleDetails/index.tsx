@@ -1,7 +1,6 @@
 import Header from "../../components/Header";
 import HeaderAdmin from "../../components/HeaderAdmin";
 import { randomColors } from "../../utils/randomColors";
-import car from "../../assets/car1.png";
 import Button from "../../components/Button";
 import theme from "../../styles/theme";
 import Comments from "../../components/Comments";
@@ -32,9 +31,9 @@ import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAds } from "../../providers/Ads";
-import { useEffect } from "react";
-import { useUser } from "../../providers/User";
+import { AdProps, useAds } from "../../providers/Ads";
+import { useEffect, useState } from "react";
+import { User, useUser } from "../../providers/User";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { commentSchema } from "../../schemas/comment.schema";
@@ -49,9 +48,25 @@ interface CommentProps {
 const VehicleDetails = () => {
   const bgColor = randomColors();
   const { id } = useParams<{ id: string }>();
-  const { userAuth, getUser, user } = useUser();
-  const { ad, getOneAd } = useAds();
+  const { userAuth, getUser } = useUser();
+  const { getOneAd } = useAds();
   const { createComment } = useComment();
+  const [user, setUser] = useState<User>();
+  const [ad, setAd] = useState<AdProps>();
+
+  const fetchUser = async () => {
+    if (userAuth.userId) {
+      const res = await getUser(userAuth.userId);
+      setUser(res);
+    }
+  };
+
+  const fetchAd = async () => {
+    if (id) {
+      const res = await getOneAd(id);
+      setAd(res);
+    }
+  };
 
   const history = useNavigate();
 
@@ -65,13 +80,8 @@ const VehicleDetails = () => {
   });
 
   useEffect(() => {
-    if (id) {
-      getOneAd(id);
-    }
-
-    if (userAuth.userId) {
-      getUser(userAuth.userId);
-    }
+    fetchAd();
+    fetchUser();
   }, []);
 
   if (!ad) {

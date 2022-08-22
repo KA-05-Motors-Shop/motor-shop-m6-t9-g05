@@ -19,7 +19,7 @@ interface Props {
 interface UserAuth {
   userId: string;
   token: string;
-  loggedIn: string
+  loggedIn: string;
 }
 
 interface CreateUserProps {
@@ -73,7 +73,7 @@ interface Comments {
 }
 
 interface Vehicles {
-  id: string
+  id: string;
   title: string;
   type_of_ad: string;
   year: number;
@@ -92,7 +92,7 @@ interface Vehicles {
   comments: Comments[];
 }
 
-interface User {
+export interface User {
   id: string;
   name: string;
   email: string;
@@ -112,17 +112,16 @@ interface LoginProps {
 
 interface UserContextData {
   userAuth: UserAuth;
-  user?: User;
   users: User[];
   createUser: (data: CreateUserProps) => Promise<void>;
-  getUser: (id: string) => Promise<void>;
+  getUser: (id: string) => Promise<User>;
   getUsers: () => Promise<void>;
   updateUser: (id: string, data: UpdateUserProps) => Promise<void>;
   updateAddress: (id: string, data: UpdateAddressProps) => Promise<void>;
   deleteUser: (id: string) => Promise<void>;
   login: (data: LoginProps) => Promise<void>;
   logout: () => void;
-  endSession: () => void
+  endSession: () => void;
 }
 
 const UserContext = createContext<UserContextData>({} as UserContextData);
@@ -139,7 +138,6 @@ export const UserProvider = ({ children }: Props) => {
     return {} as UserAuth;
   });
 
-  const [user, setUser] = useState<User>();
   const [users, setUsers] = useState<User[]>([]);
 
   const navigate = useNavigate();
@@ -155,10 +153,13 @@ export const UserProvider = ({ children }: Props) => {
   }, []);
 
   const getUser = useCallback(async (id: string) => {
-    await api.get(`/users/${id}`)
-    .then(({data}) => setUser(data))
-    .catch(() => navigate('/error'))
-    
+    try {
+      const { data } = await api.get(`/users/${id}`);
+
+      return data;
+    } catch (error) {
+      navigate('/error')
+    }
   }, []);
 
   const getUsers = useCallback(async () => {
@@ -181,7 +182,7 @@ export const UserProvider = ({ children }: Props) => {
       await api
         .patch(`/users/${id}/address`, data)
         .then(() => {
-          Switch('ModalEditProfile')
+          Switch("ModalEditProfile");
           toast.success("Endereço atualizado");
           getUser(id);
         })
@@ -201,8 +202,11 @@ export const UserProvider = ({ children }: Props) => {
     await api
       .post("/login", data)
       .then((res) => {
-        localStorage.setItem("@UserAuth", JSON.stringify({...res.data, loggedIn: new Date()}));
-        setUserAuth({...res.data, loggedIn: new Date()});
+        localStorage.setItem(
+          "@UserAuth",
+          JSON.stringify({ ...res.data, loggedIn: new Date() })
+        );
+        setUserAuth({ ...res.data, loggedIn: new Date() });
         toast.success("Login efetuado");
         navigate("/profile_admin");
       })
@@ -218,9 +222,9 @@ export const UserProvider = ({ children }: Props) => {
   }, []);
 
   const endSession = useCallback(() => {
-    localStorage.clear()
+    localStorage.clear();
     setUserAuth({} as UserAuth);
-  },[])
+  }, []);
 
   return (
     <UserContext.Provider
@@ -234,7 +238,6 @@ export const UserProvider = ({ children }: Props) => {
         login,
         logout,
         endSession,
-        user,
         userAuth,
         users,
       }}

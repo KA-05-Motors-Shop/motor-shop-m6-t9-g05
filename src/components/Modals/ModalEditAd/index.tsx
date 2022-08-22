@@ -25,7 +25,7 @@ import { useEffect, useState } from "react";
 import { updateAdSchema } from "../../../schemas/updateAd.schema";
 import { useAds } from "../../../providers/Ads";
 import EmptyList from "../../EmptyList";
-import { useUser } from "../../../providers/User";
+import { User, useUser } from "../../../providers/User";
 
 interface EditAdProps {
   title?: string;
@@ -54,7 +54,15 @@ const EditAd = ({ vehicle_id }: Props) => {
   const [count, setCount] = useState(2);
   const [extraInputs, setShowExtraInputs] = useState<number[]>([]);
   const { updateAd } = useAds();
-  const { user } = useUser();
+  const { userAuth, getUser } = useUser();
+  const [user, setUser] = useState<User>();
+
+  const fetchUser = async () => {
+    if (userAuth.userId) {
+      const res = await getUser(userAuth.userId);
+      setUser(res);
+    }
+  };
 
   const {
     register,
@@ -72,6 +80,10 @@ const EditAd = ({ vehicle_id }: Props) => {
       setShowExtraInputs((prev) => [...prev, count]);
     }
   };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   const ad = user?.vehicles.find((vehicle) => vehicle.id === vehicle_id);
 

@@ -24,7 +24,7 @@ import ModalSucess from "../../components/Modals/ModalSucess";
 import { randomColors } from "../../utils/randomColors";
 import EditAd from "../../components/Modals/ModalEditAd";
 import ModalDelete from "../../components/Modals/ModalDelete";
-import { useUser } from "../../providers/User";
+import { User, useUser } from "../../providers/User";
 import Loading from "../../components/Loading";
 import EmptyList from "../../components/EmptyList";
 import { calculateDate } from "../../utils/calculateDate";
@@ -43,14 +43,22 @@ const ProfileViewAdmin = () => {
 
   const [vehicle_id, setVehicleId] = useState<string>("");
 
-  const { getUser, user, userAuth, logout } = useUser();
+  const { getUser, userAuth, logout } = useUser();
+  const [user, setUser] = useState<User>();
   const days = calculateDate(userAuth.loggedIn);
-  const initials = initalLetters(user?.name)
+  const initials = initalLetters(user?.name);
 
   if (days >= 3) {
     logout();
     return;
   }
+
+  const fetchUser = async () => {
+    if (userAuth.userId) {
+      const res = await getUser(userAuth.userId);
+      setUser(res);
+    }
+  };
 
   const bgColor = randomColors();
 
@@ -65,7 +73,7 @@ const ProfileViewAdmin = () => {
       openEditProfileModal
         ? "hidden"
         : "scroll";
-    getUser(userAuth.userId);
+    fetchUser();
   }, [
     openCreateAdModal,
     openSucessModal,
