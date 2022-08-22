@@ -102,10 +102,10 @@ const EditAddress = (user: User) => {
               defaultValue={user.address.cep}
               {...register("cep")}
               error={errors.cep?.message}
-              onKeyPress={(e) => {
+              onKeyPress={async (e) => {
                 if (e.key === "Enter") {
                   e.preventDefault();
-                  getAddress(e.target.value);
+                  await getAddress(e.target.value);
                   setValues();
                 }
               }}
@@ -115,7 +115,7 @@ const EditAddress = (user: User) => {
                 label="Estado"
                 width={100}
                 placeholder="Digitar estado"
-                defaultValue={address.uf}
+                defaultValue={address.uf ? address.uf : user.address.state}
                 {...register("state")}
                 error={errors.state?.message}
               />
@@ -123,7 +123,9 @@ const EditAddress = (user: User) => {
                 label="Cidade"
                 width={100}
                 placeholder="Digitar cidade"
-                defaultValue={address.localidade}
+                defaultValue={
+                  address.localidade ? address.localidade : user.address.city
+                }
                 {...register("city")}
                 error={errors.city?.message}
               />
@@ -132,7 +134,9 @@ const EditAddress = (user: User) => {
               label="Rua"
               width={100}
               placeholder="Digitar rua"
-              defaultValue={address.logradouro}
+              defaultValue={
+                address.logradouro ? address.logradouro : user.address.street
+              }
               {...register("street")}
               error={errors.street?.message}
             />
