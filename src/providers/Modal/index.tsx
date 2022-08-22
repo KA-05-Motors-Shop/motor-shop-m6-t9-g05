@@ -17,6 +17,7 @@ interface ModalContextData {
   openEditAdModal: boolean;
   openDeleteModal: boolean;
   openEditProfileModal: boolean;
+  openEditAddressModal: boolean;
   setStateModalCarImage: React.Dispatch<SetStateAction<boolean>>;
   Switch: (modal: string) => void;
 }
@@ -30,6 +31,8 @@ export const ModalProvider = ({ children }: ModalProps) => {
   const [openEditAdModal, setOpenEditAdModal] = useState<boolean>(false);
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openEditProfileModal, setOpenEditProfileModal] =
+    useState<boolean>(false);
+  const [openEditAddressModal, setOpenEditAddressModal] =
     useState<boolean>(false);
 
   const Switch = (modal: string) => {
@@ -58,6 +61,10 @@ export const ModalProvider = ({ children }: ModalProps) => {
         setOpenEditProfileModal(!openEditProfileModal);
         break;
       }
+      case "ModalEditAddress": {
+        setOpenEditAddressModal(!openEditAddressModal);
+        break;
+      }
 
       default: {
         break;
@@ -75,6 +82,7 @@ export const ModalProvider = ({ children }: ModalProps) => {
         openEditAdModal,
         openDeleteModal,
         openEditProfileModal,
+        openEditAddressModal,
         setStateModalCarImage,
       }}
     >
