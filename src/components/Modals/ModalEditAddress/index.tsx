@@ -105,7 +105,7 @@ const EditAddress = (user: User) => {
               register={register("cep")}
               error={errors.cep?.message}
               onKeyPress={(e) => {
-                if(e.key === 'Enter') {
+                if(e.key === "Enter" || e.key === "NumpadEnter") {
                   e.preventDefault()
                   getAddress(e.target.value)
                   setValues()

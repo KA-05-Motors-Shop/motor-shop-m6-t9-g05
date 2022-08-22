@@ -158,7 +158,7 @@ const Register = () => {
                 placeholder="Pressione enter para preencher automaticamente"
                 register={register("address.cep")}
                 onKeyPress={(e) => {
-                  if (e.key === "Enter") {
+                  if (e.key === "Enter" || e.key === "NumpadEnter") {
                     e.preventDefault();
                     getAddress(e.target.value);
                     setValues();
