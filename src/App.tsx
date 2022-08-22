@@ -1,23 +1,19 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import { Presentation } from "./style";
+import { Toaster } from "react-hot-toast";
+import Router from "./routes";
 
-function App() {
-  const [count, setCount] = useState(0);
-
+const App = () => {
   return (
-    <div className="App">
-      <Presentation>
-        <h1>
-          Template made by Marioto{" "}
-          <a href="https://github.com/henriquemarioto" target="_blank">
-            Paulo Marioto
-          </a>
-          &nbsp;♥
-        </h1>
-      </Presentation>
-    </div>
+    <>
+      <Toaster
+        toastOptions={{
+          style: {
+            fontFamily: "Inter, sans-serif",
+          },
+        }}
+      />
+      <Router />
+    </>
   );
-}
+};
 
 export default App;

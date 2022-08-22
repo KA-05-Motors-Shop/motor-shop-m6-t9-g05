@@ -24,6 +24,7 @@ export default createGlobalStyle`
         font-size: 100%;
         font: inherit;
         vertical-align: baseline;
+        scroll-behavior: smooth;
     }
     /* HTML5 display-role reset for older browsers */
     article, aside, details, figcaption, figure, 
@@ -48,4 +49,40 @@ export default createGlobalStyle`
         border-collapse: collapse;
         border-spacing: 0;
     }
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #5126EA #B0A6F0;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  width: 5px;
+  width: 5px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background-color: #B0A6F0;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: #B0A6F0;
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: #B0A6F0;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: #5126EA;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #4529E6;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: #4529E6;
+}
 `;
