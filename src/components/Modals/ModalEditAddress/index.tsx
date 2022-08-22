@@ -6,6 +6,7 @@ import { Input } from "../../Input";
 import {
   Container,
   ContainerForm,
+  Details,
   DivFooter,
   DivInfos,
   DivTitle,
@@ -109,22 +110,24 @@ const EditAddress = (user: User) => {
                 }
               }}
             />
-            <Input
-              label="Estado"
-              width={100}
-              placeholder="Digitar estado"
-              defaultValue={user.address.state}
-              {...register("state")}
-              error={errors.state?.message}
-            />
-            <Input
-              label="Cidade"
-              width={100}
-              placeholder="Digitar cidade"
-              defaultValue={user.address.city}
-              {...register("city")}
-              error={errors.city?.message}
-            />
+            <Details>
+              <Input
+                label="Estado"
+                width={100}
+                placeholder="Digitar estado"
+                defaultValue={user.address.state}
+                {...register("state")}
+                error={errors.state?.message}
+              />
+              <Input
+                label="Cidade"
+                width={100}
+                placeholder="Digitar cidade"
+                defaultValue={user.address.city}
+                {...register("city")}
+                error={errors.city?.message}
+              />
+            </Details>
             <Input
               label="Rua"
               width={100}
@@ -133,22 +136,24 @@ const EditAddress = (user: User) => {
               {...register("street")}
               error={errors.street?.message}
             />
-            <Input
-              label="Número"
-              width={100}
-              placeholder="Digitar número"
-              defaultValue={user.address.number}
-              {...register("number")}
-              error={errors.number?.message}
-            />
-            <Input
-              label="Complemento"
-              width={100}
-              placeholder="Digitar complemento"
-              defaultValue={user.address.complement}
-              {...register("complement")}
-              error={errors.complement?.message}
-            />
+            <Details>
+              <Input
+                label="Número"
+                width={100}
+                placeholder="Digitar número"
+                defaultValue={user.address.number}
+                {...register("number")}
+                error={errors.number?.message}
+              />
+              <Input
+                label="Complemento"
+                width={100}
+                placeholder="Digitar complemento"
+                defaultValue={user.address.complement}
+                {...register("complement")}
+                error={errors.complement?.message}
+              />
+            </Details>
             <DivFooter>
               <div>
                 <Button

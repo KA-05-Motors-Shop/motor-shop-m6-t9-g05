@@ -88,6 +88,18 @@ export const DivInfos = styled.div`
   }
 `;
 
+export const Details = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+
+  @media screen and (min-width: 768px) {
+    flex-wrap: nowrap;
+  }
+`;
+
 export const DivFooter = styled.div`
   width: 100%;
   display: block;
