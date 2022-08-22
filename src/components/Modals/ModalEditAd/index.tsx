@@ -23,9 +23,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { updateAdSchema } from "../../../schemas/updateAd.schema";
-import { useAds } from "../../../providers/Ads";
+import { AdProps, useAds } from "../../../providers/Ads";
 import EmptyList from "../../EmptyList";
-import { User, useUser } from "../../../providers/User";
+
 
 interface EditAdProps {
   title?: string;
@@ -53,15 +53,12 @@ const EditAd = ({ vehicle_id }: Props) => {
   const { Switch, openEditAdModal } = useModal();
   const [count, setCount] = useState(2);
   const [extraInputs, setShowExtraInputs] = useState<number[]>([]);
-  const { updateAd } = useAds();
-  const { userAuth, getUser } = useUser();
-  const [user, setUser] = useState<User>();
+  const { updateAd, getOneAd } = useAds();
+  const [ad, setAd] = useState<AdProps>();
 
-  const fetchUser = async () => {
-    if (userAuth.userId) {
-      const res = await getUser(userAuth.userId);
-      setUser(res);
-    }
+  const fetchAd = async () => {
+    const res = await getOneAd(vehicle_id);
+    setAd(res);
   };
 
   const {
@@ -82,10 +79,8 @@ const EditAd = ({ vehicle_id }: Props) => {
   };
 
   useEffect(() => {
-    fetchUser();
+    fetchAd();
   }, []);
-
-  const ad = user?.vehicles.find((vehicle) => vehicle.id === vehicle_id);
 
   if (!ad) {
     return <EmptyList />;
