@@ -46,8 +46,8 @@ interface User {
   address: Address;
 }
 
-const EditProfile = (user: User) => {
-  const { Switch, openEditProfileModal } = useModal();
+const EditAddress = (user: User) => {
+  const { Switch, openEditAddressModal } = useModal();
   const { updateAddress } = useUser();
   const { getAddress, address } = useCep();
 
@@ -81,7 +81,7 @@ const EditProfile = (user: User) => {
   };
 
   return (
-    <Container isOpen={openEditProfileModal}>
+    <Container isOpen={openEditAddressModal}>
       <ContainerForm>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <DivTitle>
@@ -178,4 +178,4 @@ const EditProfile = (user: User) => {
   );
 };
 
-export default EditProfile;
+export default EditAddress;

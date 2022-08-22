@@ -30,6 +30,7 @@ import EmptyList from "../../components/EmptyList";
 import { calculateDate } from "../../utils/calculateDate";
 import EditProfile from "../../components/Modals/ModalEditProfile";
 import { initalLetters } from "../../utils/initialLetters";
+import EditAddress from "../../components/Modals/ModalEditAddress";
 
 const ProfileViewAdmin = () => {
   const {
@@ -39,13 +40,14 @@ const ProfileViewAdmin = () => {
     openEditAdModal,
     openDeleteModal,
     openEditProfileModal,
+    openEditAddressModal,
   } = useModal();
 
   const [vehicle_id, setVehicleId] = useState<string>("");
 
   const { getUser, user, userAuth, logout } = useUser();
   const days = calculateDate(userAuth.loggedIn);
-  const initials = initalLetters(user?.name)
+  const initials = initalLetters(user?.name);
 
   if (days >= 3) {
     logout();
@@ -62,7 +64,8 @@ const ProfileViewAdmin = () => {
       openSucessModal ||
       openEditAdModal ||
       openDeleteModal ||
-      openEditProfileModal
+      openEditProfileModal ||
+      openEditAddressModal
         ? "hidden"
         : "scroll";
     getUser(userAuth.userId);
@@ -72,6 +75,7 @@ const ProfileViewAdmin = () => {
     openEditAdModal,
     openDeleteModal,
     openEditProfileModal,
+    openEditAddressModal,
   ]);
 
   if (!user) {
@@ -268,6 +272,7 @@ const ProfileViewAdmin = () => {
       {openEditAdModal && <EditAd vehicle_id={vehicle_id} />}
       {openDeleteModal && <ModalDelete vehicle_id={vehicle_id} />}
       {openEditProfileModal && <EditProfile {...user} />}
+      {openEditAddressModal && <EditAddress {...user} />}
     </Container>
   );
 };
