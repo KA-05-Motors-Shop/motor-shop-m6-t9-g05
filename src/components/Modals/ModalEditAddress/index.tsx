@@ -115,7 +115,7 @@ const EditAddress = (user: User) => {
                 label="Estado"
                 width={100}
                 placeholder="Digitar estado"
-                defaultValue={user.address.state}
+                defaultValue={address.uf}
                 {...register("state")}
                 error={errors.state?.message}
               />
@@ -123,7 +123,7 @@ const EditAddress = (user: User) => {
                 label="Cidade"
                 width={100}
                 placeholder="Digitar cidade"
-                defaultValue={user.address.city}
+                defaultValue={address.localidade}
                 {...register("city")}
                 error={errors.city?.message}
               />
@@ -132,7 +132,7 @@ const EditAddress = (user: User) => {
               label="Rua"
               width={100}
               placeholder="Digitar rua"
-              defaultValue={user.address.street}
+              defaultValue={address.logradouro}
               {...register("street")}
               error={errors.street?.message}
             />
