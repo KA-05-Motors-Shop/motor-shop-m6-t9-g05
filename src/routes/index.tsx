@@ -19,7 +19,7 @@ const Router = () => {
       <Route path="/vehicle/:id" element={<VehicleDetails />} />
       <Route path="/ads/filter/:type" element={<FilterAd />} />
       <Route path="/error" element={<PageError />}/>
-      <Route path="*" element={<Homepage />} />
+      <Route path="*" element={<PageError />} />
     </Routes>
   );
 };

@@ -216,9 +216,9 @@ export const UserProvider = ({ children }: Props) => {
   }, []);
 
   const logout = useCallback(() => {
+    navigate("/");
     localStorage.clear();
     setUserAuth({} as UserAuth);
-    navigate("/");
   }, []);
 
   const endSession = useCallback(() => {

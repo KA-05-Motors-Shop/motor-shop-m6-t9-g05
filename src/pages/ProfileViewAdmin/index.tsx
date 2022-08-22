@@ -31,6 +31,8 @@ import { calculateDate } from "../../utils/calculateDate";
 import EditProfile from "../../components/Modals/ModalEditProfile";
 import { initalLetters } from "../../utils/initialLetters";
 import EditAddress from "../../components/Modals/ModalEditAddress";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const ProfileViewAdmin = () => {
   const {
@@ -45,15 +47,12 @@ const ProfileViewAdmin = () => {
 
   const [vehicle_id, setVehicleId] = useState<string>("");
 
-  const { getUser, userAuth, logout } = useUser();
+  const { getUser, userAuth, endSession } = useUser();
   const [user, setUser] = useState<User>();
   const days = calculateDate(userAuth.loggedIn);
   const initials = initalLetters(user?.name);
 
-  if (days >= 3) {
-    logout();
-    return;
-  }
+  const navigate = useNavigate()
 
   const fetchUser = async () => {
     if (userAuth.userId) {
@@ -65,6 +64,12 @@ const ProfileViewAdmin = () => {
   const bgColor = randomColors();
 
   useEffect(() => {
+    if (days >= 3) {
+      navigate('/')
+      endSession()
+      toast.error('Sua sessão expirou, faça login novamente')
+    }
+
     openCreateAdModal && scrollToTop();
     openEditAdModal && scrollToTop();
     document.body.style.overflowY =

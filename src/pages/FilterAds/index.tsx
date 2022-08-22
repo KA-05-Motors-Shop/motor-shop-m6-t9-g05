@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CardAuction from "../../components/Cards/CardAuction";
 import CardShowcase from "../../components/Cards/CardShowcase";
 import EmptyList from "../../components/EmptyList";
@@ -16,6 +16,9 @@ const FilterAd = () => {
   const { type } = useParams<{ type: string }>();
   const { ads, getAds } = useAds();
   const { userAuth } = useUser();
+  const navigate = useNavigate()
+
+  if (!type) navigate('/')
 
   document.title = type
     ? `${type?.charAt(0).toUpperCase()}${type?.substring(1)}`
