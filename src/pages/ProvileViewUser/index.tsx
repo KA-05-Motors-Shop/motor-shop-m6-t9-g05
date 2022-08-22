@@ -9,12 +9,12 @@ import {
 } from "./styles";
 import HeaderAdmin from "../../components/HeaderAdmin";
 import CardShowcase from "../../components/Cards/CardShowcase";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Footer from "../../components/Footer";
 import { randomColors } from "../../utils/randomColors";
-import { useUser } from "../../providers/User";
+import { User, useUser } from "../../providers/User";
 import { useParams } from "react-router-dom";
 import Header from "../../components/Header";
 import Loading from "../../components/Loading";
@@ -24,11 +24,19 @@ import EmptyList from "../../components/EmptyList";
 const ProfileViewUser = () => {
   const { id } = useParams<{ id: string }>();
   const bgColor = randomColors();
+  const [user, setUser] = useState<User>();
 
-  const { getUser, user, userAuth } = useUser();
+  const { userAuth, getUser } = useUser();
+
+  const fetchUser = async () => {
+    if (id) {
+      const res = await getUser(id);
+      setUser(res);
+    }
+  };
 
   useEffect(() => {
-    if (id) getUser(id);
+    fetchUser();
   }, []);
 
   if (!user) {

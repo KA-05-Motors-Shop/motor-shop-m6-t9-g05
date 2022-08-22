@@ -17,6 +17,8 @@ import { useForm } from "react-hook-form";
 import { useUser } from "../../../providers/User";
 import { updateAddressSchema } from "../../../schemas/updateAddress.schema";
 import { useCep } from "../../../providers/CEP";
+import { useState } from "react";
+import { getOnlyPastValues } from "../../../utils/onlyPastValues";
 
 interface UpdateAddressProps {
   cep?: string;
@@ -62,7 +64,8 @@ const EditAddress = (user: User) => {
   });
 
   const onSubmit = async (data: UpdateAddressProps) => {
-    await updateAddress(user.id, data);
+    const newData = getOnlyPastValues(data)
+    await updateAddress(user.id, newData);
     Switch("ModalEditAddress");
   };
 
@@ -99,14 +102,13 @@ const EditAddress = (user: User) => {
               width={100}
               mask="99999-999"
               placeholder="Pressione enter para preencher automaticamente"
-              defaultValue={user.address.cep}
-              {...register("cep")}
+              register={register("cep")}
               error={errors.cep?.message}
-              onKeyPress={async (e) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  await getAddress(e.target.value);
-                  setValues();
+              onKeyPress={(e) => {
+                if(e.key === 'Enter') {
+                  e.preventDefault()
+                  getAddress(e.target.value)
+                  setValues()
                 }
               }}
             />
@@ -115,7 +117,6 @@ const EditAddress = (user: User) => {
                 label="Estado"
                 width={100}
                 placeholder="Digitar estado"
-                defaultValue={address.uf ? address.uf : user.address.state}
                 {...register("state")}
                 error={errors.state?.message}
               />
@@ -123,9 +124,6 @@ const EditAddress = (user: User) => {
                 label="Cidade"
                 width={100}
                 placeholder="Digitar cidade"
-                defaultValue={
-                  address.localidade ? address.localidade : user.address.city
-                }
                 {...register("city")}
                 error={errors.city?.message}
               />
@@ -134,9 +132,7 @@ const EditAddress = (user: User) => {
               label="Rua"
               width={100}
               placeholder="Digitar rua"
-              defaultValue={
-                address.logradouro ? address.logradouro : user.address.street
-              }
+
               {...register("street")}
               error={errors.street?.message}
             />

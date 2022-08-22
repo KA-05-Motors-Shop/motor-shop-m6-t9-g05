@@ -61,7 +61,7 @@ interface Comments {
   };
 }
 
-interface AdProps {
+export interface AdProps {
   id: string;
   title: string;
   type_of_ad: string;
@@ -89,10 +89,9 @@ interface AdProps {
 
 interface AdsContextData {
   ads?: AdProps[];
-  ad?: AdProps;
   createAd: (data: CreateAdProps) => Promise<void>;
   getAds: () => Promise<void>;
-  getOneAd: (id: string) => Promise<void>;
+  getOneAd: (id: string) => Promise<AdProps>;
   updateAd: (id: string, data: UpdateAdProps) => Promise<void>;
   deleteAd: (id: string) => Promise<void>;
 }
@@ -104,7 +103,6 @@ export const AdsProvider = ({ children }: Props) => {
   const { Switch } = useModal();
 
   const [ads, setAds] = useState<AdProps[]>();
-  const [ad, setAd] = useState<AdProps>();
 
   const navigate = useNavigate();
 
@@ -130,10 +128,13 @@ export const AdsProvider = ({ children }: Props) => {
   }, []);
 
   const getOneAd = useCallback(async (id: string) => {
-    await api
-      .get(`/vehicles/${id}`)
-      .then(({ data }) => setAd(data))
-      .catch(() => navigate("/error"));
+    try {
+      const { data } = await api.get(`/vehicles/${id}`);
+
+      return data;
+    } catch (error) {
+      navigate("/error");
+    }
   }, []);
 
   const updateAd = useCallback(async (id: string, data: UpdateAdProps) => {
@@ -167,7 +168,7 @@ export const AdsProvider = ({ children }: Props) => {
 
   return (
     <AdsContext.Provider
-      value={{ ad, ads, createAd, deleteAd, getAds, getOneAd, updateAd }}
+      value={{ ads, createAd, deleteAd, getAds, getOneAd, updateAd }}
     >
       {children}
     </AdsContext.Provider>

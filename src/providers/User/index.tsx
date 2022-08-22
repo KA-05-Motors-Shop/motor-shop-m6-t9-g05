@@ -72,6 +72,7 @@ interface Comments {
 }
 
 interface Vehicles {
+  id: string;
   title: string;
   type_of_ad: string;
   year: number;
@@ -90,7 +91,7 @@ interface Vehicles {
   comments: Comments[];
 }
 
-interface User {
+export interface User {
   id: string;
   name: string;
   email: string;
@@ -110,10 +111,9 @@ interface LoginProps {
 
 interface UserContextData {
   userAuth: UserAuth;
-  user?: User;
   users: User[];
   createUser: (data: CreateUserProps) => Promise<void>;
-  getUser: (id: string) => Promise<void>;
+  getUser: (id: string) => Promise<User>;
   getUsers: () => Promise<void>;
   updateUser: (id: string, data: UpdateUserProps) => Promise<void>;
   updateAddress: (id: string, data: UpdateAddressProps) => Promise<void>;
@@ -137,7 +137,6 @@ export const UserProvider = ({ children }: Props) => {
     return {} as UserAuth;
   });
 
-  const [user, setUser] = useState<User>();
   const [users, setUsers] = useState<User[]>([]);
 
   const navigate = useNavigate();
@@ -153,10 +152,13 @@ export const UserProvider = ({ children }: Props) => {
   }, []);
 
   const getUser = useCallback(async (id: string) => {
-    await api
-      .get(`/users/${id}`)
-      .then(({ data }) => setUser(data))
-      .catch(() => navigate("/error"));
+    try {
+      const { data } = await api.get(`/users/${id}`);
+
+      return data;
+    } catch (error) {
+      navigate('/error')
+    }
   }, []);
 
   const getUsers = useCallback(async () => {
@@ -168,6 +170,7 @@ export const UserProvider = ({ children }: Props) => {
     await api
       .patch(`/users/${id}`, data)
       .then(() => {
+        Switch("ModalEditProfile");
         toast.success("Informações atualizadas");
         getUser(id);
       })
@@ -179,7 +182,7 @@ export const UserProvider = ({ children }: Props) => {
       await api
         .patch(`/users/${id}/address`, data)
         .then(() => {
-          Switch("ModalEditProfile");
+          Switch("ModalEditAddress");
           toast.success("Endereço atualizado");
           getUser(id);
         })
@@ -235,7 +238,6 @@ export const UserProvider = ({ children }: Props) => {
         login,
         logout,
         endSession,
-        user,
         userAuth,
         users,
       }}
