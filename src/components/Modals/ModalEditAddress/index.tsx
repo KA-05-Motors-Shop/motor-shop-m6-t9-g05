@@ -15,6 +15,7 @@ import {
 } from "./styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import { useUser } from "../../../providers/User";
 import { updateProfileSchema } from "../../../schemas/updateProfile.schema";
 
@@ -50,7 +51,7 @@ const EditProfile = (user: User) => {
 
   const onSubmit = async (data: EditProfileProps) => {
     await updateUser(user.id, data);
-    Switch("ModalEditProfile");
+    Switch('ModalEditProfile')
   };
 
   return (
