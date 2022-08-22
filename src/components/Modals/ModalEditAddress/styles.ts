@@ -12,7 +12,7 @@ export const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 1;
+  z-index: 2;
   backdrop-filter: saturate(180%);
   -webkit-backdrop-filter: saturate(180%);
   background-color: rgba(17, 25, 40, 0.3);
