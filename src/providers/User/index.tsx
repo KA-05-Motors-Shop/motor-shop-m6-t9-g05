@@ -3,7 +3,6 @@ import {
   ReactNode,
   useCallback,
   useContext,
-  useEffect,
   useState,
 } from "react";
 import toast from "react-hot-toast";
@@ -19,7 +18,7 @@ interface Props {
 interface UserAuth {
   userId: string;
   token: string;
-  loggedIn: string
+  loggedIn: string;
 }
 
 interface CreateUserProps {
@@ -121,7 +120,7 @@ interface UserContextData {
   deleteUser: (id: string) => Promise<void>;
   login: (data: LoginProps) => Promise<void>;
   logout: () => void;
-  endSession: () => void
+  endSession: () => void;
 }
 
 const UserContext = createContext<UserContextData>({} as UserContextData);
@@ -154,10 +153,10 @@ export const UserProvider = ({ children }: Props) => {
   }, []);
 
   const getUser = useCallback(async (id: string) => {
-    await api.get(`/users/${id}`)
-    .then(({data}) => setUser(data))
-    .catch(() => navigate('/error'))
-    
+    await api
+      .get(`/users/${id}`)
+      .then(({ data }) => setUser(data))
+      .catch(() => navigate("/error"));
   }, []);
 
   const getUsers = useCallback(async () => {
@@ -180,7 +179,7 @@ export const UserProvider = ({ children }: Props) => {
       await api
         .patch(`/users/${id}/address`, data)
         .then(() => {
-          Switch('ModalEditProfile')
+          Switch("ModalEditProfile");
           toast.success("Endereço atualizado");
           getUser(id);
         })
@@ -200,8 +199,11 @@ export const UserProvider = ({ children }: Props) => {
     await api
       .post("/login", data)
       .then((res) => {
-        localStorage.setItem("@UserAuth", JSON.stringify({...res.data, loggedIn: new Date()}));
-        setUserAuth({...res.data, loggedIn: new Date()});
+        localStorage.setItem(
+          "@UserAuth",
+          JSON.stringify({ ...res.data, loggedIn: new Date() })
+        );
+        setUserAuth({ ...res.data, loggedIn: new Date() });
         toast.success("Login efetuado");
         navigate("/profile_admin");
       })
@@ -217,9 +219,9 @@ export const UserProvider = ({ children }: Props) => {
   }, []);
 
   const endSession = useCallback(() => {
-    localStorage.clear()
+    localStorage.clear();
     setUserAuth({} as UserAuth);
-  },[])
+  }, []);
 
   return (
     <UserContext.Provider

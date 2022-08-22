@@ -6,25 +6,33 @@ import { Input } from "../../Input";
 import {
   Container,
   ContainerForm,
-  ContainerText,
   DivFooter,
   DivInfos,
   DivTitle,
   Form,
-  TextArea,
 } from "./styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
 import { useUser } from "../../../providers/User";
-import { updateProfileSchema } from "../../../schemas/updateProfile.schema";
+import { updateAddressSchema } from "../../../schemas/updateAddress.schema";
+import { useCep } from "../../../providers/CEP";
 
-interface EditProfileProps {
-  name?: string;
-  email?: string;
-  cel?: string;
-  birth_date?: string;
-  description?: string;
+interface UpdateAddressProps {
+  cep?: string;
+  street?: string;
+  complement?: string;
+  city?: string;
+  state?: string;
+  number?: string;
+}
+
+interface Address {
+  cep: string;
+  street: string;
+  complement: string;
+  city: string;
+  state: string;
+  number: string;
 }
 
 interface User {
@@ -35,23 +43,41 @@ interface User {
   cel: string;
   birth_date: string;
   description: string;
+  address: Address;
 }
 
 const EditProfile = (user: User) => {
   const { Switch, openEditProfileModal } = useModal();
-  const { updateUser } = useUser();
+  const { updateAddress } = useUser();
+  const { getAddress, address } = useCep();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<EditProfileProps>({
-    resolver: yupResolver(updateProfileSchema),
+    setValue,
+  } = useForm<UpdateAddressProps>({
+    resolver: yupResolver(updateAddressSchema),
   });
 
-  const onSubmit = async (data: EditProfileProps) => {
-    await updateUser(user.id, data);
-    Switch('ModalEditProfile')
+  const onSubmit = async (data: UpdateAddressProps) => {
+    await updateAddress(user.id, data);
+    Switch("ModalEditAddress");
+  };
+
+  const setValues = () => {
+    setValue("street", address.logradouro, {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+    setValue("city", address.localidade, {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+    setValue("state", address.uf, {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
   };
 
   return (
@@ -59,68 +85,70 @@ const EditProfile = (user: User) => {
       <ContainerForm>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <DivTitle>
-            <span>Editar perfil</span>
-            <button onClick={() => Switch("ModalEditProfile")} type="button">
+            <span>Editar endereço</span>
+            <button onClick={() => Switch("ModalEditAddress")} type="button">
               <X size={20} weight="bold" />
             </button>
           </DivTitle>
 
           <DivInfos>
-            <label>Informações pessoais</label>
+            <label>Informações de endereço</label>
             <Input
-              label="Nome"
+              label="CEP"
               width={100}
-              placeholder="Digitar nome"
-              defaultValue={user.name}
-              {...register("name")}
-              error={errors.name?.message}
+              mask="99999-999"
+              placeholder="Pressione enter para preencher automaticamente"
+              defaultValue={user.address.cep}
+              {...register("cep")}
+              error={errors.cep?.message}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  getAddress(e.target.value);
+                  setValues();
+                }
+              }}
             />
             <Input
-              label="E-mail"
+              label="Estado"
               width={100}
-              placeholder="Digitar e-mail"
-              defaultValue={user.email}
-              {...register("email")}
-              error={errors.email?.message}
+              placeholder="Digitar estado"
+              defaultValue={user.address.state}
+              {...register("state")}
+              error={errors.state?.message}
             />
             <Input
-              label="CPF"
+              label="Cidade"
               width={100}
-              defaultValue={user.cpf}
-              disabled={true}
+              placeholder="Digitar cidade"
+              defaultValue={user.address.city}
+              {...register("city")}
+              error={errors.city?.message}
             />
             <Input
-              label="Celular"
+              label="Rua"
               width={100}
-              placeholder="Digitar celular"
-              mask="(99)99999-9999"
-              defaultValue={user.cel}
-              {...register("cel")}
-              error={errors.cel?.message}
+              placeholder="Digitar rua"
+              defaultValue={user.address.street}
+              {...register("street")}
+              error={errors.street?.message}
             />
             <Input
-              label="Nascimento"
+              label="Número"
               width={100}
-              placeholder="31/12/2000"
-              mask="99/99/9999"
-              defaultValue={user.birth_date}
-              {...register("birth_date")}
-              error={errors.birth_date?.message}
+              placeholder="Digitar número"
+              defaultValue={user.address.number}
+              {...register("number")}
+              error={errors.number?.message}
             />
-            <ContainerText>
-              <label>
-                Descrição{" "}
-                {!!errors.description && (
-                  <span> - {errors.description?.message}</span>
-                )}{" "}
-              </label>
-              <TextArea
-                placeholder="Digitar descrição"
-                defaultValue={user.description}
-                {...register("description")}
-              />
-            </ContainerText>
-
+            <Input
+              label="Complemento"
+              width={100}
+              placeholder="Digitar complemento"
+              defaultValue={user.address.complement}
+              {...register("complement")}
+              error={errors.complement?.message}
+            />
             <DivFooter>
               <div>
                 <Button
@@ -129,7 +157,7 @@ const EditProfile = (user: User) => {
                   bgcolor={theme.colors.grey6}
                   color={theme.colors.grey0}
                   type="button"
-                  onClick={() => Switch("ModalEditProfile")}
+                  onClick={() => Switch("ModalEditAddress")}
                 >
                   Cancelar
                 </Button>
