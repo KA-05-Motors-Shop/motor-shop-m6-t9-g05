@@ -3,7 +3,6 @@ import {
   ReactNode,
   useCallback,
   useContext,
-  useEffect,
   useState,
 } from "react";
 import toast from "react-hot-toast";
@@ -171,6 +170,7 @@ export const UserProvider = ({ children }: Props) => {
     await api
       .patch(`/users/${id}`, data)
       .then(() => {
+        Switch("ModalEditProfile");
         toast.success("Informações atualizadas");
         getUser(id);
       })
@@ -182,7 +182,7 @@ export const UserProvider = ({ children }: Props) => {
       await api
         .patch(`/users/${id}/address`, data)
         .then(() => {
-          Switch("ModalEditProfile");
+          Switch("ModalEditAddress");
           toast.success("Endereço atualizado");
           getUser(id);
         })

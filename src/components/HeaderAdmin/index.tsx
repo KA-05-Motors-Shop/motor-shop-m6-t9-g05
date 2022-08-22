@@ -15,7 +15,6 @@ import { useUser } from "../../providers/User";
 import { useNavigate } from "react-router-dom";
 import { initalLetters } from "../../utils/initialLetters";
 import { useModal } from "../../providers/Modal";
-import { scrollToTop } from "../../utils/scrollToTop";
 
 interface HeaderProps {
   bgColor: string;
@@ -70,7 +69,9 @@ const HeaderAdmin = ({ bgColor }: HeaderProps) => {
                 </button>
               </li>
               <li>
-                <button>Editar endereço</button>
+                <button onClick={() => Switch("ModalEditAddress")}>
+                  Editar endereço
+                </button>
               </li>
               <li>
                 <button onClick={() => Switch("ModalEditProfile")}>
@@ -103,7 +104,9 @@ const HeaderAdmin = ({ bgColor }: HeaderProps) => {
             <button onClick={() => Switch("ModalEditProfile")}>
               Editar perfil
             </button>
-            <button>Editar endereço</button>
+            <button onClick={() => Switch("ModalEditAddress")}>
+              Editar endereço
+            </button>
             <button>Minhas compras</button>
             <button onClick={logout}>Sair</button>
           </DropMenu>

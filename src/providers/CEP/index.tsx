@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, ReactNode, useContext, useState } from "react";
+import toast from "react-hot-toast";
 
 interface Props {
   children: ReactNode;
@@ -24,12 +25,11 @@ const CepContext = createContext<CepContextData>({} as CepContextData);
 export const CepProvider = ({ children }: Props) => {
   const [address, setAddress] = useState<Address>({} as Address);
 
-
   const getAddress = async (cep: string) => {
     await axios
       .get(`https://viacep.com.br/ws/${cep}/json/`)
       .then((res) => setAddress(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error('CEP invalido'));
   };
 
   return (
