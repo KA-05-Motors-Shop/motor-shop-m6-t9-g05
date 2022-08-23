@@ -94,7 +94,7 @@ const EditProfile = (user: User) => {
               placeholder="Digitar celular"
               mask="(99)99999-9999"
               defaultValue={user.cel}
-              {...register("cel")}
+              register={register("cel")}
               error={errors.cel?.message}
             />
             <Input
@@ -103,7 +103,7 @@ const EditProfile = (user: User) => {
               placeholder="31/12/2000"
               mask="99/99/9999"
               defaultValue={user.birth_date}
-              {...register("birth_date")}
+              register={register("birth_date")}
               error={errors.birth_date?.message}
             />
             <ContainerText>
