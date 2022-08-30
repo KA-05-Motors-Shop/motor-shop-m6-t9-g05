@@ -192,5 +192,6 @@ export const Div = styled.div`
 
   > button {
     width: 100%;
+    max-width: 361px;
   }
 `;

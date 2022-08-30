@@ -60,7 +60,7 @@ const Register = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     setValue,
   } = useForm<RegisterProps>({
     resolver: yupResolver(registerSchema),
@@ -264,7 +264,12 @@ const Register = () => {
             </DivPassword>
 
             <Div>
-              <Button height={38} type="submit">
+              <Button
+                height={38}
+                type="submit"
+                bgcolor={isValid ? theme.colors.brand1 : theme.colors.brand3}
+                disabled={isValid ? false : true}
+              >
                 Finalizar cadastro
               </Button>
             </Div>

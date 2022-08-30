@@ -90,6 +90,7 @@ const VehicleDetails = () => {
 
   const onSubmit = async (data: CommentProps) => {
     await createComment(ad.id, data);
+    await fetchAd();
     reset();
   };
 
