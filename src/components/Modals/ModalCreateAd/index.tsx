@@ -55,7 +55,7 @@ const CreateAd = () => {
     setValue,
   } = useForm<CreateAdProps>({
     resolver: yupResolver(createAdSchema),
-    mode: 'onBlur'
+    mode: "onBlur",
   });
 
   const renderInputs = () => {
@@ -67,9 +67,8 @@ const CreateAd = () => {
   };
 
   const onSubmit = async (data: CreateAdProps) => {
-    // await createAd(data);
-    
-    reset()
+    await createAd(data);
+    reset();
   };
 
   return (
