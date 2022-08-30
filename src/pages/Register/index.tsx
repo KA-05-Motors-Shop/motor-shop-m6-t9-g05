@@ -26,6 +26,7 @@ import {
   DivTitle,
   Form,
   Div,
+  Error,
 } from "./styles";
 
 interface RegisterProps {
@@ -64,6 +65,7 @@ const Register = () => {
     setValue,
   } = useForm<RegisterProps>({
     resolver: yupResolver(registerSchema),
+    mode: 'onBlur'
   });
 
   const setValues = () => {
@@ -139,7 +141,7 @@ const Register = () => {
                 <label>
                   Descrição{" "}
                   {!!errors.description && (
-                    <span> - {errors.description?.message}</span>
+                    <Error> - {errors.description?.message}</Error>
                   )}{" "}
                 </label>
                 <TextArea
