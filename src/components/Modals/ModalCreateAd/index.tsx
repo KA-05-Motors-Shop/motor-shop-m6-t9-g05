@@ -17,6 +17,7 @@ import {
   DivFooter,
   DivButton,
   DivExtraInputs,
+  Error,
 } from "./styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -85,7 +86,7 @@ const CreateAd = () => {
             <label>
               Tipo de anuncio{" "}
               {!!errors.type_of_ad && (
-                <span> - {errors.type_of_ad?.message}</span>
+                <Error> - {errors.type_of_ad?.message}</Error>
               )}{" "}
             </label>
             <div>
@@ -159,7 +160,7 @@ const CreateAd = () => {
               <label>
                 Descrição{" "}
                 {!!errors.description && (
-                  <span> - {errors.description?.message}</span>
+                  <Error> - {errors.description?.message}</Error>
                 )}{" "}
               </label>
               <TextArea
@@ -171,7 +172,7 @@ const CreateAd = () => {
               <label>
                 Tipo de Veiculo{" "}
                 {!!errors.type_of_vehicle && (
-                  <span> - {errors.type_of_vehicle?.message}</span>
+                  <Error> - {errors.type_of_vehicle?.message}</Error>
                 )}{" "}
               </label>
               <div>

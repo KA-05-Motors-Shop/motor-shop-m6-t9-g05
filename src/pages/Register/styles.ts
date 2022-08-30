@@ -6,8 +6,6 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  
 `;
 
 export const DivForm = styled.div`
@@ -194,4 +192,12 @@ export const Div = styled.div`
     width: 100%;
     max-width: 361px;
   }
+`;
+
+export const Error = styled.span`
+  font-size: 0.875rem;
+  font-weight: ${({ theme }) => theme.fonts.fontWeight500};
+  font-family: "Inter", sans-serif;
+  margin-bottom: 0.7rem;
+  color: ${({ theme }) => theme.colors.alert1};
 `;
