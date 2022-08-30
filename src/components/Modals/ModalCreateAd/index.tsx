@@ -50,11 +50,12 @@ const CreateAd = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     reset,
     setValue,
   } = useForm<CreateAdProps>({
     resolver: yupResolver(createAdSchema),
+    mode: 'onBlur'
   });
 
   const renderInputs = () => {
@@ -66,7 +67,8 @@ const CreateAd = () => {
   };
 
   const onSubmit = async (data: CreateAdProps) => {
-    await createAd(data);
+    // await createAd(data);
+    
     reset()
   };
 
@@ -258,7 +260,8 @@ const CreateAd = () => {
                 <Button
                   width={95}
                   height={45}
-                  bgcolor={theme.colors.brand3}
+                  bgcolor={isValid ? theme.colors.brand2 : theme.colors.brand3}
+                  disabled={isValid ? false : true}
                   type="submit"
                 >
                   Criar anuncio
