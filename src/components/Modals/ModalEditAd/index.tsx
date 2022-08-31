@@ -26,7 +26,6 @@ import { updateAdSchema } from "../../../schemas/updateAd.schema";
 import { AdProps, useAds } from "../../../providers/Ads";
 import EmptyList from "../../EmptyList";
 
-
 interface EditAdProps {
   title?: string;
   type_of_ad?: string;
@@ -66,6 +65,7 @@ const EditAd = ({ vehicle_id }: Props) => {
     handleSubmit,
     formState: { errors },
     setValue,
+    watch,
   } = useForm<EditAdProps>({
     resolver: yupResolver(updateAdSchema),
   });
@@ -107,6 +107,11 @@ const EditAd = ({ vehicle_id }: Props) => {
               <Button
                 width={235}
                 height={45}
+                bgcolor={
+                  watch("type_of_ad") === "Venda"
+                    ? theme.colors.brand3
+                    : theme.colors.brand1
+                }
                 type="button"
                 onClick={() =>
                   setValue("type_of_ad", "Venda", {
@@ -120,7 +125,11 @@ const EditAd = ({ vehicle_id }: Props) => {
               <Button
                 width={235}
                 height={45}
-                bgcolor={theme.colors.whiteFixed}
+                bgcolor={
+                  watch("type_of_ad") === "Leilão"
+                    ? theme.colors.grey4
+                    : theme.colors.whiteFixed
+                }
                 color={theme.colors.grey0}
                 borderColor={theme.colors.grey4}
                 type="button"
@@ -193,6 +202,11 @@ const EditAd = ({ vehicle_id }: Props) => {
                 <Button
                   width={235}
                   height={45}
+                  bgcolor={
+                    watch("type_of_vehicle") === "Carro"
+                      ? theme.colors.brand3
+                      : theme.colors.brand1
+                  }
                   type="button"
                   onClick={() =>
                     setValue("type_of_vehicle", "Carro", {
@@ -206,7 +220,11 @@ const EditAd = ({ vehicle_id }: Props) => {
                 <Button
                   width={235}
                   height={45}
-                  bgcolor={theme.colors.whiteFixed}
+                  bgcolor={
+                    watch("type_of_vehicle") === "Moto"
+                      ? theme.colors.grey4
+                      : theme.colors.whiteFixed
+                  }
                   color={theme.colors.grey0}
                   borderColor={theme.colors.grey4}
                   type="button"
@@ -228,7 +246,11 @@ const EditAd = ({ vehicle_id }: Props) => {
                   width={235}
                   height={45}
                   type="button"
-                  bgcolor={theme.colors.whiteFixed}
+                  bgcolor={
+                    watch("published")
+                      ? theme.colors.grey4
+                      : theme.colors.whiteFixed
+                  }
                   color={theme.colors.grey0}
                   borderColor={theme.colors.grey4}
                   onClick={() =>
@@ -243,6 +265,11 @@ const EditAd = ({ vehicle_id }: Props) => {
                 <Button
                   width={235}
                   height={45}
+                  bgcolor={
+                    !watch("published")
+                      ? theme.colors.brand3
+                      : theme.colors.brand1
+                  }
                   type="button"
                   onClick={() =>
                     setValue("published", false, {
