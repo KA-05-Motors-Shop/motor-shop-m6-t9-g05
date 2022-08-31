@@ -56,16 +56,17 @@ const Register = () => {
 
   const { getAddress, address } = useCep();
   const { createUser } = useUser();
-  const { Switch, openSucessModal } = useModal();
+  const { openSucessModal } = useModal();
 
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
     setValue,
+    watch,
   } = useForm<RegisterProps>({
     resolver: yupResolver(registerSchema),
-    mode: 'onBlur'
+    mode: "onBlur",
   });
 
   const setValues = () => {
@@ -220,6 +221,11 @@ const Register = () => {
               <div>
                 <Button
                   height={38}
+                  bgcolor={
+                    watch("account_type") === "Comprador"
+                      ? theme.colors.brand3
+                      : theme.colors.brand1
+                  }
                   type="button"
                   onClick={() =>
                     setValue("account_type", "Comprador", {
@@ -232,7 +238,11 @@ const Register = () => {
                 </Button>
                 <Button
                   height={38}
-                  bgcolor={theme.colors.whiteFixed}
+                  bgcolor={
+                    watch("account_type") === "Anunciante"
+                      ? theme.colors.grey4
+                      : theme.colors.whiteFixed
+                  }
                   color={theme.colors.grey0}
                   borderColor={theme.colors.grey4}
                   type="button"
