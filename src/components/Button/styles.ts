@@ -1,3 +1,4 @@
+import { darken } from "polished";
 import styled, { css } from "styled-components";
 
 interface ContainerProps {
@@ -41,4 +42,9 @@ export const ButtonContainer = styled.button<ContainerProps>`
       : css`
           font-size: 14px;
         `}
+
+  &:hover {
+    background-color: ${({ bgcolor, theme }) =>
+      bgcolor === "transparent" ? theme.colors.grey6 : darken(0.09, bgcolor!)};
+  }
 `;

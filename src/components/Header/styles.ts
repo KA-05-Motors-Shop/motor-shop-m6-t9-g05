@@ -83,7 +83,7 @@ export const ContainerLeft = styled.div<HeaderProps>`
       border: 1px solid ${({ theme }) => theme.colors.grey4};
       border-radius: 4px;
       cursor: pointer;
-      transition: 0.2s;
+      transition: 0.5s;
 
       :hover {
         background-color: ${({ theme }) => theme.colors.grey8};

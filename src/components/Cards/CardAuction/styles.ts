@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface Props {
+  bgColor?: string;
+}
+
 export const Container = styled.div`
   position: relative;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.29) 0%, #000000 100%);
@@ -145,3 +149,34 @@ export const Inactive = styled.span`
   font-weight: ${({ theme }) => theme.fonts.fontWeight600};
   color: ${({ theme }) => theme.colors.alert1};
 `;
+
+export const UserInfo = styled.div<Props>`
+  display: flex;
+  align-items: center;
+
+  > span {
+    font-size: 0.875rem;
+    font-family: "Inter", sans-serif;
+    font-weight: ${({ theme }) => theme.fonts.fontWeight500};
+    color: ${({ theme }) => theme.colors.whiteFixed};
+    margin-left: 0.5rem;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: ${({ bgColor }) => bgColor};
+
+    span {
+      font-size: 0.875rem;
+      font-family: "Inter", sans-serif;
+      font-weight: ${({ theme }) => theme.fonts.fontWeight500};
+      color: ${({ theme }) => theme.colors.whiteFixed};
+    }
+  }
+`;
+
