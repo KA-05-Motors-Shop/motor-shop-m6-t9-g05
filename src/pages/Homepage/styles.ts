@@ -87,12 +87,12 @@ export const DivButtons = styled.div`
 `;
 
 export const SectionLeilao = styled.section`
-  width: 95%;
+  width: 90%;
   margin-top: 3rem;
 `;
 
 export const SectionVehicles = styled.section`
-  width: 95%;
+  width: 90%;
   margin-top: 5rem;
   margin-bottom: 2rem;
 `;
