@@ -52,7 +52,7 @@ const ProfileViewAdmin = () => {
   const days = calculateDate(userAuth.loggedIn);
   const initials = initalLetters(user?.name);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const fetchUser = async () => {
     if (userAuth.userId) {
@@ -65,9 +65,9 @@ const ProfileViewAdmin = () => {
 
   useEffect(() => {
     if (days >= 3) {
-      navigate('/')
-      endSession()
-      toast.error('Sua sessão expirou, faça login novamente')
+      navigate("/");
+      endSession();
+      toast.error("Sua sessão expirou, faça login novamente");
     }
 
     openCreateAdModal && scrollToTop();

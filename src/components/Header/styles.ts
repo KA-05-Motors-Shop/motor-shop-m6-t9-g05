@@ -25,7 +25,7 @@ export const Container = styled.div`
 export const ContainerLeft = styled.div<HeaderProps>`
   display: flex;
   height: 100%;
-  padding: 0 1rem;
+  padding: 0 5%;
   justify-content: space-between;
   align-items: center;
 
@@ -97,7 +97,7 @@ export const ContainerLeft = styled.div<HeaderProps>`
 
   @media (min-width: 768px) {
     flex: 1; //max de espaço
-    padding: 0 1rem 0 3rem;
+    padding: 0 1rem 0 5%;
 
     svg {
       display: none;
@@ -115,7 +115,7 @@ export const ContainerRight = styled.div`
   @media (min-width: 768px) {
     display: flex;
     height: 100%;
-    padding: 0 3rem 0 1.375rem;
+    padding: 0 5% 0 1.375rem;
     align-items: center;
     border-left: 2px solid ${({ theme }) => theme.colors.grey6};
   }
