@@ -26,6 +26,11 @@ export const Container = styled.footer`
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    transition: 0.5s;
+
+    :hover {
+      background-color: ${({ theme }) => theme.colors.grey2};
+    }
 
     svg {
       color: #fff;
@@ -35,5 +40,14 @@ export const Container = styled.footer`
   @media screen and (min-width: 1024px) {
     height: 200px;
     flex-direction: row;
+    justify-content: space-between;
+
+    > img {
+      padding: 0 1rem 0 5%;
+    }
+
+    > button {
+      margin: 0 5% 0 1.375rem;
+    }
   }
 `;

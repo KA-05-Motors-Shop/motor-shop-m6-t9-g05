@@ -26,6 +26,7 @@ import {
   DivTitle,
   Form,
   Div,
+  Error,
 } from "./styles";
 
 interface RegisterProps {
@@ -55,15 +56,17 @@ const Register = () => {
 
   const { getAddress, address } = useCep();
   const { createUser } = useUser();
-  const { Switch, openSucessModal } = useModal();
+  const { openSucessModal } = useModal();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     setValue,
+    watch,
   } = useForm<RegisterProps>({
     resolver: yupResolver(registerSchema),
+    mode: "onBlur",
   });
 
   const setValues = () => {
@@ -139,7 +142,7 @@ const Register = () => {
                 <label>
                   Descrição{" "}
                   {!!errors.description && (
-                    <span> - {errors.description?.message}</span>
+                    <Error> - {errors.description?.message}</Error>
                   )}{" "}
                 </label>
                 <TextArea
@@ -218,6 +221,11 @@ const Register = () => {
               <div>
                 <Button
                   height={38}
+                  bgcolor={
+                    watch("account_type") === "Comprador"
+                      ? theme.colors.brand3
+                      : theme.colors.brand1
+                  }
                   type="button"
                   onClick={() =>
                     setValue("account_type", "Comprador", {
@@ -230,7 +238,11 @@ const Register = () => {
                 </Button>
                 <Button
                   height={38}
-                  bgcolor={theme.colors.whiteFixed}
+                  bgcolor={
+                    watch("account_type") === "Anunciante"
+                      ? theme.colors.grey4
+                      : theme.colors.whiteFixed
+                  }
                   color={theme.colors.grey0}
                   borderColor={theme.colors.grey4}
                   type="button"
@@ -264,7 +276,12 @@ const Register = () => {
             </DivPassword>
 
             <Div>
-              <Button height={38} type="submit">
+              <Button
+                height={38}
+                type="submit"
+                bgcolor={isValid ? theme.colors.brand1 : theme.colors.brand3}
+                disabled={isValid ? false : true}
+              >
                 Finalizar cadastro
               </Button>
             </Div>

@@ -63,3 +63,11 @@ export const Label = styled.label`
   font-family: "Inter", sans-serif;
   margin-bottom: 0.7rem;
 `;
+
+export const Error = styled.span`
+  font-size: 0.875rem;
+  font-weight: ${({ theme }) => theme.fonts.fontWeight500};
+  font-family: "Inter", sans-serif;
+  margin-bottom: 0.7rem;
+  color: ${({ theme }) => theme.colors.alert1};
+`;

@@ -17,6 +17,7 @@ import {
   DivFooter,
   DivButton,
   DivExtraInputs,
+  Error,
 } from "./styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -50,11 +51,13 @@ const CreateAd = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     reset,
     setValue,
+    watch,
   } = useForm<CreateAdProps>({
     resolver: yupResolver(createAdSchema),
+    mode: "onBlur",
   });
 
   const renderInputs = () => {
@@ -67,7 +70,7 @@ const CreateAd = () => {
 
   const onSubmit = async (data: CreateAdProps) => {
     await createAd(data);
-    reset()
+    reset();
   };
 
   return (
@@ -84,13 +87,18 @@ const CreateAd = () => {
             <label>
               Tipo de anuncio{" "}
               {!!errors.type_of_ad && (
-                <span> - {errors.type_of_ad?.message}</span>
+                <Error> - {errors.type_of_ad?.message}</Error>
               )}{" "}
             </label>
             <div>
               <Button
                 width={235}
                 height={45}
+                bgcolor={
+                  watch("type_of_ad") === "Venda"
+                    ? theme.colors.brand3
+                    : theme.colors.brand1
+                }
                 type="button"
                 onClick={() =>
                   setValue("type_of_ad", "Venda", {
@@ -104,7 +112,11 @@ const CreateAd = () => {
               <Button
                 width={235}
                 height={45}
-                bgcolor={theme.colors.whiteFixed}
+                bgcolor={
+                  watch("type_of_ad") === "Leilão"
+                    ? theme.colors.grey4
+                    : theme.colors.whiteFixed
+                }
                 color={theme.colors.grey0}
                 borderColor={theme.colors.grey4}
                 type="button"
@@ -158,7 +170,7 @@ const CreateAd = () => {
               <label>
                 Descrição{" "}
                 {!!errors.description && (
-                  <span> - {errors.description?.message}</span>
+                  <Error> - {errors.description?.message}</Error>
                 )}{" "}
               </label>
               <TextArea
@@ -170,7 +182,7 @@ const CreateAd = () => {
               <label>
                 Tipo de Veiculo{" "}
                 {!!errors.type_of_vehicle && (
-                  <span> - {errors.type_of_vehicle?.message}</span>
+                  <Error> - {errors.type_of_vehicle?.message}</Error>
                 )}{" "}
               </label>
               <div>
@@ -178,6 +190,11 @@ const CreateAd = () => {
                   width={235}
                   height={45}
                   type="button"
+                  bgcolor={
+                    watch("type_of_vehicle") === "Carro"
+                      ? theme.colors.brand3
+                      : theme.colors.brand1
+                  }
                   onClick={() =>
                     setValue("type_of_vehicle", "Carro", {
                       shouldValidate: true,
@@ -190,7 +207,11 @@ const CreateAd = () => {
                 <Button
                   width={235}
                   height={45}
-                  bgcolor={theme.colors.whiteFixed}
+                  bgcolor={
+                    watch("type_of_vehicle") === "Moto"
+                      ? theme.colors.grey4
+                      : theme.colors.whiteFixed
+                  }
                   color={theme.colors.grey0}
                   borderColor={theme.colors.grey4}
                   type="button"
@@ -258,7 +279,8 @@ const CreateAd = () => {
                 <Button
                   width={95}
                   height={45}
-                  bgcolor={theme.colors.brand3}
+                  bgcolor={isValid ? theme.colors.brand2 : theme.colors.brand3}
+                  disabled={isValid ? false : true}
                   type="submit"
                 >
                   Criar anuncio

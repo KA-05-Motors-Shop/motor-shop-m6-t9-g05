@@ -1,7 +1,6 @@
 import { Clock } from "phosphor-react";
 import theme from "../../../styles/theme";
 import Button from "../../Button";
-import car from "../../../assets/Photo.png";
 import {
   Container,
   DivButtons,
@@ -11,9 +10,12 @@ import {
   DivImg,
   Published,
   Inactive,
+  UserInfo,
 } from "./styles";
 import { useModal } from "../../../providers/Modal";
 import { useNavigate } from "react-router-dom";
+import { randomColors } from "../../../utils/randomColors";
+import { initalLetters } from "../../../utils/initialLetters";
 
 interface Comments {
   id: string;
@@ -56,7 +58,9 @@ interface CardProps {
 
 const CardAuction = ({ vehicle, setVehicleId, isUser = true }: CardProps) => {
   const { Switch } = useModal();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const bgColor = randomColors();
+  const initials = initalLetters(vehicle.owner?.name);
 
   return (
     <Container>
@@ -79,37 +83,49 @@ const CardAuction = ({ vehicle, setVehicleId, isUser = true }: CardProps) => {
         <span>R$ {vehicle.price}</span>
       </DivDetails>
 
-      <DivButtons>
-        <Button
-          width={130}
-          height={38}
-          color={theme.colors.whiteFixed}
-          bgcolor="transparent"
-          borderColor={theme.colors.whiteFixed}
-          onClick={() => {
-            setVehicleId(() => (vehicle.id ? vehicle.id : ""));
-            Switch("ModalEditAd");
-          }}
-        >
-          {" "}
-          Editar{" "}
-        </Button>
-        <Button
-          width={130}
-          height={38}
-          color={theme.colors.whiteFixed}
-          bgcolor="transparent"
-          borderColor={theme.colors.whiteFixed}
-        >
-          Ver como
-        </Button>
-        {!isUser &&
-          (vehicle.published ? (
-            <Published>Publicado</Published>
-          ) : (
-            <Inactive>Inativo</Inactive>
-          ))}
-      </DivButtons>
+      {isUser ? (
+        <DivButtons>
+          <UserInfo bgColor={bgColor}>
+            <div>
+              <span>{initials}</span>
+            </div>
+            <span>{vehicle.owner?.name}</span>
+          </UserInfo>
+        </DivButtons>
+      ) : (
+        <>
+          <DivButtons>
+            <Button
+              width={130}
+              height={38}
+              color={theme.colors.whiteFixed}
+              bgcolor="transparent"
+              borderColor={theme.colors.whiteFixed}
+              onClick={() => {
+                setVehicleId(() => (vehicle.id ? vehicle.id : ""));
+                Switch("ModalEditAd");
+              }}
+            >
+              {" "}
+              Editar{" "}
+            </Button>
+            <Button
+              width={130}
+              height={38}
+              color={theme.colors.whiteFixed}
+              bgcolor="transparent"
+              borderColor={theme.colors.whiteFixed}
+            >
+              Ver como
+            </Button>
+            {vehicle.published ? (
+              <Published>Publicado</Published>
+            ) : (
+              <Inactive>Inativo</Inactive>
+            )}
+          </DivButtons>
+        </>
+      )}
     </Container>
   );
 };

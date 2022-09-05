@@ -44,7 +44,7 @@ export const ContainerImage = styled.div`
   background-color: ${({ theme }) => theme.colors.grey7};
 
   img {
-    width: 262px;
+    height: 150px;
     filter: drop-shadow(5px 5px 3px #00000073);
     object-fit: cover;
     cursor: pointer;

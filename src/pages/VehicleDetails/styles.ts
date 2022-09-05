@@ -36,7 +36,7 @@ export const DivMain = styled.div`
     align-items: flex-start;
     justify-content: center;
     margin: 0 auto;
-    gap: 5rem;
+    gap: 8rem;
   }
 `;
 
@@ -395,7 +395,7 @@ export const Overlay = styled.div`
 
   @media screen and (min-width: 1024px) {
     display: block;
-    min-width: 400px;
+    min-width: 450px;
   }
 `;
 
@@ -412,5 +412,8 @@ export const DivSection = styled.div`
   max-width: 700px;
   background-color: ${({ theme }) => theme.colors.whiteFixed};
   border-radius: 5px;
-  padding: 8px;
+
+  > div {
+    padding: 0.5rem;
+  }
 `;

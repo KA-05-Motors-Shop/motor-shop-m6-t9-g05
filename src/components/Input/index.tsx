@@ -4,7 +4,7 @@ import {
   InputHTMLAttributes,
   useRef,
 } from "react";
-import { Container, InputContainer, Label } from "./styles";
+import { Container, InputContainer, Label, Error } from "./styles";
 import InputMask from "react-input-mask";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -25,7 +25,7 @@ const InputDefault: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
     return (
       <Container width={width}>
         <Label>
-          {label} {!!error && <span> - {error}</span>}{" "}
+          {label} {!!error && <Error> - {error}</Error>}{" "}
         </Label>
         <InputContainer>
           <input {...rest} ref={ref} />
@@ -37,7 +37,7 @@ const InputDefault: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   return (
     <Container width={width}>
       <Label>
-        {label} {!!error && <span> - {error}</span>}{" "}
+        {label} {!!error && <Error> - {error}</Error>}{" "}
       </Label>
       <InputContainer>
         <InputMask mask={mask} {...rest} inputRef={inputRef} {...register} autoComplete='off'/>

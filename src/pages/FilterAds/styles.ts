@@ -11,7 +11,7 @@ export const Main = styled.main`
 `;
 
 export const Section = styled.section`
-  width: 95%;
+  width: 90%;
   display: flex;
   flex-direction: column;
 `;
@@ -27,8 +27,7 @@ export const H2 = styled.h2`
 export const DivSection = styled.div<CardProps>`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 3rem;
+  gap: 5rem;  
 
   ${({ auction }) =>
     auction

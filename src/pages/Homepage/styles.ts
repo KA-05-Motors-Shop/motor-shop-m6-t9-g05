@@ -75,6 +75,12 @@ export const DivButtons = styled.div`
     margin: 0.5rem;
     width: 80%;
     border: 1px solid ${({ theme }) => theme.colors.whiteFixed};
+    transition: 0.5s;
+
+    :hover {
+      background-color: ${({ theme }) => theme.colors.brand3};
+      color: ${({ theme }) => theme.colors.brand1};
+    }
   }
 
   @media screen and (min-width: 768px) {
@@ -87,12 +93,12 @@ export const DivButtons = styled.div`
 `;
 
 export const SectionLeilao = styled.section`
-  width: 95%;
+  width: 90%;
   margin-top: 3rem;
 `;
 
 export const SectionVehicles = styled.section`
-  width: 95%;
+  width: 90%;
   margin-top: 5rem;
   margin-bottom: 2rem;
 `;
