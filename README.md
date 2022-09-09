@@ -46,3 +46,9 @@
 ```/profile_admin - Necessario estar logado```
 
 <img src="https://i.postimg.cc/QdjPRtjc/Captura-de-tela-de-2022-09-09-14-31-31.png"/>
+
+## Página individual dos automoveis
+```/ads/filter/carros | /ads/filter/motos | /ads/filter/leilao```
+
+<img src="https://i.postimg.cc/xd8mCWvc/Captura-de-tela-de-2022-09-09-14-38-02.png"/>
+
