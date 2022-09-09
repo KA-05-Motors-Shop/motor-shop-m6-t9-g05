@@ -37,17 +37,10 @@ interface VehicleProps {
   description: string;
   type_of_vehicle: string;
   cover_image: string;
-  gallery_image: string;
-  gallery_image2?: string;
-  gallery_image3?: string;
-  gallery_image4?: string;
-  gallery_image5?: string;
-  gallery_image6?: string;
   owner?: {
     id?: string;
     name?: string;
   };
-  comments?: Comments[];
   published: boolean | string;
 }
 
