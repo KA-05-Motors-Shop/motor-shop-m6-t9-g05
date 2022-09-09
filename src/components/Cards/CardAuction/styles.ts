@@ -8,6 +8,7 @@ export const Container = styled.div`
   position: relative;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.29) 0%, #000000 100%);
   width: 100%;
+  max-width: 520px;
   height: 350px;
   display: flex;
   flex-direction: column;
