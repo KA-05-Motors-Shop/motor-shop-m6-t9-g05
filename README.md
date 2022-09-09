@@ -43,6 +43,6 @@
 <img src="https://i.postimg.cc/tgxgw2q1/Captura-de-tela-de-2022-09-09-14-30-16.png"/>
 
 ## Página do perfil do usuario
-```/profile_admin```
+```/profile_admin - Necessario estar logado```
 
 <img src="https://i.postimg.cc/QdjPRtjc/Captura-de-tela-de-2022-09-09-14-31-31.png"/>
