@@ -6,7 +6,7 @@
 
 ## Documentação dos componentes
 
-<a href="https://631b7f13742c045d38ca59b5-agouylpfmm.chromatic.com/?path=/story/button-button--primary"> Visitar Storybook </a>
+<a href="https://631b7f13742c045d38ca59b5-agouylpfmm.chromatic.com/?path=/story/button-button--primary" target="blank"> Visitar Storybook </a>
 
 ## Tecnologias utilizadas
 
