@@ -17,15 +17,6 @@ import { useNavigate } from "react-router-dom";
 import { randomColors } from "../../../utils/randomColors";
 import { initalLetters } from "../../../utils/initialLetters";
 
-interface Comments {
-  id: string;
-  message: string;
-  owner: {
-    id: string;
-    name: string;
-  };
-}
-
 interface VehicleProps {
   id?: string;
   title: string;
@@ -36,17 +27,10 @@ interface VehicleProps {
   description: string;
   type_of_vehicle: string;
   cover_image: string;
-  gallery_image: string;
-  gallery_image2?: string;
-  gallery_image3?: string;
-  gallery_image4?: string;
-  gallery_image5?: string;
-  gallery_image6?: string;
   owner?: {
     id?: string;
     name?: string;
   };
-  comments?: Comments[];
   published?: boolean;
 }
 

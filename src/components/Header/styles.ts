@@ -8,6 +8,7 @@ export const Header = styled.header`
   width: 100%;
   height: 80px;
   background-color: ${({ theme }) => theme.colors.grey10};
+  position: relative;
 `;
 
 export const Container = styled.div`
@@ -43,7 +44,9 @@ export const ContainerLeft = styled.div<HeaderProps>`
     width: 100%;
     position: absolute;
     border-top: 1px solid ${({ theme }) => theme.colors.grey6};
-    margin: 440px 0 0 -1rem;
+    top: 80px;
+    left: 0;
+    z-index: 1;
     -webkit-box-shadow: 0px 13px 31px -7px rgba(0, 0, 0, 0.19);
     box-shadow: 0px 13px 31px -7px rgba(0, 0, 0, 0.19);
 
