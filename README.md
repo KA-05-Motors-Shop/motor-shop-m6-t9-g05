@@ -4,6 +4,10 @@
 
 - Site para vendas e leilões de automoveis
 
+## Documentação dos componentes
+
+<a href="https://631b7f13742c045d38ca59b5-agouylpfmm.chromatic.com/?path=/story/button-button--primary"> https://631b7f13742c045d38ca59b5-agouylpfmm.chromatic.com/?path=/story/button-button--primary </a>
+
 ## Tecnologias utilizadas
 
 - ReactJS
